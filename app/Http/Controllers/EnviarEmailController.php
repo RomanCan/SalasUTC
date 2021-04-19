@@ -85,6 +85,6 @@ class EnviarEmailController extends Controller
             // $mensaje->priority(3);
             // $mensaje->attach('pathToFile');
         });
-        // return redirect()->back();
+        return redirect()->back();
     }
 }
