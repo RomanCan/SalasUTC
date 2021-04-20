@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Director de Carreras</title>
 
+    {{-- TOKEN PARA CAMBIOS --}}
+    <meta name="token" id="token" value="{{ csrf_token() }}">
+    {{-- META PARA RUTA DINAMICA --}}
+    <meta name="route" id="route" value="{{ url('/') }}">
+
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -18,7 +24,8 @@
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
-    <script src="js/dCarreras/salas.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
 
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
@@ -186,52 +193,44 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2020-2021 <a href="a">Universdad Tecnologica del Centro Izamal</a>.</strong>
+            {{-- <strong>Copyright &copy; 2020-2021 <a href="a">Universdad Tecnologica del Centro Izamal</a>.</strong>
             Todos los derechos reservados
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0
-            </div>
+            </div> --}}
         </footer>
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
+        {{-- <aside class="control-sidebar control-sidebar-dark"> --}}
+        <!-- Control sidebar content goes here -->
+        {{-- </aside> --}}
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+
+
+
+
     @stack('scripts')
 
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
+    </script>
+
+
     <!-- jQuery -->
-
-    <script src="plugins/jquery/jquery.min.js"></script>
+    {{-- <script src="plugins/jquery/jquery.min.js"></script> --}}
     <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    {{-- <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    {{-- <script src="plugins/jquery-ui/jquery-ui.min.js"></script> --}}
 
-    </script> --}}
 
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-
-
-
-    <!-- Tempusdominus Bootstrap 4 -->
-    {{-- <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script> --}}
-    <!-- Summernote -->
-    {{-- <script src="plugins/summernote/summernote-bs4.min.js"></script> --}}
-    <!-- overlayScrollbars -->
-    {{-- <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> --}}
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 
 </body>
 
