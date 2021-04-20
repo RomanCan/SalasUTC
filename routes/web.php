@@ -19,5 +19,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::view('contactanos', 'emails.contactanos');
+//Zona Vistas Director de Carreras
+Route::view('salas', 'directorCarreras.salas');
+
+//Envio de Email
 Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
