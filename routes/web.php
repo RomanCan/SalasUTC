@@ -21,9 +21,13 @@ Route::get('/', function () {
 
 //Zona Vistas Director de Carreras
 Route::view('salas', 'directorCarreras.espacios');
+// vista de Recursos
+Route::view('recursos', 'directorCarreras.recursos');
 
 //Zona de APIS
 Route::apiResource('apiEspacios', 'App\Http\Controllers\EspaciosController');
+
+Route::apiResource('apiRecurso', 'App\Http\Controllers\ApiRecursoController');
 
 //Envio de Email
 Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
