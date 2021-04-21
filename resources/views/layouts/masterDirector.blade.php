@@ -23,9 +23,10 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
+    <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
