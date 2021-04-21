@@ -482,10 +482,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/kanban.html" class="nav-link">
+                            <a href="{{url('recursos')}}" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
-                                    Kanban Board
+                                    RECURSOS
                                 </p>
                             </a>
                         </li>
