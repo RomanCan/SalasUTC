@@ -20,10 +20,11 @@ Route::get('/', function () {
 });
 
 //Zona Vistas Director de Carreras
-Route::view('salas', 'directorCarreras.espacios');
+Route::view('espacios', 'directorCarreras.espacios');
 Route::view('solicitudes', 'directorCarreras.solicitudes');
 
 //Zona de APIS
+Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');
 Route::apiResource('apiEspacios', 'App\Http\Controllers\EspaciosController');
 
 //Envio de Email
