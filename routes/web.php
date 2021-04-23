@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
+//LOGIN
+Route::view('login', 'login.login');
 //Zona Vistas Director de Carreras
 Route::view('espacios', 'directorCarreras.espacios');
 Route::view('solicitudes', 'directorCarreras.solicitudes');
