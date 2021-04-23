@@ -43,7 +43,7 @@ new Vue({
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Guardado exitosamente',
+                    title: '¡Guardado exitosamente!',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -54,8 +54,8 @@ new Vue({
             }).catch(function(json){
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ha ocurrido un error',
-                    text: 'No deje campos vacios',
+                    title: '¡Ha ocurrido un error!',
+                    text: '¡No deje campos vacíos!',
                 })
             })
         },
@@ -82,7 +82,7 @@ new Vue({
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Guardado exitosamente',
+                    title: '¡Guardado exitosamente!',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -94,8 +94,8 @@ new Vue({
             }).catch(function(){
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ha ocurrido un error',
-                    text: 'No deje campos vacios',
+                    title: '¡Ha ocurrido un error!',
+                    text: '¡No deje campos vacios!',
                 })
             })
         },
@@ -115,7 +115,7 @@ new Vue({
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Eliminado exitosamente',
+                            title: '¡Eliminado exitosamente!',
                             showConfirmButton: false,
                             timer: 1500
                         })

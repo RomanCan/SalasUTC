@@ -15,7 +15,7 @@
                 <table class="table table-responsive table table-hove">
                     <thead>
                         <th>Nombre</th>
-                        <th>Ubicacion</th>
+                        <th>Ubicación</th>
                         <th>Cupo</th>
                         <td>Opciones</td>
                     </thead>
@@ -58,7 +58,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <label>Nombre:</label><input type="text" placeholder="Nombre" v-model="nombre"
                                             class="form-control" required>
-                                        <label>Ubicacion</label><input type="text" placeholder="Ubicacion"
+                                        <label>Ubicación:</label><input type="text" placeholder="Ubicación"
                                             v-model="ubicacion" class="form-control" required>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
