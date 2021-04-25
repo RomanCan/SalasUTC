@@ -20,6 +20,11 @@ Route::get('/', function () {
 });
 //LOGIN
 Route::view('login', 'login.login');
+
+//Zona de logueo
+Route::post('login','App\Http\Controllers\ApiUsuarioController@validar');
+Route::get('salir','App\Http\Controllers\ApiUsuarioController@salir');
+
 //Zona Vistas Director de Carreras
 Route::view('espacios', 'directorCarreras.espacios');
 Route::view('solicitudes', 'directorCarreras.solicitudes');
