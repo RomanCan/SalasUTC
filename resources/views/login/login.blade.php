@@ -2,15 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>Bienvenido</title>
         <link href="dist/css/login/login.css" rel="stylesheet" type="text/css">
     </head>
     <body>
     <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
-    <h2 class="active"> Sign In </h2>
-    <h2 class="inactive underlineHover">Sign Up </h2>
+    <h2 class="active"> Inicio de sesión </h2>
 
     <!-- Icon -->
     <div class="fadeIn first">
@@ -18,16 +17,16 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form action="{{url('login')}}" method="POST">
+      <input type="text" id="login" class="fadeIn second" name="user" placeholder="Usuario" required>
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" required>
+      <input type="submit" class="fadeIn fourth" value="Ingresar">
     </form>
 
     <!-- Remind Passowrd -->
-    <div id="formFooter">
+    <!-- <div id="formFooter">
       <a class="underlineHover" href="#">Forgot Password?</a>
-    </div>
+    </div> -->
 
   </div>
 </div>
