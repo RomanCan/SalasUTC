@@ -29,6 +29,7 @@ Route::view('recursos', 'directorCarreras.recursos');
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');
 Route::apiResource('apiEspacios', 'App\Http\Controllers\EspaciosController');
 Route::apiResource('apiRecurso', 'App\Http\Controllers\ApiRecursoController');
+Route::apiResource('apiRol', 'App\Http\Controllers\RolesController');
 
 //Envio de Email
 Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
