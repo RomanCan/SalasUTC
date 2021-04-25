@@ -9,7 +9,7 @@ class Profesores extends Model
 {
     // use HasFactory;
     protected $table = 'profesores';
-    protected $priamryKey = 'cedula';
+    protected $primaryKey = 'cedula';
     public $timestamps = false;
     public $fillable = [
         'nombre',
