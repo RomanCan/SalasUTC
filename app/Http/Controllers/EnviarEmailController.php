@@ -87,4 +87,24 @@ class EnviarEmailController extends Controller
         });
         return redirect()->back();
     }
+    public function user(Request $request)
+    {
+        $subject = "Nombre de usuario y contraseña";
+        $nombre = $request->nombre;
+        $apellidop = $request->apellidop;
+        $apellidom = $request->apellidom;
+        $tratamiento = $request->tratamiento;
+        // $docente = $tratamiento + $nombre + $apellidop + $apellidom;
+        $director = "Puga Sosa";
+        $emailDirec = "directorCarreras@Utcentro.com";
+        $user = $request->usuario;
+        $password = $request->password;
+        $email = $request->email;
+
+        Mail::send('emails.username', $request->all(), function ($mensaje) use ($director, $emailDirec, $nombre, $user, $password, $email, $subject) {
+            $mensaje->from($emailDirec, $director);
+            $mensaje->subject($subject);
+            $mensaje->to($email, $nombre);
+        });
+    }
 }

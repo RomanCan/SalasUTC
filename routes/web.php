@@ -33,6 +33,7 @@ Route::view('recursos', 'directorCarreras.recursos');
 Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
 
 
+
 //Zona de APIS
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');
 Route::apiResource('apiEspacios', 'App\Http\Controllers\EspaciosController');
@@ -43,3 +44,4 @@ Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
 
 //Envio de Email
 Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
+Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');

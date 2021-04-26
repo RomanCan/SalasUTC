@@ -1,6 +1,7 @@
 var route = document.querySelector("[name=route]").value;
 var UrlUsuarios = route +'/apiUsuarios';
 var UrlDocentes = route + '/apiDocentes';
+var UserName = route + '/username';
 new Vue({
     http: {
         headers: {
@@ -85,9 +86,7 @@ new Vue({
                 usuario : this.usuario,
                 password : this.password,
                 email : this.email,
-                usuario : this.usuario,
-                password : this.password,
-                email : this.email
+
             };
 
             Swal.fire({
@@ -109,21 +108,41 @@ new Vue({
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        this.salir();
+                            this.enviarEmail();
+                            this.salir();
+                            window.location.reload();
+                        //
 
                         // this.getUsuarios();
-                        window.location.reload();
+                        // window.location.reload();
+                    }).catch(function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Ha ocurrido un error!',
+                            text: '¡No deje campos vacios!',
+                        })
                     })
                 }
-            }).catch(function(){
-                Swal.fire({
-                    icon: 'error',
-                    title: '¡Ha ocurrido un error!',
-                    text: '¡No deje campos vacios!',
-                })
             })
 
 
+        },
+        enviarEmail:function(){
+            var user = {
+                nombre : this.nombre,
+                apellidop : this.apellidop,
+                apellidom : this.apellidom,
+                tratamiento : this.tratamiento,
+                email : this.email,
+                usuario : this.usuario,
+                password : this.password,
+            };
+            this.$http.post(UserName,user)
+            .then(function(){
+
+            }).catch(function(json){
+                console.log(json);
+            })
         },
         salir:function(){
             $('#agregar_user').modal('hide');
