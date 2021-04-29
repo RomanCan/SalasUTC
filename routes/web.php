@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::view('login', 'login.login');
 
 //Zona de logueo
-Route::post('login', 'App\Http\Controllers\ApiUsuarioController@validar');
+Route::post('log', 'App\Http\Controllers\ApiUsuarioController@validar');
 Route::get('salir', 'App\Http\Controllers\ApiUsuarioController@salir');
 
 //Zona Vistas Director de Carreras
@@ -32,7 +32,8 @@ Route::view('solicitudes', 'directorCarreras.solicitudes');
 Route::view('recursos', 'directorCarreras.recursos');
 Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
 
-
+//Zona Vistas Docentes
+Route::view('solicitudesd', 'docentes.solicitudes');
 
 //Zona de APIS
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');
