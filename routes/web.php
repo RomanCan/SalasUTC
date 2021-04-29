@@ -33,7 +33,9 @@ Route::view('recursos', 'directorCarreras.recursos');
 Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
 
 //Zona Vistas Docentes
-Route::view('solicitudesd', 'docentes.solicitudes');
+Route::view('docente-perfil', 'docentes.perfil');
+Route::view('docente-calendario', 'docentes.calendario');
+Route::view('docente-solicitud', 'docentes.solicitudes');
 
 //Zona de APIS
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');

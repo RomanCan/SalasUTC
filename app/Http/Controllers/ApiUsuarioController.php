@@ -29,7 +29,7 @@ class ApiUsuarioController extends Controller
             if ($resp[0]->rol->rol == "Coordinador") {
                 return Redirect::to('registro_usuarios');
             } else if ($resp[0]->rol->rol == "Docente") {
-                return Redirect::to('solicitudesd');
+                return Redirect::to('docente-perfil');
             }
         } else {
             return Redirect::to('/');
