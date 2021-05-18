@@ -44,6 +44,6 @@ class ApiUsuarioController extends Controller
         Cookie::forget('laravel_session');
         unset($_COOKIE);
         unset($_SESSION);
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 }
