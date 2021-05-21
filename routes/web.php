@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Http\Middleware\EnsureUserHasRole;
+use App\Http\Middleware\RoutesMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,27 +16,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 //LOGIN
-Route::view('login', 'login.login');
+Route::view('/', 'login.login')->name('/');
 
 //Zona de logueo
 Route::post('log', 'App\Http\Controllers\ApiUsuarioController@validar');
 Route::get('salir', 'App\Http\Controllers\ApiUsuarioController@salir');
 
-//Zona Vistas Director de Carreras
-Route::view('espacios', 'directorCarreras.espacios');
-Route::view('solicitudes', 'directorCarreras.solicitudes');
-Route::view('recursos', 'directorCarreras.recursos');
-Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
+Route::middleware(['rutas'])->group(function () {
+    //Zona Vistas Director de Carreras
+    Route::view('espacios', 'directorCarreras.espacios');
+    Route::view('solicitudes', 'directorCarreras.solicitudes');
+    Route::view('recursos', 'directorCarreras.recursos');
+    Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
 
-//Zona Vistas Docentes
-Route::view('docente-perfil', 'docentes.perfil');
-Route::view('docente-calendario', 'docentes.calendario');
-Route::view('docente-solicitud', 'docentes.solicitudes');
+    //Zona Vistas Docentes
+    Route::view('docente-perfil', 'docentes.perfil');
+    Route::view('docente-calendario', 'docentes.calendario');
+    Route::view('docente-solicitud', 'docentes.solicitudes');
+});
+
+
 
 //Zona de APIS
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');

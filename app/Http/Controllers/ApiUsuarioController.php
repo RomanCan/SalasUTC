@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Validation\ValidationException;
 
 class ApiUsuarioController extends Controller
 {
@@ -32,7 +32,11 @@ class ApiUsuarioController extends Controller
                 return Redirect::to('docente-perfil');
             }
         } else {
-            return Redirect::to('/');
+            throw ValidationException::withMessages([
+                'user' && 'password' => __('auth.failed'),
+
+            ]);
+            // return Redirect::to('/');
         }
     }
 
@@ -44,6 +48,6 @@ class ApiUsuarioController extends Controller
         Cookie::forget('laravel_session');
         unset($_COOKIE);
         unset($_SESSION);
-        return Redirect::to('/login');
+        return Redirect::to('/');
     }
 }

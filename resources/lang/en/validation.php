@@ -130,10 +130,19 @@ return [
     |
     */
 
+    // 'custom' => [
+    //     'attribute-name' => [
+    //         'rule-name' => 'custom-message',
+    //     ],
+    // ],
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'user' => [
+            'each' => 'El nombre de usuario es requerido',
         ],
+        'password' => [
+            'each' => 'La contraseña es requerido',
+        ],
+
     ],
 
     /*
