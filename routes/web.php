@@ -38,6 +38,15 @@ Route::middleware(['rutas'])->group(function () {
     Route::view('docente-perfil', 'docentes.perfil');
     Route::view('docente-calendario', 'docentes.calendario');
     Route::view('docente-solicitud', 'docentes.solicitudes');
+    Route::view('index', 'index');
+
+    //Envio de Email
+    Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
+    Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');
+
+    
+    
+
 });
 
 
@@ -50,6 +59,8 @@ Route::apiResource('apiRol', 'App\Http\Controllers\RolesController');
 Route::apiResource('apiUsuarios', 'App\Http\Controllers\UsuariosController');
 Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
 
+Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
+
 //Envio de Email
-Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
-Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');
+// Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
+// Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');

@@ -28,6 +28,15 @@
     <script src="js/vue-resource.js"></script>
     <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 
+    {{-- full calender --}}
+    {{-- estilos --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.css">
+    {{-- instalacion --}}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js"></script>
+    {{-- traduccion --}}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.js"></script>
+    {{-- fin de scripts --}}
+
     <style>
         .sidebar-mini.sidebar-collapse .content-wrapper,
         .sidebar-mini.sidebar-collapse .main-footer,
