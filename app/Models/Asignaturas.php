@@ -10,6 +10,7 @@ class Asignaturas extends Model
     // use HasFactory;
     protected $table = 'asignaturas';
     protected $primaryKey = 'ClaveAsig';
+    public $incrementing = false;
     public $timestamps = false;
     public $fillable = [
         'Nombre',
@@ -22,4 +23,5 @@ class Asignaturas extends Model
         'id_area',
         'tipo',
     ];
+    
 }

@@ -58,6 +58,19 @@ Route::apiResource('apiRecurso', 'App\Http\Controllers\ApiRecursoController');
 Route::apiResource('apiRol', 'App\Http\Controllers\RolesController');
 Route::apiResource('apiUsuarios', 'App\Http\Controllers\UsuariosController');
 Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
+Route::apiResource('apiDocentesGrupos', 'App\Http\Controllers\DocentesGruposController');
+
+
+// funcion cascada
+Route::get('getDocentesGrupos/{id}', [
+    'as' => 'getDocentesGrupos',
+    'uses' => 'App\Http\Controllers\DocentesGruposController@getDocentesGrupos',
+]);
+
+Route::get('getAsignaturas/{id}', [
+    'as' => 'getAsignaturas',
+    'uses' => 'App\Http\Controllers\AsignaturasController@getAsignaturas',
+]);
 
 Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 
