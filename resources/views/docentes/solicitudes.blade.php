@@ -55,9 +55,7 @@
 
     <!-- {{-- modal --}} -->
     <!-- Button trigger modal -->
-    <div>
-      @{{id_session = "{!!Session::get('usuario')!!}"}}
-    </div>
+     
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Agregar">
       Hacer una solicitud
     </button>

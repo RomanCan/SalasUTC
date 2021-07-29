@@ -25,7 +25,7 @@ class ApiUsuarioController extends Controller
             $usuario = $resp[0]->nombre . ' ' . $resp[0]->apellidop . ' ' . $resp[0]->apellidom;
             Session::put('usuario', $usuario);
             Session::put('rol', $resp[0]->rol->rol);
-            Session::put('id_usuario', $resp[0]->id_usuario);
+            Session::put('cedula', $resp[0]->cedula);
             if ($resp[0]->rol->rol == "Coordinador") {
                 return Redirect::to('registro_usuarios');
             } else if ($resp[0]->rol->rol == "Docente") {

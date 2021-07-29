@@ -1,6 +1,6 @@
 var route = document.querySelector("[name=route]").value;
 var urlSolicitudes= route+ '/' + 'apiSolicitudes';
-var urlDocentes = route + '/' + 'apiDocentes';
+var urlSoliDocentes = route + '/' + 'apiSoliDocentes';
 var urlDocentesGrupos = route + '/' + 'getDocentesGrupos/';
 var urlAsignaturas = route + '/' + 'getAsignaturas/';
 var urlEspacios= route+ '/' + 'apiEspacios';
@@ -43,7 +43,7 @@ new Vue ({
     
   },
   created:function(){
-		this.getDocentes();
+		this.getSoliDocentes();
 		this.getEspacios();
 		this.getHorarios();
 		this.getSolicitudes();
@@ -58,8 +58,8 @@ new Vue ({
 		});
 	},
     
-    getDocentes:function(){
-			this.$http.get(urlDocentes)
+    getSoliDocentes:function(){
+			this.$http.get(urlSoliDocentes)
 			.then(function(json){
 				this.docentes=json.data
 			});

@@ -60,6 +60,8 @@ Route::apiResource('apiUsuarios', 'App\Http\Controllers\UsuariosController');
 Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
 Route::apiResource('apiDocentesGrupos', 'App\Http\Controllers\DocentesGruposController');
 Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
+//  Api para traer al maestro de la solicitud
+Route::apiResource('apiSoliDocentes', 'App\Http\Controllers\SoliDocenteController');
 
 
 // funcion cascada
