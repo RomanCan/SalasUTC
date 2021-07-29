@@ -27,35 +27,37 @@ class SolicitudesController extends Controller
         //INNER JOIN Asignaturas
         //ON res_solicitudes.ClaveAsig = asignaturas.ClaveAsig
         // return $solicitudes = Solicitudes::all();
-        return $solicitudes = DB::select(
-            'SELECT  res_espacios.nombre AS Espacio, profesores.cedula AS Cedula,
-            profesores.nombre AS Docente,
-            res_solicitudes.fecha_solicitud,
-            res_solicitudes.fecha_solicitada,
-            res_solicitudes.fecha_autorizacion,
-            res_solicitudes.titulo_actividad,
+        // return $solicitudes = DB::select(
+        //     'SELECT  res_espacios.nombre AS Espacio, profesores.cedula AS Cedula,
+        //     profesores.nombre AS Docente,
+        //     res_solicitudes.fecha_solicitud,
+        //     res_solicitudes.fecha_solicitada,
+        //     res_solicitudes.fecha_autorizacion,
+        //     res_solicitudes.titulo_actividad,
 
 
-            res_solicitudes.detalle_actividad,
-            res_solicitudes.participantes,
-            res_solicitudes.tipo_solicitud,
-            res_solicitudes.status,
+        //     res_solicitudes.detalle_actividad,
+        //     res_solicitudes.participantes,
+        //     res_solicitudes.tipo_solicitud,
+        //     res_solicitudes.status,
 
 
-            docentesporgrupo.ClaveGrupo AS ClaveGrupo,
-            asignaturas.ClaveAsig AS ClaveAsignatura, asignaturas.nombre AS Asignatura
-            FROM res_solicitudes
-            INNER JOIN res_espacios
-            ON res_solicitudes.id_espacio = res_espacios.id_espacio
-            INNER JOIN profesores
-            ON res_solicitudes.cedula = profesores.cedula
-            INNER JOIN docentesporgrupo
-            ON res_solicitudes.ClaveGrupo = docentesporgrupo.ClaveGrupo
-            INNER JOIN Asignaturas
-            ON res_solicitudes.ClaveAsig = asignaturas.ClaveAsig
-            LIMIT 1
-            '
-        );
+        //     docentesporgrupo.ClaveGrupo AS ClaveGrupo,
+        //     asignaturas.ClaveAsig AS ClaveAsignatura, asignaturas.nombre AS Asignatura
+        //     FROM res_solicitudes
+        //     INNER JOIN res_espacios
+        //     ON res_solicitudes.id_espacio = res_espacios.id_espacio
+        //     INNER JOIN profesores
+        //     ON res_solicitudes.cedula = profesores.cedula
+        //     INNER JOIN docentesporgrupo
+        //     ON res_solicitudes.ClaveGrupo = docentesporgrupo.ClaveGrupo
+        //     INNER JOIN Asignaturas
+        //     ON res_solicitudes.ClaveAsig = asignaturas.ClaveAsig
+        //     LIMIT 1
+        //     '
+        // );
+
+        return $soli = Solicitudes::all();
     }
 
     /**
@@ -66,7 +68,21 @@ class SolicitudesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $soli = new Solicitudes;
+        $soli->cedula = $request->get('cedula');
+        $soli->id_espacio = $request->get('id_espacio');
+        $soli->fecha_solicitud = $request->get('fecha_solicitud');
+        $soli->fecha_solicitada = $request->get('fecha_solicitada');
+        $soli->hora = $request->get('hora');
+        $soli->titulo_actividad = $request->get('titulo_actividad');
+        $soli->detalle_actividad = $request->get('detalle_actividad');
+        $soli->status = $request->get('status');
+        $soli->ClaveGrupo = $request->get('ClaveGrupo');
+        $soli->ClaveAsig = $request->get('ClaveAsig');
+        $soli->asignatura = $request->get('asignatura');
+        $soli->participantes = $request->get('participantes');
+        $soli->tipo_solicitud = $request->get('tipo_solicitud');
+        $soli->save();
     }
 
     /**
@@ -77,7 +93,7 @@ class SolicitudesController extends Controller
      */
     public function show($id)
     {
-        //
+        return $soli = Solicitudes::find($id);
     }
 
     /**

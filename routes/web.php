@@ -59,6 +59,7 @@ Route::apiResource('apiRol', 'App\Http\Controllers\RolesController');
 Route::apiResource('apiUsuarios', 'App\Http\Controllers\UsuariosController');
 Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
 Route::apiResource('apiDocentesGrupos', 'App\Http\Controllers\DocentesGruposController');
+Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 
 
 // funcion cascada

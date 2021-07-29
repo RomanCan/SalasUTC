@@ -87,26 +87,79 @@
                           </select>
                           
                         </div>
-                        
                         <div class="form-group">
-                          <label for="ClaveGrupo">Clave de Grupo</label>
-                          <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getAsignaturas" class="form-control">
-                            <option v-for="d in docentesgrupos" :value="d.ClaveAsig">@{{d.ClaveGrupo}}</option>
+                          <label for="">Clave de Grupo</label>
+                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control">
+                            <option v-for="d in docentesgrupos" >@{{d.ClaveGrupo}}</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="">Clave de Asignatura</label>
+                          <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control">
+                            <option v-for="de in docentesgrupos" >@{{de.ClaveAsig}}</option>
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="ClaveAsig">Asignatura</label>
-                          <select name="" id="" v-model="ClaveAsig" class="form-control">
-                            <option v-for="a in asignaturas" :value="a.ClaveAsig">@{{a.Nombre}}</option>
+                          <select name="" id="" v-model="asignatura" class="form-control">
+                            <option v-for="a in asignaturas" >@{{a.Nombre}}</option>
                           </select>
+                        </div>
+
+                        <div class="form-group" >
+                          <label for="">Espacio</label>
+                          <select name="" id="" v-model="id_espacio" class="form-control">
+                            <option v-for="e in espacios" :value="e.id_espacio" >@{{e.nombre}}</option>
+                          </select>
+                          
+                        </div>
+
+                        <div class="form-group" >
+                          <label for="">Fecha de Solicitud</label>
+                          <input type="date" class="form-control" v-model="fecha_solicitud">
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Fecha Solicitada</label>
+                          <select name="" id="" v-model="fecha_solicitada" class="form-control">
+                            <option value="" v-for="f in horarios">@{{f.fecha}}</option>
+                          </select>
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Hora Solicitada</label>
+                          <select name="" id="" v-model="hora" class="form-control">
+                            <option value="" v-for="h in horarios">@{{h.horario}}</option>
+                          </select>
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Titulo de la actividad</label>
+                          <input type="text" class="form-control" v-model="titulo_actividad">
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Detalle de la actividad</label>
+                          <input type="text" class="form-control" v-model="detalle_actividad">
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Cantidad de participantes</label>
+                          <input type="number" class="form-control" v-model="participantes" min="0">
+                          
+                        </div>
+                        <div class="form-group" >
+                          <label for="">Tipo de solicitud</label>
+                          <input type="text" class="form-control" v-model="tipo_solicitud">
+                          
+                        </div>
+
                           
                         
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="btnGuardar">Guardar</button>
-                    <button type="button" class="btn btn-warning" id="btnModificar">Modificar</button>
-                    <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     
                 </div>
@@ -114,6 +167,40 @@
         </div>
     </div>
     <!-- {{-- fin modal --}} -->
+    <br><br><br>
+
+    <!-- mostrar tabla de solicitud -->
+    <div class="row">
+            <div class="col-md-12 ">
+
+                <!-- {{-- tabla --}} -->
+                <table class="table table-responsive table table-hove">
+                    <thead>
+                        <th>Cedula</th>
+                        <th>Estado</th>
+                        <th>Fecha de Solicitud</th>
+                        <td>Opciones</td>
+                    </thead>
+                    <tbody>
+                        <tr v-for="sol in solicitudes" >
+                            <td>@{{ sol . cedula }}</td>
+                            <td>@{{ sol . status }}</td>
+                            <td>@{{ sol . fecha_solicitud }}</td>
+                            <span>
+                                <td class="btn-group" role="group">
+                                    <span class="btn btn-outline-success" ><i
+                                            class="fas fa-edit"></i></span>
+
+                                    <span class="btn btn-outline-danger" ><i
+                                            class="fas fa-trash"></i></span>
+                                </td>
+                            </span>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
 </div>
 
 

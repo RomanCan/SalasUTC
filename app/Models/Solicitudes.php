@@ -26,6 +26,7 @@ class Solicitudes extends Model
         'ClaveAsig',
         'participantes',
         'tipo_solicitud',
-        'hora_solicitada'
+        'hora',
+        'asignatura',
     ];
 }
