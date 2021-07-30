@@ -13,9 +13,9 @@ class AsignaturasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        return $asignaturas = Asignaturas::find($id);
+        return $asignaturas = Asignaturas::all();
     }
 
     /**
