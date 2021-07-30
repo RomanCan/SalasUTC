@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DocentesGrupos;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class DocentesGruposController extends Controller
 {
@@ -15,7 +17,8 @@ class DocentesGruposController extends Controller
      */
     public function index()
     {
-        return $DocentesGrupos = DocentesGrupos::all();
+        $docente = Session::get('cedula');
+        return $dc = DocentesGrupos::where('cedula','=', $docente)->get();
        
 
     }

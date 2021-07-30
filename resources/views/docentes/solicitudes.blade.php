@@ -66,7 +66,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Nueva Solicitud</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="limpiar()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
@@ -83,18 +83,27 @@
                           <select name="" id="" v-model="cedula" @change="getDocentesGrupos" class="form-control">
                             <option v-for="doc in docentes" :value="doc.cedula" >@{{doc.nombre}}</option>
                           </select>
-                          
+                                             
                         </div>
                         <div class="form-group">
                           <label for="">Clave de Grupo</label>
-                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control">
+                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control" v-if="!editar">
                             <option v-for="d in docentesgrupos" >@{{d.ClaveGrupo}}</option>
                           </select>
+                          <!-- Para no probocar conflicto -->
+                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control" v-if="editar">
+                            <option v-for="da in dg" >@{{da.ClaveGrupo}}</option>
+                          </select>
+                          
                         </div>
                         <div class="form-group">
                           <label for="">Clave de Asignatura</label>
-                          <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control">
+                          <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="!editar">
                             <option v-for="de in docentesgrupos" >@{{de.ClaveAsig}}</option>
+                          </select>
+                          <!-- evitar conflicto al actualizar-->
+                          <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
+                            <option v-for="di in dg" >@{{di.ClaveAsig}}</option>
                           </select>
                         </div>
                         <div class="form-group">
@@ -102,6 +111,8 @@
                           <select name="" id="" v-model="asignatura" class="form-control">
                             <option v-for="a in asignaturas" >@{{a.Nombre}}</option>
                           </select>
+                          <!-- evitar conflicto con actualizar -->
+                          
                         </div>
 
                         <div class="form-group" >
@@ -120,14 +131,14 @@
                         <div class="form-group" >
                           <label for="">Fecha Solicitada</label>
                           <select name="" id="" v-model="fecha_solicitada" class="form-control">
-                            <option value="" v-for="f in horarios">@{{f.fecha}}</option>
+                            <option v-for="f in horarios">@{{f.fecha}}</option>
                           </select>
                           
                         </div>
                         <div class="form-group" >
                           <label for="">Hora Solicitada</label>
                           <select name="" id="" v-model="hora" class="form-control">
-                            <option value="" v-for="h in horarios">@{{h.horario}}</option>
+                            <option v-for="h in horarios">@{{h.horario}}</option>
                           </select>
                           
                         </div>
@@ -157,14 +168,16 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()" v-if="!editar">Guardar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="actualizarSolicitud(id_solicitud)" v-if="editar">Actualizar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="limpiar()">Cerrar</button>
                     
                 </div>
             </div>
         </div>
     </div>
     <!-- {{-- fin modal --}} -->
+    
     <br><br><br>
 
     <!-- mostrar tabla de solicitud -->
@@ -174,23 +187,29 @@
                 <!-- {{-- tabla --}} -->
                 <table class="table table-responsive table table-hove">
                     <thead>
+                        <th>Id</th>
                         <th>Cedula</th>
+                        <th>Espacio</th>
                         <th>Estado</th>
                         <th>Fecha de Solicitud</th>
                         <td>Opciones</td>
                     </thead>
                     <tbody>
                         <tr v-for="sol in solicitudes" >
+                            <td>@{{sol . id_solicitud}}</td>
                             <td>@{{ sol . cedula }}</td>
+                            <td>@{{sol.espacio.nombre}}</td>
                             <td>@{{ sol . status }}</td>
                             <td>@{{ sol . fecha_solicitud }}</td>
                             <span>
                                 <td class="btn-group" role="group">
-                                    <span class="btn btn-outline-success" ><i
-                                            class="fas fa-edit"></i></span>
+                                    <span class="btn btn-outline-success" @click="showSolicitud(sol.id_solicitud)" ><i
+                                            class="fas fa-edit"></i>
+                                    </span>
 
-                                    <span class="btn btn-outline-danger" ><i
-                                            class="fas fa-trash"></i></span>
+                                    <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"  ><i
+                                            class="fas fa-trash"></i>
+                                    </span>
                                 </td>
                             </span>
                         </tr>

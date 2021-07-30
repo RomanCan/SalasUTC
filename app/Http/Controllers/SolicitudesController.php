@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Solicitudes;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 class SolicitudesController extends Controller
 {
     /**
@@ -57,7 +57,9 @@ class SolicitudesController extends Controller
         //     '
         // );
 
-        return $soli = Solicitudes::all();
+        // return $soli = Solicitudes::all();
+        $soli = Session::get('cedula');
+        return $rsoli = Solicitudes::where('cedula','=', $soli)->get();
     }
 
     /**
@@ -105,7 +107,10 @@ class SolicitudesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $soli=Solicitudes::find($id);
+        
+        $soli->update($request->all());
+        return response()->json($soli, 200);
     }
 
     /**
@@ -116,6 +121,6 @@ class SolicitudesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Solicitudes::destroy($id);
     }
 }

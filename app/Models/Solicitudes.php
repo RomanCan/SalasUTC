@@ -10,6 +10,7 @@ class Solicitudes extends Model
     use HasFactory;
     protected $table = 'res_solicitudes';
     protected $primaryKey = 'id_solicitud';
+    protected $with = ['espacio'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -29,4 +30,9 @@ class Solicitudes extends Model
         'hora',
         'asignatura',
     ];
+
+    public function espacio()
+    {
+        return $this->belongsTo(Espacios::class, 'id_espacio', 'id_espacio');
+    }
 }
