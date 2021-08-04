@@ -40,6 +40,7 @@ Route::middleware(['rutas'])->group(function () {
     Route::view('docente-solicitud', 'docentes.solicitudes');
     Route::view('index', 'index');
 
+
     //Envio de Email
     Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
     Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');
@@ -61,8 +62,10 @@ Route::apiResource('apiDocentes', 'App\Http\Controllers\DocentesController');
 Route::apiResource('apiDocentesGrupos', 'App\Http\Controllers\DocentesGruposController');
 Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 
+
 //  Api para traer al maestro de la solicitud
 Route::apiResource('apiSoliDocentes', 'App\Http\Controllers\SoliDocenteController');
+Route::apiResource('apiPerfilDocentes', 'App\Http\Controllers\PerfilController');
 
 
 
