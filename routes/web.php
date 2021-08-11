@@ -70,11 +70,18 @@ Route::apiResource('apiPerfilDocentes', 'App\Http\Controllers\PerfilController')
 
 
 // funcion cascada
+// traer la clave de asignatura por cada clave de grupo
 Route::get('getDocentesGrupos/{id}', [
     'as' => 'getDocentesGrupos',
     'uses' => 'App\Http\Controllers\DocentesGruposController@getDocentesGrupos',
 ]);
 
+//  claves de docentes
+Route::get('getClaveGrupo/{id}', [
+    'as' => 'getClaveGrupo',
+    'uses' => 'App\Http\Controllers\ClaveGrupoController@getClaveGrupo',
+]);
+// traer nombre de asignatura por cada clave de asignatura
 Route::get('getAsignaturas/{id}', [
     'as' => 'getAsignaturas',
     'uses' => 'App\Http\Controllers\AsignaturasController@getAsignaturas',

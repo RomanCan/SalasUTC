@@ -80,20 +80,23 @@
                        
                         <div class="form-group" >
                           <label for="">Docente</label>
-                          <select name="" id="" v-model="cedula" @change="getDocentesGrupos" class="form-control">
+                          <select name="" id="" v-model="cedula" @change="getClaveGrupo" class="form-control">
                             <option v-for="doc in docentes" :value="doc.cedula" >@{{doc.nombre}}</option>
                           </select>
                                              
                         </div>
                         <div class="form-group">
                           <label for="">Clave de Grupo</label>
-                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control" v-if="!editar">
-                            <option v-for="d in docentesgrupos" >@{{d.ClaveGrupo}}</option>
+                          <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="!editar">
+                            <option v-for="d in clavegrupos" >@{{d.ClaveGrupo}}</option>
                           </select>
                           <!-- Para no probocar conflicto -->
-                          <select name="" id="" class="form-control" v-model="ClaveGrupo" class="form-control" v-if="editar">
+                          <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
                             <option v-for="da in dg" >@{{da.ClaveGrupo}}</option>
-                          </select>
+                          </select> -->
+                          <input type="text" v-model="ClaveGrupo" disabled class="form-control" v-if="editar">
+                          
+                          
                           
                         </div>
                         <div class="form-group">
@@ -102,17 +105,18 @@
                             <option v-for="de in docentesgrupos" >@{{de.ClaveAsig}}</option>
                           </select>
                           <!-- evitar conflicto al actualizar-->
-                          <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
+                          <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
                             <option v-for="di in dg" >@{{di.ClaveAsig}}</option>
-                          </select>
+                          </select> -->
+                          <input type="text" v-model="ClaveAsig" disabled class="form-control" v-if="editar">
                         </div>
                         <div class="form-group">
                           <label for="ClaveAsig">Asignatura</label>
-                          <select name="" id="" v-model="asignatura" class="form-control">
+                          <select name="" id="" v-model="asignatura" class="form-control" v-if="!editar">
                             <option v-for="a in asignaturas" >@{{a.Nombre}}</option>
                           </select>
                           <!-- evitar conflicto con actualizar -->
-                          
+                          <input type="text" v-model="asignatura" disabled class="form-control" v-if="editar">
                         </div>
 
                         <div class="form-group" >

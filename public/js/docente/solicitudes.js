@@ -2,6 +2,7 @@ var route = document.querySelector("[name=route]").value;
 var urlSolicitudes= route+ '/' + 'apiSolicitudes';
 var urlSoliDocentes = route + '/' + 'apiSoliDocentes';
 var urlDocentesGrupos = route + '/' + 'getDocentesGrupos/';
+var urlClaveGrupo = route + '/' + 'getClaveGrupo/';
 var urlAsignaturas = route + '/' + 'getAsignaturas/';
 var urlEspacios= route+ '/' + 'apiEspacios';
 var urlHorarios= route+ '/' + 'apiHorarios';
@@ -19,13 +20,14 @@ new Vue ({
 
   data: {
     n:'Hola',
-    
+    clavegrupos:[],
     docentes:[],
 	docentesgrupos:[],
 	asignaturas:[],
 	espacios:[],
 	horarios:[],
 	solicitudes:[],
+	
 	// datos docentes por grupos
 	dg:[],
 	as:[],
@@ -105,6 +107,16 @@ new Vue ({
 			this.$http.get(urlDocentesGrupos + cedula)
 			.then(function(json){
 				this.docentesgrupos = json.data;
+			})
+		},
+
+		// evento docentes por grupo
+		getClaveGrupo(event){
+			var cg = event.target.value;
+			this.$http.get(urlClaveGrupo + cg)
+			.then(function(json){
+				this.clavegrupos = json.data;
+				console.log(json);
 			})
 		},
 
@@ -268,6 +280,7 @@ new Vue ({
 			this.tipo_solicitud='';
 			this.asignatura='';
 			this.hora='';
+			this.editar=false;
 			
 			
 		},

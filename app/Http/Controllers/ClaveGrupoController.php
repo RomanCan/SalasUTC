@@ -7,8 +7,7 @@ use App\Models\DocentesGrupos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-
-class DocentesGruposController extends Controller
+class ClaveGrupoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,7 @@ class DocentesGruposController extends Controller
      */
     public function index()
     {
-        $docente = Session::get('cedula');
-        return $dc = DocentesGrupos::where('cedula','=', $docente)->get();
-       
-
+        //
     }
 
     /**
@@ -68,10 +64,10 @@ class DocentesGruposController extends Controller
         //
     }
 
-    public function getDocentesGrupos($id){
-        $docenteg = DB::select("SELECT *
+    public function getClaveGrupo($id){
+        $clavegrupo = DB::select("SELECT *
                                 FROM docentesporgrupo
-                                WHERE ClaveGrupo = '$id'");
-        return $docenteg;
+                                WHERE cedula = $id");
+        return $clavegrupo;
     }
 }
