@@ -16,7 +16,7 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="dist/img/icon-user.png" id="icon" alt="User Icon" />
+                <img src="dist/img/login.jpg" id="icon" alt="User Icon" />
             </div>
 
             @if ($errors->any())
