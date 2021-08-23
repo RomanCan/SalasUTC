@@ -24,3 +24,5 @@ DESCARGANDO POR PRIMERA VEZ EL PROYECTO, HAY UNOS COMANDOS QUE TIENES QUE CORRER
 *Puedes agregar el tipo de caracteres a usar despues del tipo de BD a usar, por ejemplo*
 
 `php artisan make:database salas mysql utf8mb4-unicode`
+
+
