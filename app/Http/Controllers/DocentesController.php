@@ -17,6 +17,7 @@ class DocentesController extends Controller
     {
         //
         // return $docentes = Profesores::all();
+
         return $docentes = DB::select('SELECT * FROM profesores
         INNER JOIN roles
         ON profesores.id_rol = roles.id_rol
@@ -25,6 +26,8 @@ class DocentesController extends Controller
         AND profesores.email = ""
         AND profesores.id_rol != "1"
         ');
+
+        
     }
 
     /**

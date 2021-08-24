@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="material/img/favicon.png">
     <title>Bienvenido</title>
     <link href="dist/css/login/login.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
@@ -16,7 +17,7 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="dist/img/login.jpg" id="icon" alt="User Icon" />
+                <img src="material/img/icon-user.png" id="icon" alt="User Icon" />
             </div>
 
             @if ($errors->any())

@@ -11,6 +11,7 @@ class DocentesGrupos extends Model
     protected $table = 'docentesporgrupo';
     protected $primaryKey = 'ClaveCarga';
     protected $with = ['docente', 'asignatura'];
+    
     public $timestamps = false;
     public $fillable = [
         'ClaveAsig',
