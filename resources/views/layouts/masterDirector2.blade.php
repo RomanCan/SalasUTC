@@ -17,7 +17,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="apple-touch-icon" sizes="76x76" href="material/img/apple-icon.png">
     <link rel="icon" type="image/png" href="material/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Docente</title>
+    <title>Director de Carreras</title>
     {{-- TOKEN PARA CAMBIOS --}}
     <meta name="token" id="token" value="{{ csrf_token() }}">
     {{-- META PARA RUTA DINAMICA --}}
@@ -35,14 +35,6 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="material/demo/demo.css" rel="stylesheet" />
 
-    {{-- full calender --}}
-    {{-- estilos --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.css">
-    {{-- instalacion --}}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js"></script>
-    {{-- traduccion --}}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.js"></script>
-    {{-- fin de scripts --}}
 </head>
 
 <body class="">
@@ -61,19 +53,19 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('docente-perfil') }}">
+                        <a class="nav-link" href="{{ url('registro_usuarios') }}">
                             <i class="material-icons">person</i>
-                            <p>Perfil</p>
+                            <p>Usuarios</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('docente-calendario') }}">
-                            <i class="material-icons">event</i>
-                            <p>Calendario</p>
+                        <a class="nav-link" href="{{ url('espacios') }}">
+                            <i class="material-icons">meeting_room</i>
+                            <p>Espacios</p>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('docente-solicitud') }}">
+                        <a class="nav-link" href="{{ url('solicitudes') }}">
                             <i class="material-icons">content_paste</i>
                             <p>Solicitudes</p>
                         </a>
@@ -163,6 +155,8 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
 
     @stack('scripts')
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
     </script>

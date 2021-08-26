@@ -1,4 +1,4 @@
-@extends('layouts.masterDirector')
+@extends('layouts.masterDirector2')
 
 @section('contenido')
     <div>

@@ -1,4 +1,4 @@
-@extends('layouts.masterDocente')
+@extends('layouts.masterPrueba')
 @section('contenido')
 @endsection
 @push('scripts')

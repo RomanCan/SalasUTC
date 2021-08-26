@@ -1,4 +1,4 @@
-@extends('layouts.masterDirector')
+@extends('layouts.masterDirector2')
 
 @section('contenido')
     <div id="espacio">
@@ -6,7 +6,8 @@
             <div class="col-md-12 ">
 
                 <div class="col-md-5">
-                    <button class="btn btn-outline-primary" @click="showModal">Agregar</button>
+                    <button class="btn btn-outline-primary" @click="showModal"><i class="material-icons">add_location_alt
+                        </i>&nbsp;Agregar</button>
                     <input type="text" placeholder="Buscar" v-model="search" class="form-control">
                 </div>
 
@@ -25,12 +26,12 @@
                             <td>@{{ esp . ubicacion }}</td>
                             <td>@{{ esp . cupo }}</td>
                             <span>
-                                <td class="btn-group" role="group">
+                                <td class="" role="group">
                                     <span class="btn btn-outline-success" @click="editarEspacio(esp.id_espacio)"><i
-                                            class="fas fa-edit"></i></span>
+                                            class="material-icons">mode_edit_outline</i>&nbsp;Editar</span>
 
                                     <span class="btn btn-outline-danger" @click="eliminarEspacio(esp.id_espacio)"><i
-                                            class="fas fa-trash"></i></span>
+                                            class="material-icons">delete</i>&nbsp;Eliminar</span>
                                 </td>
                             </span>
                         </tr>

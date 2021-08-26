@@ -1,4 +1,4 @@
-@extends('layouts.masterDirector')
+@extends('layouts.masterDirector2')
 @section('contenido')
     <div id="usuario">
 
@@ -7,7 +7,8 @@
 
             <div class="col-md-12">
                 <div class="col-md-5">
-                    <button class="btn btn-outline-primary" @click="showModal">Agregar</button>
+                    <button class="btn btn-outline-primary" @click="showModal"><i class="material-icons">person_add
+                        </i>&nbsp;Agregar</button>
                 </div>
                 <br>
 
@@ -69,7 +70,8 @@
                                         </select>
                                         <br>
                                         <button v-if="cedula" class="btn btn-outline-success" :href="cedula"
-                                            @click="editarI(cedula)">Editar</button>
+                                            @click="editarI(cedula)"><i
+                                                class="material-icons">manage_accounts</i>&nbsp;Editar</button>
                                         <hr>
 
                                     </div>
