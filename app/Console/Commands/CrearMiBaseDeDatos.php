@@ -1,11 +1,11 @@
 <?php
-
+ 
 namespace App\Console\Commands;
-
+ 
 use Illuminate\Console\Command;
-
-use DB;
-
+ 
+use DB; // Trait Database 
+ 
 class CrearMiBaseDeDatos extends Command
 {
     /**
@@ -14,14 +14,14 @@ class CrearMiBaseDeDatos extends Command
      * @var string
      */
     protected $signature = 'make:database {nombrebd} {tipo?} {cotejamiento?} ';
-
+ 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Este comando crea una Base de Datos.';
-
+    protected $description = 'Este comando crea una Base de Datos';
+ 
     /**
      * Create a new command instance.
      *
@@ -31,19 +31,19 @@ class CrearMiBaseDeDatos extends Command
     {
         parent::__construct();
     }
-
+ 
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return mixed
      */
     public function handle()
     {
         try {
-            $nombrebd = $this->argument('nombrebd'); 
-            $tipo = $this->hasArgument('tipo') && $this->argument('tipo') ? $this->argument('tipo'): DB::connection()->getPDO->getAttribute(PDO::ATTR_DRIVER_NAME); 
+            $nombrebd = $this->argument('nombrebd');
+            $tipo = $this->hasArgument('tipo') && $this->argument('tipo') ? $this->argument('tipo'): DB::connection()->getPDO->getAttribute(PDO::ATTR_DRIVER_NAME);
             $cotejamiento = $this->argument('cotejamiento');
-
+ 
             switch ($cotejamiento) {
                 case 'utf8':
                     $cot = "CHARACTER SET utf8 COLLATE utf8_general_ci";
@@ -57,13 +57,12 @@ class CrearMiBaseDeDatos extends Command
                 case 'utf8mb4-unicode':
                     $cot = "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
                     break;
-                            
+                
                 default:
                     $cot = "CHARACTER SET utf8 COLLATE utf8_general_ci";
                     break;
-            
             }
-
+ 
             $crearbd = DB::connection($tipo)->select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "."'".$nombrebd."'");
  
             if(empty($crearbd)) {
@@ -73,12 +72,14 @@ class CrearMiBaseDeDatos extends Command
             else {
                 $this->info("La Base de Datos con el nombre '$nombrebd' ya existe ! ");
             }
-
-
-
-        } catch (Exception $e) {
-            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+ 
         }
+ 
+        catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
+ 
     }
-}
+    
+} 
 
