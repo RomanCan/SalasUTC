@@ -10,7 +10,7 @@ class Solicitudes extends Model
     use HasFactory;
     protected $table = 'res_solicitudes';
     protected $primaryKey = 'id_solicitud';
-    protected $with = ['espacio'];
+    protected $with = ['espacio', 'profesor', 'asignatura'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -34,5 +34,13 @@ class Solicitudes extends Model
     public function espacio()
     {
         return $this->belongsTo(Espacios::class, 'id_espacio', 'id_espacio');
+    }
+    public function profesor()
+    {
+        return $this->belongsTo(Profesores::class, 'cedula', 'cedula');
+    }
+    public function asignatura()
+    {
+        return $this->belongsTo(Asignaturas::class, 'ClaveAsig', 'ClaveAsig');
     }
 }
