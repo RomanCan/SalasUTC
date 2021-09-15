@@ -1,4 +1,4 @@
-@extends('layouts.masterDirector2')
+@extends('layouts.masterDirector')
 @section('titulo', 'Recursos')
 
 @section('contenido')
@@ -31,8 +31,7 @@
 
 
                                     <td>
-                                        <span class="btn btn-xs btn-primary" data-toggle="modal"
-                                            data-target="#editarrecurso"
+                                        <span class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editarrecurso"
                                             v-on:click="showRecurso(rec.id_recurso)">EDITAR</span>
                                         <span class="btn btn-xs btn-danger"
                                             v-on:click="eliminarRecurso(rec.id_recurso)">ELIMINAR</span>

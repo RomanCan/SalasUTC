@@ -1,4 +1,4 @@
-@extends('layouts.masterPrueba')
+@extends('layouts.masterDocente')
 
 @section('contenido')
 
@@ -12,42 +12,42 @@
 
         <!-- {{-- Campos de formulario para envio de email funcionando --}} -->
         <!-- <h3>Formulario de contacto</h3>
-                                                            <form action={{ url('contact') }} method="POST">
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <label for="nombre">Docente</label>
-                                                                     <input name="docente" type="text" class="form-control" placeholder="Docente" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                     <label for="email">Email</label>
-                                                                    <input name="email" type="email" class="form-control" placeholder="Email" required>
-                                                                 </div>
-                                                                                
+                                                                                                                                            <form action={{ url('contact') }} method="POST">
+                                                                                                                                                @csrf
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="nombre">Docente</label>
+                                                                                                                                                     <input name="docente" type="text" class="form-control" placeholder="Docente" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                     <label for="email">Email</label>
+                                                                                                                                                    <input name="email" type="email" class="form-control" placeholder="Email" required>
+                                                                                                                                                 </div>
+                                                                                                                                                                
 
-                                                                <div class="form-group">
-                                                                    <label for="director">Nombre Director</label>
-                                                                    <input name="director" type="text" class="form-control" placeholder="Nombre del director" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="cargo">Cargo</label>
-                                                                    <input name="cargo" type="text" class="form-control" placeholder="Cargo" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="fecha">Fecha</label>
-                                                                     <input name="fecha" type="date" class="form-control" placeholder="Fecha" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="laboratorio">Laboratorio</label>
-                                                                    <input name="laboratorio" type="text" class="form-control" placeholder="Laboratorio" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="motivo">Motivo</label>
-                                                                    <input name="motivo" type="text" class="form-control" placeholder="Motivo" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="submit" id='btn-contact' class="btn btn-success">Enviar</button>
-                                                                 </div>
-                                                            </form>  -->
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="director">Nombre Director</label>
+                                                                                                                                                    <input name="director" type="text" class="form-control" placeholder="Nombre del director" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="cargo">Cargo</label>
+                                                                                                                                                    <input name="cargo" type="text" class="form-control" placeholder="Cargo" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="fecha">Fecha</label>
+                                                                                                                                                     <input name="fecha" type="date" class="form-control" placeholder="Fecha" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="laboratorio">Laboratorio</label>
+                                                                                                                                                    <input name="laboratorio" type="text" class="form-control" placeholder="Laboratorio" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label for="motivo">Motivo</label>
+                                                                                                                                                    <input name="motivo" type="text" class="form-control" placeholder="Motivo" required>
+                                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <button type="submit" id='btn-contact' class="btn btn-success">Enviar</button>
+                                                                                                                                                 </div>
+                                                                                                                                            </form>  -->
 
         <!-- {{-- Fin de envio de email --}} -->
 
@@ -62,12 +62,14 @@
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="Agregar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal fade" id="Agregar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="background: #2387FF; color: #fff">
                         <h5 class="modal-title">Nueva Solicitud</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="limpiar()">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            @click="limpiar()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -88,14 +90,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Clave de Grupo</label>
-                                <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos"
-                                    class="form-control" v-if="!editar">
+                                <select name="" id="" class="form-control" v-model="ClaveGrupo"
+                                    @change="getDocentesGrupos" class="form-control" v-if="!editar">
                                     <option v-for="d in clavegrupos">@{{ d . ClaveGrupo }}</option>
                                 </select>
                                 <!-- Para no probocar conflicto -->
                                 <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
-                                                                                    <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>
-                                                                                  </select> -->
+                                                                                                                                                                    <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>
+                                                                                                                                                                  </select> -->
                                 <input type="text" v-model="ClaveGrupo" disabled class="form-control" v-if="editar">
 
 
@@ -109,8 +111,8 @@
                                 </select>
                                 <!-- evitar conflicto al actualizar-->
                                 <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
-                                                                                    <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>
-                                                                                  </select> -->
+                                                                                                                                                                    <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>
+                                                                                                                                                                  </select> -->
                                 <input type="text" v-model="ClaveAsig" disabled class="form-control" v-if="editar">
                             </div>
                             <div class="form-group">
@@ -177,7 +179,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" data-dismiss="modal" @click="agregarSol()"
                             v-if="!editar">Guardar</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal"
                             @click="actualizarSolicitud(id_solicitud)" v-if="editar">Actualizar</button>
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal"
                             @click="limpiar()">Cerrar</button>
@@ -186,6 +188,7 @@
                 </div>
             </div>
         </div>
+
         <!-- {{-- fin modal --}} -->
 
         <br><br><br>
@@ -212,14 +215,14 @@
                             <td>@{{ sol . status }}</td>
                             <td>@{{ sol . fecha_solicitud }}</td>
                             <span>
-                                <td class="btn-group" role="group">
+                                <td class="" role=" group">
                                     <span class="btn btn-outline-success" @click="showSolicitud(sol.id_solicitud)"><i
-                                            class="fas fa-edit"></i>
-                                    </span>
+                                            class="material-icons">mode_edit_outline</i>&nbsp;Editar</span>
+                                    &nbsp;
 
                                     <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"><i
-                                            class="fas fa-trash"></i>
-                                    </span>
+                                            class="material-icons">delete</i>&nbsp;Eliminar</span>
+
                                 </td>
                             </span>
                         </tr>
