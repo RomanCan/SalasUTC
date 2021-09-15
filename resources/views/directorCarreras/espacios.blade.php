@@ -1,4 +1,4 @@
-@extends('layouts.masterDirector2')
+@extends('layouts.masterDirector')
 
 @section('contenido')
     <div id="espacio">
@@ -26,7 +26,7 @@
                             <td>@{{ esp . ubicacion }}</td>
                             <td>@{{ esp . cupo }}</td>
                             <span>
-                                <td class="" role="group">
+                                <td class="" role=" group">
                                     <span class="btn btn-outline-success" @click="editarEspacio(esp.id_espacio)"><i
                                             class="material-icons">mode_edit_outline</i>&nbsp;Editar</span>
 

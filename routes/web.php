@@ -29,6 +29,7 @@ Route::get('salir', 'App\Http\Controllers\ApiUsuarioController@salir');
 
 Route::middleware(['rutas'])->group(function () {
     //Zona Vistas Director de Carreras
+    Route::view('director-perfil', 'directorCarreras.perfil');
     Route::view('espacios', 'directorCarreras.espacios');
     Route::view('solicitudes', 'directorCarreras.solicitudes');
     Route::view('recursos', 'directorCarreras.recursos');

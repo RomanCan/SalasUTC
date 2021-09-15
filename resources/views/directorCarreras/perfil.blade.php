@@ -1,4 +1,4 @@
-@extends('layouts.masterDocente')
+@extends('layouts.masterDirector')
 @section('contenido')
 
     <style type="text/css">
