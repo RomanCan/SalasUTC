@@ -6,37 +6,42 @@
             <div class="col-md-12 ">
 
                 <div class="col-md-5">
-                    <button class="btn btn-outline-primary" @click="showModal"><i class="material-icons">add_location_alt
+                    <button class="btn btn-info" @click="showModal"><i class="material-icons">add_location_alt
                         </i>&nbsp;Agregar</button>
                     <input type="text" placeholder="Buscar" v-model="search" class="form-control">
                 </div>
 
-
-                {{-- tabla --}}
-                <table class="table table-responsive table table-hove">
-                    <thead>
-                        <th>Nombre</th>
-                        <th>Ubicación</th>
-                        <th>Cupo</th>
-                        <td>Opciones</td>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(esp, index) in searchE" v-bind:value="esp.id_espacio">
-                            <td>@{{ esp . nombre }}</td>
-                            <td>@{{ esp . ubicacion }}</td>
-                            <td>@{{ esp . cupo }}</td>
-                            <span>
-                                <td class="" role=" group">
-                                    <span class="btn btn-outline-success" @click="editarEspacio(esp.id_espacio)"><i
-                                            class="material-icons">mode_edit_outline</i>&nbsp;Editar</span>
-
-                                    <span class="btn btn-outline-danger" @click="eliminarEspacio(esp.id_espacio)"><i
-                                            class="material-icons">delete</i>&nbsp;Eliminar</span>
-                                </td>
-                            </span>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="card">
+                    <div class="card-body">
+                    {{-- tabla --}}
+                        <table class="table table-responsive table table-hove">
+                            <thead>
+                                <th>Nombre</th>
+                                <th>Ubicación</th>
+                                <th>Cupo</th>
+                                <td>Opciones</td>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(esp, index) in searchE" v-bind:value="esp.id_espacio">
+                                    <td>@{{ esp . nombre }}</td>
+                                    <td>@{{ esp . ubicacion }}</td>
+                                    <td>@{{ esp . cupo }}</td>
+                                    <span>
+                                        <td class="" role=" group">
+                                            <span class="btn btn-success" @click="editarEspacio(esp.id_espacio)">
+                                                <i class="material-icons">mode_edit_outline</i>&nbsp;Editar
+                                            </span>
+                                            <span class="btn btn-danger" @click="eliminarEspacio(esp.id_espacio)">
+                                                <i class="material-icons">delete</i>&nbsp;Eliminar
+                                            </span>
+                                        </td>
+                                    </span>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
@@ -69,9 +74,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-primary" @click="actualizarEspacio()"
+                                <button type="submit" class="btn btn-outline-success" @click="actualizarEspacio()"
                                     v-if="editar">Actualizar</button>
-                                <button type="submit" class="btn btn-outline-primary" @click="agregarEspacio()"
+                                <button type="submit" class="btn btn-outline-info" @click="agregarEspacio()"
                                     v-if="!editar">Guardar</button>
                                 <!-- <button type="submit" class="btn btn-success" @click="salir">Cancelar</button> -->
 

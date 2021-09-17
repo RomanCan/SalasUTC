@@ -7,7 +7,7 @@
 
             <div class="col-md-12">
                 <div class="col-md-5">
-                    <button class="btn btn-outline-primary" @click="showModal"><i class="material-icons">person_add
+                    <button class="btn btn-info" @click="showModal"><i class="material-icons">person_add
                         </i>&nbsp;Agregar</button>
                 </div>
                 <br>
@@ -20,26 +20,28 @@
                         </strong>
                     </p>
                 </div>
-                <table class="table table-responsive table-hover" v-if="usuarios.length != 0">
-                    <thead>
-                        <th>Docente</th>
-                        <th>Nivel de estudio</th>
-                        <th>Nombre de usuario</th>
-                        <th>Contraseña</th>
-                        <th>Email</th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(user,index) in usuarios">
-                            <td>@{{ user . tratamiento }} @{{ user . nombre }} @{{ user . apellidop }}
-                                @{{ user . apellidom }}
-                            </td>
-                            <td>@{{ user . nivelestudio }}</td>
-                            <td>@{{ user . usuario }}</td>
-                            <td>@{{ user . password }}</td>
-                            <td>@{{ user . email }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-responsive table-hover" v-if="usuarios.length != 0">
+                            <thead>
+                                <th>Docente</th>
+                                <th>Nivel de estudio</th>
+                                <th>Nombre de usuario</th>
+                                <th>Contraseña</th>
+                                <th>Email</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(user,index) in usuarios">
+                                    <td>@{{ user . tratamiento }} @{{ user . nombre }} @{{ user . apellidop }} @{{ user . apellidom }}</td>
+                                    <td>@{{ user . nivelestudio }}</td>
+                                    <td>@{{ user . usuario }}</td>
+                                    <td>@{{ user . password }}</td>
+                                    <td>@{{ user . email }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -88,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer" v-if="editarInfo">
-                                <button class="btn btn-outline-primary" @click="guardar()">Guardar</button>
+                                <button class="btn btn-outline-info" @click="guardar()">Guardar</button>
                             </div>
                         </div>
                     </div>
