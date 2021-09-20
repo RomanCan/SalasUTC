@@ -12,8 +12,7 @@ class Horarios extends Model
     protected $primaryKey = 'id_horario';
     public $timestamps = false;
     public $fillable = [
-        'horario',
-        'fecha',
-        
+        'hora_inicio',
+        'hora_final'
     ];
 }

@@ -16,19 +16,19 @@
 
     <div>
 
-        <h2>{{ $director }}</h2>
-        <h2>{{ $cargo }}</h2>
 
-        <h3>Presente.-</h3><span>Estimado (a) Sr. (a): </span><span>{{ $cargo }}</span>
-        <br>
+
+        {{-- <h3>Presente.-</h3><span>Estimado (a) Sr. (a): </span><span>{{ $cargo }}</span>
+        <br> --}}
         <span>
             Me dirijo a usted respetuosamente con la finalidad de solicitar su autorización para el
-            evento a realizarse el dia de <strong>{{ $fecha }}</strong> en <strong>el
-                {{ $laboratorio }}</strong>. <br>
+            evento a realizarse el dia de <strong>{{ $fecha_solicitada }}</strong> en <strong>el
+                {{ $espacio }}</strong>, dando inicio a las"{{ $hora_inicio }}" con terminacion a las
+            "{{ $hora_final }}", para la asignatura de "{{ $asignatura }}" <br>
 
             Cabe destacar que la mencionada actividad forma parte del cronograma organizado por
-            <strong>{{ $docente }}</strong>
-            para conmemorar {{ $motivo }}. <br>
+            <strong>{{ $nombre_docente }} {{ $apellidop }} {{ $apellidom }}</strong>
+            para conmemorar " {{ $titulo_actividad }} ". <br>
 
             Por todo lo expuesto, le reitero mi solicitud de autorización, agradeciendo de antemano toda la cooperación
             que pueda prestar al respecto. <br>
@@ -37,7 +37,8 @@
 
             Atentamente: <br>
 
-            {{ $docente }} docente de la universidad tecnologia del centro
+            {{ $nombre_docente }} {{ $apellidop }} {{ $apellidom }}docente de la universidad tecnologia del
+            centro
 
         </span>
 
