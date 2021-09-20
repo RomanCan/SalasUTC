@@ -65,19 +65,42 @@ class EnviarEmailController extends Controller
     }
     public function mensaje(Request $request)
     {
-        $subject = "Solicitud de laboratirio";
-        $nombreDirector = $request->director;
-        $cargo = $request->cargo;
-        $fecha = $request->fecha;
-        $laboratorio = $request->laboratorio;
-        $motivo = $request->motivo;
 
-        $emailSchool = "romancan33@gmail.com";
-        $docente = $request->docente;
-        $fromemail = $request->email;
+        // $nombreDirector = DB::select('select nombre from profesores where id_rol = ?', [1]);
+        // $apD = $director->apellidop;
+        // $amD = $director->apellidom;
+        $fecha_solicitada = $request->fecha_solicitada;
+        $espacio = $request->espacio;
 
-        Mail::send('emails.contactanos', $request->all(), function ($mensaje) use ($subject, $docente, $emailSchool, $fromemail, $nombreDirector, $cargo, $fecha, $laboratorio, $motivo) {
-            $mensaje->from($fromemail, $docente);
+        $titulo_actividad = $request->titulo_actividad;
+        $hora_inicio = $request->hora_inicio;
+        $hora_final = $request->hora_final;
+        $asignatura = $request->asignatura;
+
+        $subject = "Solicitud";
+        $emailSchool = "atencion.salas@gmail.com";
+        $nombre_docente = $request->nombre_docente;
+        $apellidop = $request->apellidop;
+        $apellidom = $request->apellidom;
+        $email = $request->email;
+
+        Mail::send('emails.contactanos', $request->all(), function ($mensaje) use (
+            $subject,
+            $nombre_docente,
+            $apellidop,
+            $apellidom,
+            $emailSchool,
+            $email,
+
+            $espacio,
+            $fecha_solicitada,
+            $titulo_actividad,
+            $asignatura,
+            $hora_inicio,
+            $hora_final
+
+        ) {
+            $mensaje->from($email, $nombre_docente);
             $mensaje->subject($subject);
             $mensaje->to($emailSchool, "Laboratorios");
         });
@@ -92,7 +115,7 @@ class EnviarEmailController extends Controller
         $tratamiento = $request->tratamiento;
         // $docente = $tratamiento + $nombre + $apellidop + $apellidom;
         $director = "Puga Sosa";
-        $emailDirec = "directorCarreras@Utcentro.com";
+        $emailDirec = "atencion.salas@gmail.com";
         $user = $request->usuario;
         $password = $request->password;
         $email = $request->email;
@@ -106,16 +129,10 @@ class EnviarEmailController extends Controller
     public function aceptarSolicitud(Request $request)
     {
 
-        // $email_director = DB::select('SELECT email FROM profesores WHERE id_rol = 1 ');
-        $email_director = "romancan33@gmail.com";
-        // $nombre_director = DB::select
-
-
+        $email_director = "atencion.salas@gmail.com";
         $nombre = $request->nombre;
         $apellidop = $request->apellidop;
         $apellidom = $request->apellidom;
-
-        // $docente = $nombre + ' ' + $apellidom + ' ' + $apellidop;
         $email = $request->email;
 
         $fecha = $request->fecha_solicitada;
@@ -146,7 +163,7 @@ class EnviarEmailController extends Controller
             $ubicacion,
             $asignatura
         ) {
-            $message->from($email_director, 'Puga');
+            $message->from($email_director, 'Director de carreras');
 
             $message->to($email, $nombre);
 
@@ -156,16 +173,13 @@ class EnviarEmailController extends Controller
     }
     public function rechazarSolicitud(Request $request)
     {
-        // $email_director = DB::select('SELECT email FROM profesores WHERE id_rol = 1 ');
-        $email_director = "romancan33@gmail.com";
-        // $nombre_director = DB::select
 
+        $email_director = "atencion.salas@gmail.com";
 
         $nombre = $request->nombre;
         $apellidop = $request->apellidop;
         $apellidom = $request->apellidom;
 
-        // $docente = $nombre + ' ' + $apellidom + ' ' + $apellidop;
         $email = $request->email;
 
         $fecha = $request->fecha_solicitada;
@@ -196,7 +210,7 @@ class EnviarEmailController extends Controller
             $ubicacion,
             $asignatura
         ) {
-            $message->from($email_director, 'Puga');
+            $message->from($email_director, 'Director de carreras');
 
             $message->to($email, $nombre);
 

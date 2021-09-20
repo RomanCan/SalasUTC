@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Solicitudes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 class SolicitudesController extends Controller
 {
     /**
@@ -59,7 +60,7 @@ class SolicitudesController extends Controller
 
         // return $soli = Solicitudes::all();
         $soli = Session::get('cedula');
-        return $rsoli = Solicitudes::where('cedula','=', $soli)->get();
+        return $rsoli = Solicitudes::where('cedula', '=', $soli)->get();
     }
 
     /**
@@ -75,7 +76,8 @@ class SolicitudesController extends Controller
         $soli->id_espacio = $request->get('id_espacio');
         $soli->fecha_solicitud = $request->get('fecha_solicitud');
         $soli->fecha_solicitada = $request->get('fecha_solicitada');
-        $soli->hora = $request->get('hora');
+        $soli->hora_inicio = $request->get('hora_inicio');
+        $soli->hora_final = $request->get('hora_final');
         $soli->titulo_actividad = $request->get('titulo_actividad');
         $soli->detalle_actividad = $request->get('detalle_actividad');
         $soli->status = $request->get('status');
@@ -107,8 +109,8 @@ class SolicitudesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $soli=Solicitudes::find($id);
-        
+        $soli = Solicitudes::find($id);
+
         $soli->update($request->all());
         return response()->json($soli, 200);
     }

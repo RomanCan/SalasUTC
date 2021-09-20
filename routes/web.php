@@ -43,7 +43,7 @@ Route::middleware(['rutas'])->group(function () {
 
 
     //Envio de Email
-    Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
+    Route::POST('solicitud_docente', 'App\Http\Controllers\EnviarEmailController@mensaje');
     Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');
     Route::POST('aceptar_soli', 'App\Http\Controllers\EnviarEmailController@aceptarSolicitud');
     Route::POST('rechazar_soli', 'App\Http\Controllers\EnviarEmailController@rechazarSolicitud');
