@@ -32,7 +32,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(user,index) in usuarios">
-                                    <td>@{{ user . tratamiento }} @{{ user . nombre }} @{{ user . apellidop }} @{{ user . apellidom }}</td>
+                                    <td>@{{ user . tratamiento }} @{{ user . nombre }} @{{ user . apellidop }}
+                                        @{{ user . apellidom }}</td>
                                     <td>@{{ user . nivelestudio }}</td>
                                     <td>@{{ user . usuario }}</td>
                                     <td>@{{ user . password }}</td>

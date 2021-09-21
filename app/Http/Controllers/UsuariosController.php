@@ -19,7 +19,7 @@ class UsuariosController extends Controller
         return $usuarios = DB::select('SELECT * FROM profesores
         INNER JOIN roles
         ON profesores.id_rol = roles.id_rol
-        WHERE usuario != "" AND password !="" AND email != ""');
+        WHERE profesores.usuario != "" AND profesores.password !="" AND profesores.email != "" AND profesores.id_rol = "2"');
     }
 
     /**

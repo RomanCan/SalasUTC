@@ -1,33 +1,35 @@
 var route = document.querySelector("[name=route]").value;
-var UrlUsuarios = route + '/apiUsuarios';
-var UrlDocentes = route + '/apiDocentes';
-var UserName = route + '/username';
+var UrlUsuarios = route + "/apiUsuarios";
+var UrlDocentes = route + "/apiDocentes";
+var UserName = route + "/username";
 new Vue({
     http: {
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')
-        }
+            "X-CSRF-TOKEN": document
+                .querySelector("#token")
+                .getAttribute("value"),
+        },
     },
-    el: '#usuario',
+    el: "#usuario",
     data: {
         docentes: [],
         usuarios: [],
 
-        cedula: '',
-        i_cedula: '',
+        cedula: "",
+        i_cedula: "",
 
-        id_rol: '',
-        nombre: '',
-        apellidop: '',
-        apellidom: '',
-        nivelestudio: '',
-        profesion: '',
-        tratamiento: '',
-        activo: '',
-        foto: '',
-        usuario: '',
-        password: '',
-        email: '',
+        id_rol: "",
+        nombre: "",
+        apellidop: "",
+        apellidom: "",
+        nivelestudio: "",
+        profesion: "",
+        tratamiento: "",
+        activo: "",
+        foto: "",
+        usuario: "",
+        password: "",
+        email: "",
 
         editar: false,
         editarInfo: false,
@@ -37,42 +39,38 @@ new Vue({
         this.getDocentes();
     },
     methods: {
-        getUsuarios: function() {
-            this.$http.get(UrlUsuarios)
-                .then(function(json) {
-                    this.usuarios = json.data;
-                    console.log(json);
-                })
+        getUsuarios: function () {
+            this.$http.get(UrlUsuarios).then(function (json) {
+                this.usuarios = json.data;
+            });
         },
-        getDocentes: function() {
-            this.$http.get(UrlDocentes)
-                .then(function(json) {
-                    this.docentes = json.data;
-                })
+        getDocentes: function () {
+            this.$http.get(UrlDocentes).then(function (json) {
+                this.docentes = json.data;
+            });
         },
-        showModal: function() {
-            $('#agregar_user').modal('show');
+        showModal: function () {
+            $("#agregar_user").modal("show");
         },
-        editarI: function(id) {
-            this.$http.get(UrlDocentes + '/' + id)
-                .then(function(json) {
-                    this.id_rol = json.data.id_rol;
-                    this.nombre = json.data.nombre;
-                    this.apellidop = json.data.apellidop;
-                    this.apellidom = json.data.apellidom;
-                    this.nivelestudio = json.data.nivelestudio;
-                    this.profesion = json.data.profesion;
-                    this.tratamiento = json.data.tratamiento;
-                    this.activo = json.data.activo;
-                    this.foto = json.data.foto;
-                    this.usuario = json.data.usuario;
-                    this.password = json.data.password;
-                    this.email = json.data.email;
-                    this.i_cedula = json.data.cedula;
-                    this.editarInfo = true;
-                })
+        editarI: function (id) {
+            this.$http.get(UrlDocentes + "/" + id).then(function (json) {
+                this.id_rol = json.data.id_rol;
+                this.nombre = json.data.nombre;
+                this.apellidop = json.data.apellidop;
+                this.apellidom = json.data.apellidom;
+                this.nivelestudio = json.data.nivelestudio;
+                this.profesion = json.data.profesion;
+                this.tratamiento = json.data.tratamiento;
+                this.activo = json.data.activo;
+                this.foto = json.data.foto;
+                this.usuario = json.data.usuario;
+                this.password = json.data.password;
+                this.email = json.data.email;
+                this.i_cedula = json.data.cedula;
+                this.editarInfo = true;
+            });
         },
-        guardar: function() {
+        guardar: function () {
             var doc = {
                 id_rol: this.id_rol,
                 nombre: this.nombre,
@@ -86,48 +84,43 @@ new Vue({
                 usuario: this.usuario,
                 password: this.password,
                 email: this.email,
-
             };
 
             Swal.fire({
                 title: "No podrás revertir este cambio!,¿Estás seguro?",
-                icon: 'warning',
+                icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, guardar',
-                cancelButtonText: 'No, cancelar',
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, guardar",
+                cancelButtonText: "No, cancelar",
             }).then((result) => {
                 if (result.value) {
-                    this.$http.patch(UrlDocentes + '/' + this.i_cedula, doc)
-                        .then(function(json) {
+                    this.$http
+                        .patch(UrlDocentes + "/" + this.i_cedula, doc)
+                        .then(function (json) {
                             Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: '¡Guardado exitosamente!',
+                                position: "center",
+                                icon: "success",
+                                title: "¡Guardado exitosamente!",
                                 showConfirmButton: false,
-                                timer: 1500
-                            })
+                                timer: 1500,
+                            });
                             this.enviarEmail();
                             this.salir();
                             window.location.reload();
-                            //
-
-                            // this.getUsuarios();
-                            // window.location.reload();
-                        }).catch(function() {
-                            Swal.fire({
-                                icon: 'error',
-                                title: '¡Ha ocurrido un error!',
-                                text: '¡No deje campos vacios!',
-                            })
                         })
+                        .catch(function () {
+                            Swal.fire({
+                                icon: "error",
+                                title: "¡Ha ocurrido un error!",
+                                text: "¡No deje campos vacios!",
+                            });
+                        });
                 }
-            })
-
-
+            });
         },
-        enviarEmail: function() {
+        enviarEmail: function () {
             var user = {
                 nombre: this.nombre,
                 apellidop: this.apellidop,
@@ -137,15 +130,13 @@ new Vue({
                 usuario: this.usuario,
                 password: this.password,
             };
-            this.$http.post(UserName, user)
-                .then(function() {
-                    console.log(json);
-                }).catch(function(json) {
-                    console.log(json);
-                })
+            this.$http
+                .post(UserName, user)
+                .then(function () {})
+                .catch(function () {});
         },
-        salir: function() {
-            $('#agregar_user').modal('hide');
+        salir: function () {
+            $("#agregar_user").modal("hide");
             this.cedula = "";
             this.id_rol = "";
             this.nombre = "";
@@ -161,6 +152,6 @@ new Vue({
             this.email = "";
             this.i_cedula = "";
             this.editarInfo = false;
-        }
+        },
     },
-})
+});
