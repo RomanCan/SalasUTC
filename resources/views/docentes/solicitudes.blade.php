@@ -84,7 +84,7 @@
                                     <div class="form-group">
                                         <label for="">Espacio</label>
                                         <select name="" id="" v-model="id_espacio" class="form-control">
-                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
+                                            <option v-for="e in espacios" :value="e.id_espacio" v-if="e.cupo === 1">@{{ e . nombre }}
                                             </option>
                                         </select>
                                     </div>
