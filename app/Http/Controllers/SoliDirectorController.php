@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Solicitudes;
+use Illuminate\Support\Facades\DB;
+use App\Models\Espacios;
 
 class SoliDirectorController extends Controller
 {
@@ -57,7 +59,8 @@ class SoliDirectorController extends Controller
         $soli->fecha_solicitud = $request->get('fecha_solicitud');
         $soli->fecha_solicitada = $request->get('fecha_solicitada');
         $soli->fecha_autorizacion = $request->get('fecha_autorizacion');
-        $soli->hora = $request->get('hora');
+        $soli->hora_inicio = $request->get('hora_inicio');
+        $soli->hora_final = $request->get('hora_final');
         $soli->titulo_actividad = $request->get('titulo_actividad');
         $soli->detalle_actividad = $request->get('detalle_actividad');
         $soli->status = $request->get('status');
@@ -67,6 +70,12 @@ class SoliDirectorController extends Controller
         $soli->participantes = $request->get('participantes');
         $soli->tipo_solicitud = $request->get('tipo_solicitud');
         $soli->update();
+
+
+
+        $cupo = 0;
+        $id_espacio = $request->id_espacio;
+        DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
     }
 
     /**

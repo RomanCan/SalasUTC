@@ -139,7 +139,8 @@ class EnviarEmailController extends Controller
         $titulo_actividad = $request->titulo_actividad;
         $detalle_actividad = $request->detalle_actividad;
         $ClaveGrupo = $request->ClaveGrupo;
-        $hora = $request->hora;
+        $hora_inicio = $request->hora_inicio;
+        $hora_final = $request->hora_final;
 
         $espacio = $request->espacio;
         $ubicacion = $request->ubicacion;
@@ -158,7 +159,8 @@ class EnviarEmailController extends Controller
             $titulo_actividad,
             $detalle_actividad,
             $ClaveGrupo,
-            $hora,
+            $hora_inicio,
+            $hora_final,
             $espacio,
             $ubicacion,
             $asignatura

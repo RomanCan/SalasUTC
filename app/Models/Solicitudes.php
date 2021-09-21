@@ -27,7 +27,8 @@ class Solicitudes extends Model
         'ClaveAsig',
         'participantes',
         'tipo_solicitud',
-        'hora',
+        'hora_inicio',
+        'hora_final',
         'asignatura',
     ];
 

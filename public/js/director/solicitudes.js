@@ -26,7 +26,8 @@ new Vue({
         ClaveAsig: "",
         participantes: "",
         tipo_solicitud: "",
-        hora: "",
+        hora_inicio: "",
+        hora_final: "",
         asignatura: "",
         id: "",
         aprobado: 2,
@@ -62,7 +63,8 @@ new Vue({
                 this.status = json.data.status;
                 this.ClaveGrupo = json.data.ClaveGrupo;
                 this.ClaveAsig = json.data.ClaveAsig;
-                this.hora = json.data.hora;
+                this.hora_inicio = json.data.hora_inicio;
+                this.hora_final = json.data.hora_final;
                 this.participantes = json.data.participantes;
                 this.tipo_solicitud = json.data.tipo;
 
@@ -99,7 +101,8 @@ new Vue({
                         ClaveAsig: this.ClaveAsig,
                         participantes: this.participantes,
                         tipo_solicitud: this.tipo_solicitud,
-                        hora: this.hora,
+                        hora_inicio: this.hora_inicio,
+                        hora_final: this.hora_final,
                         status: this.aprobado,
                         nombre_asignatura: this.nombre_asignatura,
                         ubicacion: this.ubicacion,
@@ -143,7 +146,8 @@ new Vue({
                 ClaveAsig: this.ClaveAsig,
                 participantes: this.participantes,
                 tipo_solicitud: this.tipo_solicitud,
-                hora: this.hora,
+                hora_inicio: this.hora_inicio,
+                hora_final: this.hora_final,
                 status: this.aprobado,
 
                 asignatura: this.nombre_asignatura,
@@ -172,7 +176,8 @@ new Vue({
                 this.status = json.data.status;
                 this.ClaveGrupo = json.data.ClaveGrupo;
                 this.ClaveAsig = json.data.ClaveAsig;
-                this.hora = json.data.hora;
+                this.hora_inicio = json.data.hora_inicio;
+                this.hora_final = json.data.hora_final;
                 this.participantes = json.data.participantes;
                 this.tipo_solicitud = json.data.tipo;
 
@@ -209,7 +214,8 @@ new Vue({
                         ClaveAsig: this.ClaveAsig,
                         participantes: this.participantes,
                         tipo_solicitud: this.tipo_solicitud,
-                        hora: this.hora,
+                        hora_inicio: this.hora_inicio,
+                        hora_final: this.hora_final,
                         status: this.rechazado,
                         nombre_asignatura: this.nombre_asignatura,
                         ubicacion: this.ubicacion,
@@ -253,9 +259,9 @@ new Vue({
                 ClaveAsig: this.ClaveAsig,
                 participantes: this.participantes,
                 tipo_solicitud: this.tipo_solicitud,
-                hora: this.hora,
+                hora_inicio: this.hora_inicio,
+                hora_final: this.hora_final,
                 status: this.aprobado,
-
                 asignatura: this.nombre_asignatura,
                 nombre: this.profesor,
                 apellidop: this.profesor_apellidop,
