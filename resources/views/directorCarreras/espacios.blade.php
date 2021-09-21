@@ -25,7 +25,15 @@
                                 <tr v-for="(esp, index) in searchE" v-bind:value="esp.id_espacio">
                                     <td>@{{ esp . nombre }}</td>
                                     <td>@{{ esp . ubicacion }}</td>
-                                    <td>@{{ esp . cupo }}</td>
+                                    <td v-if="esp.cupo === 0">
+                                        <span
+                                            style="background-color: rgb(184, 0, 0); color:white; padding:5px;border-radius: 14px;">Ocupado</span>
+                                    </td>
+                                    <td v-if="esp.cupo === 1">
+                                        <span
+                                            style="background-color: rgb(41, 153, 26); color:white; padding:5px;border-radius: 14px;">Disponible</span>
+                                    </td>
+
                                     <span>
                                         <td class="" role=" group">
                                             <span class="btn btn-success" @click="editarEspacio(esp.id_espacio)">
