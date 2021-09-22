@@ -6,7 +6,10 @@
             <div class="col-md-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-responsive table-hover">
+                        <div v-if="solicitudes == ''">
+                            <h4><b>No han realizado solicitudes</b></h4>
+                        </div>
+                        <table class="table table-responsive table-hover" v-if="solicitudes != ''">
                             <thead>
                                 <th>Docente</th>
                                 <th>Materia</th>
@@ -20,6 +23,7 @@
                                 <th>Opciones</th>
                             </thead>
                             <tbody>
+
                                 <tr v-for="sol in solicitudes" style="text-transform: uppercase">
                                     <td>@{{ sol . profesor . tratamiento }} @{{ sol . profesor . nombre }}
                                     <td>@{{ sol . ClaveGrupo }} @{{ sol . asignatura . Nombre }}</td>
@@ -40,7 +44,7 @@
                                     <td v-if="sol.status === 0">
                                         <span style=" color: red"> <i class="material-icons">close</i></span>
                                     </td>
-                                    <td v-if="sol.status === 1">
+                                    <td v-if="sol.status === 1 && sol.espacio.cupo === 1">
                                         <div>
                                             <button class="btn btn-success btn-sm" @click="aprobar(sol.id_solicitud)">
                                                 <i class="material-icons">done</i>
@@ -49,6 +53,9 @@
                                                 <i class="material-icons">highlight_off</i>
                                             </button>
                                         </div>
+                                    </td>
+                                    <td v-if="sol.espacio.cupo === 0 && sol.status != 2">
+                                        <span>Se ha rechazado su solicitud o el laboratorio no esta disponible</span>
                                     </td>
                                 </tr>
                             </tbody>
