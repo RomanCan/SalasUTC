@@ -203,7 +203,11 @@
                             </td>
                             <td v-if="sol.status === 2">
                                 <span
-                                    style="background-color: rgb(76 175 80); color:white; padding:5px;border-radius: 14px;">Aprobado</span>
+                                    style="background-color: rgb(76, 175, 80); color:white; padding:5px;border-radius: 14px;">Aprobado</span>
+                            </td>
+                            <td v-if="sol.status === 3">
+                                <span
+                                    style="background-color: rgb(12, 103, 252); color:white; padding:5px;border-radius: 14px;">Finalizado</span>
                             </td>
 
 
@@ -215,6 +219,23 @@
                                     <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"><i
                                             class="material-icons">delete</i>&nbsp;Eliminar</span> --}}
 
+                            </td>
+
+                            {{-- habilitar el cupo --}}
+                            <td class="" role=" group" v-if="sol.status === 2">
+                                <span class="btn btn-danger" @click="finPractica(sol.id_solicitud)">
+                                    Finalizar</span>
+                                {{-- &nbsp;
+
+                                    <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"><i
+                                            class="material-icons">delete</i>&nbsp;Eliminar</span> --}}
+
+                            </td>
+                            <td v-if="sol.status === 3">
+                                <span>LA PRACTICA SE HA CONCLUIDO CON ÉXITO</span>
+                            </td>
+                            <td v-if="sol.status === 0">
+                                <span>SOLICITUD RECHAZADA</span>
                             </td>
 
                         </tr>

@@ -110,9 +110,27 @@ class SolicitudesController extends Controller
     public function update(Request $request, $id)
     {
         $soli = Solicitudes::find($id);
+        $soli->cedula = $request->get('cedula');
+        $soli->id_espacio = $request->get('id_espacio');
+        $soli->fecha_solicitud = $request->get('fecha_solicitud');
+        $soli->fecha_solicitada = $request->get('fecha_solicitada');
+        $soli->fecha_autorizacion = $request->get('fecha_autorizacion');
+        $soli->hora_inicio = $request->get('hora_inicio');
+        $soli->hora_final = $request->get('hora_final');
+        $soli->titulo_actividad = $request->get('titulo_actividad');
+        $soli->detalle_actividad = $request->get('detalle_actividad');
+        $soli->status = $request->get('status');
+        $soli->ClaveGrupo = $request->get('ClaveGrupo');
+        $soli->ClaveAsig = $request->get('ClaveAsig');
+        $soli->asignatura = $request->get('asignatura');
+        $soli->participantes = $request->get('participantes');
+        $soli->tipo_solicitud = $request->get('tipo_solicitud');
+        $soli->update();
 
-        $soli->update($request->all());
-        return response()->json($soli, 200);
+
+        $cupo = 1;
+        $id_espacio = $request->id_espacio;
+        DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
     }
 
     /**

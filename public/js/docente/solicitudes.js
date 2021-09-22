@@ -53,6 +53,9 @@ new Vue({
         hora_final: "",
         // ocultar boton de actualizar
         editar: false,
+
+        // id para finalizar la practica
+        id:"",
     },
     created: function () {
         this.getSoliDocentes();
@@ -272,5 +275,80 @@ new Vue({
             this.hora_final = "";
             this.editar = false;
         },
+
+        // área de habilitar espacio o finalizacion de practica por parte del docente
+        finPractica(id) {
+            this.$http.get(urlSolicitudes + "/" + id).then(function (json) {
+                this.id_solicitud = json.data.id_solicitud;
+                this.cedula = json.data.cedula;
+                this.id_espacio = json.data.id_espacio;
+                this.fecha_solicitud = json.data.fecha_solicitud;
+                this.fecha_solicitada = json.data.fecha_solicitada;
+                this.fecha_autorizacion = json.data.fecha_autorizacion;
+                this.titulo_actividad = json.data.titulo_actividad;
+                this.detalle_actividad = json.data.detalle_actividad;
+                this.status = json.data.status;
+                this.ClaveGrupo = json.data.ClaveGrupo;
+                this.ClaveAsig = json.data.ClaveAsig;
+                this.hora_inicio = json.data.hora_inicio;
+                this.hora_final = json.data.hora_final;
+                this.participantes = json.data.participantes;
+                this.tipo_solicitud = json.data.tipo_solicitud;
+                this.asignatura = json.data.asignatura.Nombre;
+
+                this.id = this.id_solicitud;
+
+                
+            });
+
+            Swal.fire({
+                title: "No podrás revertir este cambio!,¿Su Practica ha Finalizado?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, Finalizar",
+                cancelButtonText: "No, cancelar",
+            }).then((result) => {
+                if (result.value) {
+                    var soli = {
+                        cedula: this.cedula,
+                        ClaveGrupo: this.ClaveGrupo,
+                        ClaveAsig: this.ClaveAsig,
+                        id_espacio: this.id_espacio,
+                        fecha_solicitud: this.fecha_solicitud,
+                        fecha_solicitada: this.fecha_solicitada,
+                        titulo_actividad: this.titulo_actividad,
+                        detalle_actividad: this.detalle_actividad,
+                        status: 3,
+                        participantes: this.participantes,
+                        tipo_solicitud: this.tipo_solicitud,
+                        asignatura: this.asignatura,
+                        hora_inicio: this.hora_inicio,
+                        hora_final: this.hora_final,
+                    };
+
+                    this.$http
+                        .patch(urlSolicitudes + "/" + id, soli)
+                        .then(function () {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "¡Ha Finalizado con éxito!",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+
+                            this.getSolicitudes();
+                            
+                        })
+                        .catch(function (json) {
+                            console.log(json);
+                        });
+                }
+            });
+        },
     },
+
+    
 });
