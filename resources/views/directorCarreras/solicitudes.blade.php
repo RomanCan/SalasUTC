@@ -58,8 +58,11 @@
                                             </button>
                                         </div>
                                     </td>
-                                    <td v-if="sol.espacio.cupo === 0 && sol.status != 2">
-                                        <span>Se ha rechazado su solicitud o el laboratorio no esta disponible</span>
+                                    <td v-if="sol.status === 0">
+                                        <span>HAZ RECHAZADO LA SOLICITUD</span>
+                                    </td>
+                                    <td v-if="sol.status === 2">
+                                        <span>ESPACIO OCUPADO</span>
                                     </td>
                                     <td v-if="sol.status === 3">
                                         <span>LA PRÁCTICA EN EL ESPACIO SE HA CONCLUIDO CON ÉXITO</span>
