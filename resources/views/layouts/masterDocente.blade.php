@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="material/img/apple-icon.png">
     <link rel="icon" type="image/png" href="material/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Director de Carreras</title>
+    <title>Docente</title>
     {{-- TOKEN PARA CAMBIOS --}}
     <meta name="token" id="token" value="{{ csrf_token() }}">
     {{-- META PARA RUTA DINAMICA --}}
