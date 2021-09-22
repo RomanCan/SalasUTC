@@ -232,7 +232,7 @@
 
                             </td>
                             <td v-if="sol.status === 3">
-                                <span>LA PRACTICA SE HA CONCLUIDO CON ÉXITO</span>
+                                <span>LA PRÁCTICA SE HA CONCLUIDO CON ÉXITO</span>
                             </td>
                             <td v-if="sol.status === 0">
                                 <span>SOLICITUD RECHAZADA</span>

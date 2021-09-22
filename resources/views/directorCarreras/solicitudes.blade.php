@@ -44,6 +44,10 @@
                                     <td v-if="sol.status === 0">
                                         <span style=" color: red"> <i class="material-icons">close</i></span>
                                     </td>
+                                    {{-- ÁREA DE NUEVO STATUS (FINALIZADO) --}}
+                                    <td v-if="sol.status === 3">
+                                        <span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>
+                                    </td>
                                     <td v-if="sol.status === 1 && sol.espacio.cupo === 1">
                                         <div>
                                             <button class="btn btn-success btn-sm" @click="aprobar(sol.id_solicitud)">
@@ -56,6 +60,9 @@
                                     </td>
                                     <td v-if="sol.espacio.cupo === 0 && sol.status != 2">
                                         <span>Se ha rechazado su solicitud o el laboratorio no esta disponible</span>
+                                    </td>
+                                    <td v-if="sol.status === 3">
+                                        <span>LA PRÁCTICA EN EL ESPACIO SE HA CONCLUIDO CON ÉXITO</span>
                                     </td>
                                 </tr>
                             </tbody>
