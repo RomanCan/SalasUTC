@@ -169,7 +169,7 @@
     <script src="material/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <script src="material/js/plugins/bootstrap-tagsinput.js"></script>
     <script src="material/js/material-dashboard.js" type="text/javascript"></script>
-
+    <script src="js/datatables/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
             $().ready(function() {
@@ -353,7 +353,6 @@
         $(document).ready(function() {
             // Javascript method's body can be found in assets/js/demos.js
             md.initDashboardPageCharts();
-
         });
     </script>
 </body>
