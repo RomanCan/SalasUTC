@@ -2,7 +2,28 @@
 @section('contenido')
 <script>
     $(document).ready(function() {
-    $('#datatable_spaces').DataTable();
+    $('#datatable_spaces').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total registros)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    });
 } );
 </script>
     <div id="espacio">
@@ -18,12 +39,12 @@
                 <div class="card">
                     <div class="card-body">
                     {{-- tabla --}}
-                        <table id="datatable_spaces" class="table table table-hove">
+                        <table id="datatable_spaces" class="table table-hover">
                             <thead>
                                 <th>Nombre</th>
                                 <th>Ubicación</th>
                                 <th>Cupo</th>
-                                <td>Opciones</td>
+                                <th>Opciones</td>
                             </thead>
                             <tbody>
                                 <tr v-for="(esp, index) in searchE" v-bind:value="esp.id_espacio">

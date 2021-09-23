@@ -155,9 +155,11 @@
     @stack('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
-    </script>
+    </script>-->
+    <script src="js/jquery/jquery-3.6.0.min.js"></script>
+
 
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -170,6 +172,7 @@
     <script src="material/js/plugins/bootstrap-tagsinput.js"></script>
     <script src="material/js/material-dashboard.js" type="text/javascript"></script>
     <script src="js/datatables/datatables.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $().ready(function() {
