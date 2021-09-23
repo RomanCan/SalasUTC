@@ -82,7 +82,7 @@ new Vue({
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: '¡Guardado exitosamente!',
+                    title: '¡Actualizado exitosamente!',
                     showConfirmButton: false,
                     timer: 1500
                 })

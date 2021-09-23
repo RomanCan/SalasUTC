@@ -81,7 +81,7 @@ new Vue({
 
             Swal.fire({
                 title: "No podrás revertir este cambio!,¿Estás seguro de aceptar?",
-                icon: "success",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
@@ -193,13 +193,13 @@ new Vue({
             });
 
             Swal.fire({
-                title: "No podrás revertir este cambio!,¿Estás seguro de aceptar?",
-                icon: "success",
+                title: "No podrás revertir este cambio!,¿Estás seguro de cancelar?",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, aceptar",
-                cancelButtonText: "No, cancelar",
+                confirmButtonText: "Sí, cancelar",
+                cancelButtonText: "No, salir",
             }).then((result) => {
                 if (result.value) {
                     var soli = {
@@ -232,7 +232,7 @@ new Vue({
                             Swal.fire({
                                 position: "center",
                                 icon: "success",
-                                title: "¡Ha sido aprobado!",
+                                title: "¡Ha sido cancelado!",
                                 showConfirmButton: false,
                                 timer: 2000,
                             });
