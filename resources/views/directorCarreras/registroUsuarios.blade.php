@@ -1,5 +1,10 @@
 @extends('layouts.masterDirector')
 @section('contenido')
+<script>
+    $(document).ready(function() {
+    $('#datatable_users').DataTable();
+} );
+</script>
     <div id="usuario">
 
 
@@ -22,7 +27,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-responsive table-hover" v-if="usuarios.length != 0">
+                        <table id="datatable_users" class="table table-hover" v-if="usuarios.length != 0">
                             <thead>
                                 <th>Docente</th>
                                 <th>Nivel de estudio</th>

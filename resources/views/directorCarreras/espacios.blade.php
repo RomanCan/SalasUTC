@@ -1,6 +1,10 @@
 @extends('layouts.masterDirector')
-
 @section('contenido')
+<script>
+    $(document).ready(function() {
+    $('#datatable_spaces').DataTable();
+} );
+</script>
     <div id="espacio">
         <div class="row">
             <div class="col-md-12 ">
@@ -14,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                     {{-- tabla --}}
-                        <table class="table table-responsive table table-hove">
+                        <table id="datatable_spaces" class="table table table-hove">
                             <thead>
                                 <th>Nombre</th>
                                 <th>Ubicación</th>

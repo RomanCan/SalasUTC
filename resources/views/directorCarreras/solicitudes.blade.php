@@ -1,6 +1,10 @@
 @extends('layouts.masterDirector')
-
 @section('contenido')
+<script>
+    $(document).ready(function() {
+    $('#datatable_requests').DataTable();
+} );
+</script>
     <div id="solicitudes">
         <div class="row">
             <div class="col-md-12 ">
@@ -9,7 +13,7 @@
                         <div v-if="solicitudes == ''">
                             <h4><b>No han realizado solicitudes</b></h4>
                         </div>
-                        <table class="table table-responsive table-hover" v-if="solicitudes != ''">
+                        <table id="datatable_requests" class="table table-hover" v-if="solicitudes != ''">
                             <thead>
                                 <th>Docente</th>
                                 <th>Materia</th>
