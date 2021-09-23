@@ -73,9 +73,16 @@ class SoliDirectorController extends Controller
 
 
 
-        $cupo = 0;
-        $id_espacio = $request->id_espacio;
-        DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
+        if ($request->status == 2){
+            $cupo = 0;
+            $id_espacio = $request->id_espacio;
+            DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
+        } else {
+            $cupo = 1;
+            $id_espacio = $request->id_espacio;
+            DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
+        }
+
     }
 
     /**
