@@ -39,7 +39,7 @@
                 <div class="card">
                     <div class="card-body">
                     {{-- tabla --}}
-                        <table id="datatable_spaces" class="table table-hover">
+                        <table id="datatable_spaces" class="table table-hover table-condensed">
                             <thead>
                                 <th>Nombre</th>
                                 <th>Ubicación</th>

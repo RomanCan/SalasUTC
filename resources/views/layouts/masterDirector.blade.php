@@ -20,7 +20,8 @@
     <link href="material/css/material-dashboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/datatables/datatables.min.css">
 
-    <script src="material/js/core/jquery.min.js"></script>
+    <!--<script src="material/js/core/jquery.min.js"></script>-->
+    <script src="js/jquery/jquery-3.6.0.min.js"></script>
     <script src="js/datatables/datatables.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
@@ -158,7 +159,7 @@
     <!--<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
     </script>-->
-    <script src="js/jquery/jquery-3.6.0.min.js"></script>
+    <!-- <script src="js/jquery/jquery-3.6.0.min.js"></script> -->
 
 
     <!-- Bootstrap 4 -->
@@ -171,7 +172,7 @@
     <script src="material/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <script src="material/js/plugins/bootstrap-tagsinput.js"></script>
     <script src="material/js/material-dashboard.js" type="text/javascript"></script>
-    <script src="js/datatables/datatables.min.js"></script>
+    <!-- <script src="js/datatables/datatables.min.js"></script> -->
     
     <script>
         $(document).ready(function() {

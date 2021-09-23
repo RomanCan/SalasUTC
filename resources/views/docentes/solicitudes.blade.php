@@ -1,6 +1,31 @@
 @extends('layouts.masterDocente')
-
 @section('contenido')
+<script>
+    $(document).ready(function() {
+    $('#datatable_teacher_requests').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total registros)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    });
+} );
+</script>
     <div id="soli">
         <!-- Button trigger modal -->
 
@@ -165,11 +190,10 @@
         {{-- fin del modal --}}
 
         <!-- mostrar tabla de solicitud -->
-
         <div class="card">
             <div class="card-body">
                 <!-- {{-- tabla --}} -->
-                <table class="table table-striped table-responsive">
+                <table id="datatable_teacher_requests" class="table table-striped table-condensed">
                     <thead class="thead">
                         <th>#</th>
                         <th>Espacio</th>

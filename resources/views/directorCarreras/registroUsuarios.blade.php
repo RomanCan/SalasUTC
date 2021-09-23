@@ -48,7 +48,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <table id="datatable_users" class="table table-hover" v-if="usuarios.length != 0">
+                        <table id="datatable_users" class="table table-hover table-condensed" v-if="usuarios.length != 0">
                             <thead>
                                 <th>Docente</th>
                                 <th>Nivel de estudio</th>
