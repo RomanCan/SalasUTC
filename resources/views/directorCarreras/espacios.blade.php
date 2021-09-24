@@ -33,7 +33,7 @@
                 <div class="col-md-5">
                     <button class="btn btn-info" @click="showModal"><i class="material-icons">add_location_alt
                         </i>&nbsp;Agregar</button>
-                    <input type="text" placeholder="Buscar" v-model="search" class="form-control">
+                    <!-- <input type="text" placeholder="Buscar" v-model="search" class="form-control"> -->
                 </div>
 
                 <div class="card">

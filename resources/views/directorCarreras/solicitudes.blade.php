@@ -73,7 +73,7 @@
                                     <td v-if="sol.status === 3">
                                         <span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>
                                     </td>
-                                    <td v-if="sol.status === 1">
+                                    <td v-if="sol.status === 1 && sol.espacio.cupo === 1">
                                         <div>
                                             <button class="btn btn-success btn-sm" @click="aprobar(sol.id_solicitud)">
                                                 <i class="material-icons">done</i>
