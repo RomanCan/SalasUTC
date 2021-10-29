@@ -65,6 +65,7 @@ Route::apiResource('apiSoliDirector', 'App\Http\Controllers\SoliDirectorControll
 //  Api para traer al maestro de la solicitud
 Route::apiResource('apiSoliDocentes', 'App\Http\Controllers\SoliDocenteController');
 Route::apiResource('apiPerfilDocentes', 'App\Http\Controllers\PerfilController');
+Route::get('apiEventos', [App\Http\Controllers\EventoController::class, 'show']);
 
 
 
