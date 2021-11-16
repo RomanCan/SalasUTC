@@ -10,13 +10,14 @@ class Solicitudes extends Model
     use HasFactory;
     protected $table = 'res_solicitudes';
     protected $primaryKey = 'id_solicitud';
-    protected $with = ['espacio', 'profesor', 'asignatura'];
+    protected $with = ['espacio', 'profesor', 'asignatura','horarios'];
     public $timestamps = false;
 
     protected $fillable = [
         'id_solicitud',
         'cedula',
         'id_espacio',
+        'id_horario',
         'fecha_solicitud',
         'fecha_solicitada',
         'fecha_autorizacion',
@@ -27,11 +28,14 @@ class Solicitudes extends Model
         'ClaveAsig',
         'participantes',
         'tipo_solicitud',
-        'hora_inicio',
-        'hora_final',
+        // 'hora_inicio',
+        // 'hora_final',
         'asignatura',
     ];
 
+    public function horarios(){
+        return $this->belongsTo(Horarios::class, 'id_horario','id_horario');
+    }
     public function espacio()
     {
         return $this->belongsTo(Espacios::class, 'id_espacio', 'id_espacio');

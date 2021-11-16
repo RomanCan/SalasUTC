@@ -1,15 +1,15 @@
 $(document).ready(function(){
     $('#select_espacio').on('change', function () {
-     get_horarios_reuel();
+     get_horarios();
     });
 
     $('#requested_date').on('focusout', function () {
-    get_horarios_reuel();
+    get_horarios();
     });
 
 });
 
-function get_horarios_reuel() {
+function get_horarios() {
 
 if($('#select_espacio option:selected').val() == null){
 
@@ -22,7 +22,7 @@ if($('#select_espacio option:selected').val() == null){
 }
 
 
-    var url = $('#reuel_ruta').val();
+    var url = $('#horarios').val();
     $.ajax({
         url: url,
         type: "GET",

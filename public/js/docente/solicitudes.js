@@ -37,6 +37,7 @@ new Vue({
         ClaveGrupo: "",
         ClaveAsig: "",
         id_espacio: "",
+        id_horario: "",
         fecha_solicitud: moment().format("YYYY-MM-DD"),
         fecha_solicitada: "",
         titulo_actividad: "",
@@ -127,6 +128,7 @@ new Vue({
                 ClaveGrupo: this.ClaveGrupo,
                 ClaveAsig: this.ClaveAsig,
                 id_espacio: this.id_espacio,
+                id_horario:this.id_horario,
                 fecha_solicitud: this.fecha_solicitud,
                 fecha_solicitada: this.fecha_solicitada,
                 titulo_actividad: this.titulo_actividad,
@@ -135,10 +137,9 @@ new Vue({
                 participantes: this.participantes,
                 tipo_solicitud: this.tipo_solicitud,
                 asignatura: this.asignatura,
-                hora_inicio: this.hora_inicio,
-                hora_final: this.hora_final,
+                // hora_inicio: this.hora_inicio,
+                // hora_final: this.hora_final,
             };
-
             this.$http
                 .post(urlSolicitudes, solicitud)
                 .then(function (json) {
@@ -172,6 +173,7 @@ new Vue({
                 this.ClaveGrupo = json.data.ClaveGrupo;
                 this.ClaveAsig = json.data.ClaveAsig;
                 this.id_espacio = json.data.id_espacio;
+                this.id_horario = json.data.id_horario;
                 this.fecha_solicitud = json.data.fecha_solicitud;
                 this.fecha_solicitada = json.data.fecha_solicitada;
                 this.titulo_actividad = json.data.titulo_actividad;
@@ -180,8 +182,8 @@ new Vue({
                 this.participantes = json.data.participantes;
                 this.tipo_solicitud = json.data.tipo_solicitud;
                 this.asignatura = json.data.asignatura.Nombre;
-                this.hora_inicio = json.data.hora_inicio;
-                this.hora_final = json.data.hora_final;
+                // this.hora_inicio = json.data.hora_inicio;
+                // this.hora_final = json.data.hora_final;
                 $("#Agregar").modal("show");
             });
         },
@@ -224,6 +226,7 @@ new Vue({
                 ClaveGrupo: this.ClaveGrupo,
                 ClaveAsig: this.ClaveAsig,
                 id_espacio: this.id_espacio,
+                id_horario : this.id_horario,
                 fecha_solicitud: this.fecha_solicitud,
                 fecha_solicitada: this.fecha_solicitada,
                 titulo_actividad: this.titulo_actividad,
@@ -232,8 +235,8 @@ new Vue({
                 participantes: this.participantes,
                 tipo_solicitud: this.tipo_solicitud,
                 asignatura: this.asignatura,
-                hora_inicio: this.hora_inicio,
-                hora_final: this.hora_final,
+                // hora_inicio: this.hora_inicio,
+                // hora_final: this.hora_final,
             };
             this.$http
                 .patch(urlSolicitudes + "/" + id, solicitud)
@@ -263,6 +266,7 @@ new Vue({
             this.ClaveGrupo = "";
             this.ClaveAsig = "";
             this.id_espacio = "";
+            this.id_horario = "";
             this.fecha_solicitud = "";
             this.fecha_solicitada = "";
             this.titulo_actividad = "";
@@ -298,7 +302,7 @@ new Vue({
 
                 this.id = this.id_solicitud;
 
-                
+
             });
 
             Swal.fire({
@@ -340,7 +344,7 @@ new Vue({
                             });
 
                             this.getSolicitudes();
-                            
+
                         })
                         .catch(function (json) {
                             console.log(json);
@@ -350,5 +354,5 @@ new Vue({
         },
     },
 
-    
+
 });

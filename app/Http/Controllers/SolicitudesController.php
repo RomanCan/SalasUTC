@@ -75,10 +75,11 @@ class SolicitudesController extends Controller
         $soli = new Solicitudes;
         $soli->cedula = $request->get('cedula');
         $soli->id_espacio = $request->get('id_espacio');
+        $soli->id_horario = $request->get('id_horario');
         $soli->fecha_solicitud = $request->get('fecha_solicitud');
         $soli->fecha_solicitada = $request->get('fecha_solicitada');
-        $soli->hora_inicio = $request->get('hora_inicio');
-        $soli->hora_final = $request->get('hora_final');
+        // $soli->hora_inicio = $request->get('hora_inicio');
+        // $soli->hora_final = $request->get('hora_final');
         $soli->titulo_actividad = $request->get('titulo_actividad');
         $soli->detalle_actividad = $request->get('detalle_actividad');
         $soli->status = $request->get('status');
@@ -113,11 +114,12 @@ class SolicitudesController extends Controller
         $soli = Solicitudes::find($id);
         $soli->cedula = $request->get('cedula');
         $soli->id_espacio = $request->get('id_espacio');
+        $soli->id_horario = $request->get('id_horario');
         $soli->fecha_solicitud = $request->get('fecha_solicitud');
         $soli->fecha_solicitada = $request->get('fecha_solicitada');
         $soli->fecha_autorizacion = $request->get('fecha_autorizacion');
-        $soli->hora_inicio = $request->get('hora_inicio');
-        $soli->hora_final = $request->get('hora_final');
+        // $soli->hora_inicio = $request->get('hora_inicio');
+        // $soli->hora_final = $request->get('hora_final');
         $soli->titulo_actividad = $request->get('titulo_actividad');
         $soli->detalle_actividad = $request->get('detalle_actividad');
         $soli->status = $request->get('status');
@@ -151,7 +153,7 @@ class SolicitudesController extends Controller
         $fecha_solicitada = $request->get('fecha_solicitada');
 
         $solicitudes_existentes = DB::select("Select *
-         from res_solicitudes where (status = 2) 
+         from res_solicitudes where (status = 2)
          AND id_espacio = $espacio_id AND DATE(fecha_solicitada) = STR_TO_DATE('$fecha_solicitada', '%Y-%m-%d')");
 
          $horas_espacios = DB::select("Select * from res_horarios where id_espacio = $espacio_id");

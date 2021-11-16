@@ -1,31 +1,31 @@
 @extends('layouts.masterDocente')
 @section('contenido')
-<script>
-    $(document).ready(function() {
-    $('#datatable_teacher_requests').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total registros)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    },
-    });
-} );
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable_teacher_requests').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total registros)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+            });
+        });
+    </script>
     <div id="soli">
         <!-- Button trigger modal -->
 
@@ -73,7 +73,7 @@
                                         </select>
                                         <!-- Para no probocar conflicto -->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
                                         <input type="text" v-model="ClaveGrupo" disabled class="form-control"
                                             v-if="editar">
                                     </div>
@@ -88,7 +88,7 @@
                                         </select>
                                         <!-- evitar conflicto al actualizar-->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                        <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
                                         <input type="text" v-model="ClaveAsig" disabled class="form-control"
                                             v-if="editar">
                                     </div>
@@ -109,7 +109,7 @@
                                     <div class="form-group">
                                         <label for="">Espacio</label>
                                         <select name="" id="select_espacio" v-model="id_espacio" class="form-control">
-                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }} 
+                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
                                             </option>
                                         </select>
                                     </div>
@@ -125,7 +125,8 @@
                                 <div class="col-md-6" style="padding-top: 20px;">
                                     <div class="form-group">
                                         <label for="">Fecha Solicitada</label>
-                                        <input type="date" class="form-control" id="requested_date" v-model="fecha_solicitada">
+                                        <input type="date" class="form-control" id="requested_date"
+                                            v-model="fecha_solicitada">
                                         {{-- <select name="" id="" v-model="fecha_solicitada" class="form-control"> --}}
                                         {{-- <option v-for="f in horarios">@{{ f . fecha }}
                                         </option> --}}
@@ -135,14 +136,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Hora de inicio</label>
-                                        <select name="" id="start_time" v-model="hora_inicio" class="form-control">
-                                            <option v-for="h in horarios">
+                                        <label for="">Horarios</label>
+                                        <select name="" id="start_time" v-model="id_horario" class="form-control">
+                                            <option v-for="h in horarios" :value="h.id_horario">
                                                 @{{ h . hora_inicio }}</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Hora de finalización</label>
                                         <select name="" id="" v-model="hora_final" class="form-control">
@@ -150,7 +151,7 @@
                                                 @{{ h . hora_final }}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6" style="padding-top: 20px;">
                                     <div class="form-group">
                                         <label for="">Titulo de la actividad</label>
@@ -214,8 +215,8 @@
                             <td>@{{ sol . detalle_actividad }}</td>
                             <td>@{{ sol . asignatura . Nombre }}</td>
                             <td>@{{ sol . fecha_solicitada }}</td>
-                            <td>@{{ sol . hora_inicio }}</td>
-                            <td>@{{ sol . hora_final }}</td>
+                            <td>@{{ sol . horarios . hora_inicio }}</td>
+                            <td>@{{ sol . horarios . hora_final }}</td>
 
                             <td v-if="sol.status === 0">
                                 <span
@@ -280,5 +281,4 @@
     <script src="js/docente/validaciones_fechas.js"></script>
 @endpush
 <input type="hidden" name="route" value="{{ url('/') }}">
-<input type="hidden" id="reuel_ruta" value="{{ url('/getHorarios') }}">
-
+<input type="hidden" id="horarios" value="{{ url('/getHorarios') }}">
