@@ -108,13 +108,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Espacio</label>
-                                        <select name="" id="" v-model="id_espacio" class="form-control">
-                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
+                                        <select name="" id="select_espacio" v-model="id_espacio" class="form-control">
+                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }} 
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="padding-top: 20px;">
                                     <div class="form-group">
                                         <label for="">Fecha de Solicitud</label>
                                         <input type="date" class="form-control" :value="fecha_solicitud" disabled>
@@ -122,10 +122,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="padding-top: 20px;">
                                     <div class="form-group">
                                         <label for="">Fecha Solicitada</label>
-                                        <input type="date" class="form-control" v-model="fecha_solicitada">
+                                        <input type="date" class="form-control" id="requested_date" v-model="fecha_solicitada">
                                         {{-- <select name="" id="" v-model="fecha_solicitada" class="form-control"> --}}
                                         {{-- <option v-for="f in horarios">@{{ f . fecha }}
                                         </option> --}}
@@ -136,7 +136,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Hora de inicio</label>
-                                        <select name="" id="" v-model="hora_inicio" class="form-control">
+                                        <select name="" id="start_time" v-model="hora_inicio" class="form-control">
                                             <option v-for="h in horarios">
                                                 @{{ h . hora_inicio }}</option>
                                         </select>
@@ -151,7 +151,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="padding-top: 20px;">
                                     <div class="form-group">
                                         <label for="">Titulo de la actividad</label>
                                         <input type="text" class="form-control" v-model="titulo_actividad">
@@ -277,5 +277,8 @@
 @push('scripts')
     <script src="js/moment-with-locales.js"></script>
     <script src="js/docente/solicitudes.js"></script>
+    <script src="js/docente/validaciones_fechas.js"></script>
 @endpush
 <input type="hidden" name="route" value="{{ url('/') }}">
+<input type="hidden" id="reuel_ruta" value="{{ url('/getHorarios') }}">
+

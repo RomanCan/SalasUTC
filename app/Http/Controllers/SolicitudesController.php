@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Solicitudes;
+use App\Models\Horarios;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -143,4 +144,30 @@ class SolicitudesController extends Controller
     {
         return Solicitudes::destroy($id);
     }
+
+    public function getHorarios(Request $request){
+
+        $espacio_id = $request->get('espacio_id');
+        $fecha_solicitada = $request->get('fecha_solicitada');
+
+        $solicitudes_existentes = DB::select("Select *
+         from res_solicitudes where (status = 2) 
+         AND id_espacio = $espacio_id AND DATE(fecha_solicitada) = STR_TO_DATE('$fecha_solicitada', '%Y-%m-%d')");
+
+         $horas_espacios = DB::select("Select * from res_horarios where id_espacio = $espacio_id");
+
+         if(count($solicitudes_existentes) > 0){
+            $horarios_ids = collect($solicitudes_existentes)->pluck('id_horario');
+            $string = str_replace('[', ' ', $horarios_ids);
+            $string2 = str_replace(']', ' ', $string);
+            $horas_espacios = DB::select("Select * from res_horarios where id_espacio = $espacio_id AND id_horario not in ($string2)");
+         }
+
+        return response()->json([
+            'horas_espacios' => $horas_espacios
+        ]);
+
+    }
+
+
 }

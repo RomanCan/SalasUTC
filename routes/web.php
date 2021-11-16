@@ -87,6 +87,11 @@ Route::get('getAsignaturas/{id}', [
     'uses' => 'App\Http\Controllers\AsignaturasController@getAsignaturas',
 ]);
 
+Route::get('getHorarios', [
+    'as' => 'getHorarios',
+    'uses' => 'App\Http\Controllers\SolicitudesController@getHorarios',
+]);
+
 Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 
 //Envio de Email
