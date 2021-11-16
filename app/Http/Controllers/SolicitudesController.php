@@ -168,6 +168,4 @@ class SolicitudesController extends Controller
         ]);
 
     }
-
-
 }
