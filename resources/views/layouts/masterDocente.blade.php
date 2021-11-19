@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="material/css/material-dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/datatables/datatables.min.css">
+    {{-- <link rel="stylesheet" href="css/datatables/datatables.min.css"> --}}
 
     <!-- <script src="material/js/core/jquery.min.js"></script> -->
     <script src="js/jquery/jquery-3.6.0.min.js"></script>
-    <script src="js/datatables/datatables.min.js"></script>
+    {{-- <script src="js/datatables/datatables.min.js"></script> --}}
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
     <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -32,6 +32,15 @@
     <link rel="stylesheet" href="fullcalendar/css/main.css">
     <script src="fullcalendar/js/main.min.js"></script>
     <script src="fullcalendar/js/locales-all.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 </head>
 
@@ -155,9 +164,9 @@
     @stack('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
-    </script> -->
+    </script> --}}
 
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

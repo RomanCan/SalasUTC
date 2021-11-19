@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="material/css/material-dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/datatables/datatables.min.css">
+    {{-- <link rel="stylesheet" href="css/datatables/datatables.min.css"> --}}
 
     <!--<script src="material/js/core/jquery.min.js"></script>-->
     <script src="js/jquery/jquery-3.6.0.min.js"></script>
-    <script src="js/datatables/datatables.min.js"></script>
+    {{-- <script src="js/datatables/datatables.min.js"></script> --}}
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
     <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -33,89 +33,89 @@
 <body class="">
     <div class=" wrapper ">
         <div class="           sidebar" data-color="orange" data-background-color="white">
-    <!--
+            <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
-    <div class="logo">
-        <a href="#" class="simple-text logo-normal text-white">
-            Gestión de Salas
-        </a>
-    </div>
-    <div class="sidebar-wrapper">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('director-perfil') }}">
-                    <i class="material-icons">person</i>
-                    <p>Perfil</p>
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal text-white">
+                    Gestión de Salas
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('registro_usuarios') }}">
-                    <i class="material-icons">switch_account</i>
-                    <p>Usuarios</p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ url('espacios') }}">
-                    <i class="material-icons">meeting_room</i>
-                    <p>Espacios</p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ url('solicitudes') }}">
-                    <i class="material-icons">content_paste</i>
-                    <p>Solicitudes</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-    </div>
-    <div class="main-panel">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top ">
-            <div class="container-fluid">
-                <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="javascript:;">{{ Session::get('usuario') }} /
-                        {{ Session::get('rol') }}</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end">
-                    <form class="navbar-form" hidden="true">
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                <i class="material-icons">search</i>
-                                <div class="ripple-container"></div>
-                            </button>
-                        </div>
-                    </form>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ url('salir') }}">
-                                <i class="material-icons">logout</i>
-                                <p class="d-lg-none d-md-block">
-                                    Salir
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </nav>
-        <!-- End Navbar -->
-        <div class="content">
-            @yield('contenido')
-
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('director-perfil') }}">
+                            <i class="material-icons">person</i>
+                            <p>Perfil</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('registro_usuarios') }}">
+                            <i class="material-icons">switch_account</i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url('espacios') }}">
+                            <i class="material-icons">meeting_room</i>
+                            <p>Espacios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url('solicitudes') }}">
+                            <i class="material-icons">content_paste</i>
+                            <p>Solicitudes</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!-- <footer class="footer">
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-absolute fixed-top ">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <a class="navbar-brand" href="javascript:;">{{ Session::get('usuario') }} /
+                            {{ Session::get('rol') }}</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <form class="navbar-form" hidden="true">
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="{{ url('salir') }}">
+                                    <i class="material-icons">logout</i>
+                                    <p class="d-lg-none d-md-block">
+                                        Salir
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                @yield('contenido')
+
+            </div>
+            <!-- <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
             <ul>
@@ -150,14 +150,14 @@
           </div>
         </div>
       </footer> -->
-    </div>
+        </div>
     </div>
 
     @stack('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
-        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+            integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous">
     </script>-->
     <!-- <script src="js/jquery/jquery-3.6.0.min.js"></script> -->
 
@@ -173,7 +173,7 @@
     <script src="material/js/plugins/bootstrap-tagsinput.js"></script>
     <script src="material/js/material-dashboard.js" type="text/javascript"></script>
     <!-- <script src="js/datatables/datatables.min.js"></script> -->
-    
+
     <script>
         $(document).ready(function() {
             $().ready(function() {

@@ -1,31 +1,96 @@
 @extends('layouts.masterDocente')
 @section('contenido')
-    <script>
-        $(document).ready(function() {
-            $('#datatable_teacher_requests').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total registros)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                },
+    <script type="text/javascript">
+        $(function() {
+            var table = $('#datatable_teacher_requests').DataTable({
+                processing: true,
+                //   serverSide: true,
+                ajax: "{{ url('apiSolicitudes') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'nombre_espacio',
+                        name: 'nombre_espacio'
+                    },
+                    {
+                        data: 'titulo_actividad',
+                        name: 'titulo_actividad'
+                    },
+                    {
+                        data: 'detalle_actividad',
+                        name: 'detalle_actividad'
+                    },
+                    {
+                        data: 'asignatura',
+                        name: 'asignatura'
+                    },
+                    {
+                        data: 'fecha_solicitada',
+                        name: 'fecha_solicitada'
+                    },
+                    {
+                        data: 'hora_inicio',
+                        name: 'hora_inicio'
+                    },
+                    {
+                        data: 'hora_final',
+                        name: 'hora_final'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        // "render": function(data) {
+
+                        //     if (data.status == 0) {
+                        //         return '<h1>hola</h1>'
+                        //     }
+                        // }
+                    },
+
+
+                    {
+                        data: 'action',
+                        name: 'action',
+
+                    },
+
+                ],
+                drawCallback: function(e) {
+                    $('#btn-ver-dato').on('click', function() {
+                        console.log("EStoy dando click al boton de la tabla");
+                        // showSolicitud(sol.id_solicitud);
+                        //ver_datos_solicitud();
+                    });
+                }
             });
         });
+
+        function ver_datos_solicitud() {
+
+            var url = $('#horarios').val();
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                data: {
+                    espacio_id: $('#select_espacio option:selected').val(),
+                    fecha_solicitada: $('#requested_date').val()
+                },
+                success: function(data) {
+                    html = "";
+                    $.each(data.horas_espacios, function(idx, item) {
+                        html += '<option value="' + item.id_horario + '">' + item.hora_inicio + ' - ' +
+                            item.hora_final + '</option>'
+                    });
+                    $('#start_time').html(html);
+                },
+                error: function(data) {}
+            });
+        }
     </script>
+
     <div id="soli">
         <!-- Button trigger modal -->
 
@@ -73,7 +138,7 @@
                                         </select>
                                         <!-- Para no probocar conflicto -->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
                                         <input type="text" v-model="ClaveGrupo" disabled class="form-control"
                                             v-if="editar">
                                     </div>
@@ -88,9 +153,8 @@
                                         </select>
                                         <!-- evitar conflicto al actualizar-->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
-                                        <input type="text" v-model="ClaveAsig" disabled class="form-control"
-                                            v-if="editar">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -206,9 +270,10 @@
                         <th>Hora de finalización</th>
                         <th>Estado</th>
                         <th>Opciones</th>
+
                     </thead>
                     <tbody class="tbody">
-                        <tr v-for="(sol,index) in solicitudes">
+                        {{-- <tr v-for="(sol,index) in solicitudes">
                             <td>@{{ index + 1 }}</td>
                             <td>@{{ sol . espacio . nombre }}</td>
                             <td>@{{ sol . titulo_actividad }}</td>
@@ -239,21 +304,15 @@
                             <td class="" role=" group" v-if="sol.status === 1">
                                 <span class="btn btn-success" @click="showSolicitud(sol.id_solicitud)"><i
                                         class="material-icons">mode_edit_outline</i>&nbsp;Editar</span>
-                                {{-- &nbsp;
 
-                                    <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"><i
-                                            class="material-icons">delete</i>&nbsp;Eliminar</span> --}}
 
                             </td>
 
-                            {{-- habilitar el cupo --}}
+
                             <td class="" role=" group" v-if="sol.status === 2">
                                 <span class="btn btn-danger" @click="finPractica(sol.id_solicitud)">
                                     Finalizar</span>
-                                {{-- &nbsp;
 
-                                    <span class="btn btn-outline-danger" @click="eliminarSolicitud(sol.id_solicitud)"><i
-                                            class="material-icons">delete</i>&nbsp;Eliminar</span> --}}
 
                             </td>
                             <td v-if="sol.status === 3">
@@ -263,7 +322,7 @@
                                 <span>SOLICITUD RECHAZADA</span>
                             </td>
 
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
