@@ -35,6 +35,7 @@ new Vue({
         id_solicitud: "",
         cedula: "",
         ClaveGrupo: "",
+        ClaveCarga: "",
         ClaveAsig: "",
         id_espacio: "",
         id_horario: "",
@@ -171,6 +172,7 @@ new Vue({
                 this.id_solicitud = json.data.id_solicitud;
                 this.cedula = json.data.cedula;
                 this.ClaveGrupo = json.data.ClaveGrupo;
+                this.ClaveCarga = json.data.ClaveCarga;
                 this.ClaveAsig = json.data.ClaveAsig;
                 this.id_espacio = json.data.id_espacio;
                 this.id_horario = json.data.id_horario;

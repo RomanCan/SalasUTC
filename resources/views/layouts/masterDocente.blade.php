@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="material/css/material-dashboard.css" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="css/datatables/datatables.min.css"> --}}
+    <link rel="stylesheet" href="css/datatables/datatables.min.css">
 
     <!-- <script src="material/js/core/jquery.min.js"></script> -->
     <script src="js/jquery/jquery-3.6.0.min.js"></script>
-    {{-- <script src="js/datatables/datatables.min.js"></script> --}}
+    <script src="js/datatables/datatables.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
     <!-- CSS Just for demo purpose, don't include it in your project -->

@@ -72,8 +72,9 @@ class SolicitudesController extends Controller
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm btn-ver-dato" id="btn-ver-dato" data-info="$row->id_solicitud">Editar</a>';
+                ->addColumn('action', function ($data) {
+                    $id_solicitud = $data->id_solicitud;
+                    $btn = '<button type="button" class="edit btn btn-primary btn-sm btn-ver-dato" data-info="' . $id_solicitud . '">Editar</button>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

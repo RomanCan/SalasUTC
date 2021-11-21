@@ -41,15 +41,25 @@
                     {
                         data: 'status',
                         name: 'status',
-                        // "render": function(data) {
-
-                        //     if (data.status == 0) {
-                        //         return '<h1>hola</h1>'
-                        //     }
-                        // }
+                        "render": function(data, type, row, meta) {
+                            text = ""
+                            switch (data) {
+                                case 0:
+                                    text = "Rechazado"
+                                    break;
+                                case 1:
+                                    text = "Pendiente"
+                                    break;
+                                case 2:
+                                    text = "Aceptado"
+                                    break;
+                                case 3:
+                                    text = "Finalizado"
+                                    break;
+                            }
+                            return text;
+                        }
                     },
-
-
                     {
                         data: 'action',
                         name: 'action',
@@ -58,33 +68,51 @@
 
                 ],
                 drawCallback: function(e) {
-                    $('#btn-ver-dato').on('click', function() {
-                        console.log("EStoy dando click al boton de la tabla");
-                        // showSolicitud(sol.id_solicitud);
-                        //ver_datos_solicitud();
+                    $('.btn-ver-dato').on('click', function() {
+                        var id_solicitud = $(this).data('info');
+                        ver_datos_solicitud(id_solicitud);
                     });
                 }
             });
         });
 
-        function ver_datos_solicitud() {
+        function ver_datos_solicitud(id_solicitud) {
 
-            var url = $('#horarios').val();
+            var url = $('#url_ver_solicitud').val() + "/" + id_solicitud;
             $.ajax({
                 url: url,
                 type: "GET",
                 dataType: "json",
-                data: {
-                    espacio_id: $('#select_espacio option:selected').val(),
-                    fecha_solicitada: $('#requested_date').val()
-                },
+                data: {},
                 success: function(data) {
+                    console.log(data);
+                    $('#Agregar').modal('show');
+                    $('#select_docente').val(data.cedula).change();
+                    get_clave_grupo(data.cedula, data.ClaveGrupo)
+                },
+                error: function(data) {}
+            });
+        }
+
+        function get_clave_grupo(cedula_profesor, clave_grupo) {
+            var url = $('#url_get_clave_grupo').val() + "/" + cedula_profesor;
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                data: {},
+                success: function(data) {
+                    console.log(data);
+                    //$('#select_clave_grupo').val(data.ClaveCarga).change();
                     html = "";
-                    $.each(data.horas_espacios, function(idx, item) {
-                        html += '<option value="' + item.id_horario + '">' + item.hora_inicio + ' - ' +
-                            item.hora_final + '</option>'
+                    $.each(data, function(idx, item) {
+                        html += '<option value="' + item.ClaveGrupo + '">' + item.ClaveGrupo +
+                            '</option>'
                     });
-                    $('#start_time').html(html);
+                    $('#select_clave_grupo').html(html);
+
+                    $('#select_clave_grupo').val(clave_grupo).change();
+
                 },
                 error: function(data) {}
             });
@@ -119,7 +147,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Docente</label>
-                                        <select name="" id="" v-model="cedula" @change="getClaveGrupo"
+                                        <select name="" id="select_docente" v-model="cedula" @change="getClaveGrupo"
                                             class="form-control">
                                             <option v-for="doc in docentes" :value="doc.cedula">
                                                 @{{ doc . nombre }}
@@ -131,14 +159,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Clave de Grupo</label>
-                                        <select name="" id="" class="form-control" v-model="ClaveGrupo"
+                                        <select name="" id="select_clave_grupo" class="form-control" v-model="ClaveGrupo"
                                             @change="getDocentesGrupos" class="form-control" v-if="!editar">
-                                            <option v-for="d in clavegrupos">
+                                            <option v-for="d in clavegrupos" :value="d.ClaveGrupo">
                                                 @{{ d . ClaveGrupo }}</option>
                                         </select>
                                         <!-- Para no probocar conflicto -->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
                                         <input type="text" v-model="ClaveGrupo" disabled class="form-control"
                                             v-if="editar">
                                     </div>
@@ -153,7 +181,7 @@
                                         </select>
                                         <!-- evitar conflicto al actualizar-->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
 
                                     </div>
                                 </div>
@@ -341,3 +369,5 @@
 @endpush
 <input type="hidden" name="route" value="{{ url('/') }}">
 <input type="hidden" id="horarios" value="{{ url('/getHorarios') }}">
+<input type="hidden" id="url_ver_solicitud" value="{{ url('/apiSolicitudes') }}">
+<input type="hidden" id="url_get_clave_grupo" value="{{ url('/getClaveGrupo') }}">
