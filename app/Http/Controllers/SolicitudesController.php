@@ -18,50 +18,7 @@ class SolicitudesController extends Controller
      */
     public function index(Request $request)
     {
-        //res_solicitudes.id_solicitud,
-        //profesores.nombre,
-        // docentesporgrupo.ClaveCarga, docentesporgrupo.ClaveGrupo,
-        // asignaturas.ClaveAsig, asignaturas.nombre AS asignatura
-        //FROM res_solicitudes
-        //INNER JOIN profesores
-        //ON res_solicitudes.cedula = profesores.cedula
-        //INNER JOIN docentesporgrupo
-        //ON res_solicitudes.ClaveGrupo = docentesporgrupo.ClaveGrupo
-        //INNER JOIN Asignaturas
-        //ON res_solicitudes.ClaveAsig = asignaturas.ClaveAsig
-        // return $solicitudes = Solicitudes::all();
-        // return $solicitudes = DB::select(
-        //     'SELECT  res_espacios.nombre AS Espacio, profesores.cedula AS Cedula,
-        //     profesores.nombre AS Docente,
-        //     res_solicitudes.fecha_solicitud,
-        //     res_solicitudes.fecha_solicitada,
-        //     res_solicitudes.fecha_autorizacion,
-        //     res_solicitudes.titulo_actividad,
-
-        //     res_solicitudes.detalle_actividad,
-        //     res_solicitudes.participantes,
-        //     res_solicitudes.tipo_solicitud,
-        //     res_solicitudes.status,
-
-        //     docentesporgrupo.ClaveGrupo AS ClaveGrupo,
-        //     asignaturas.ClaveAsig AS ClaveAsignatura, asignaturas.nombre AS Asignatura
-        //     FROM res_solicitudes
-        //     INNER JOIN res_espacios
-        //     ON res_solicitudes.id_espacio = res_espacios.id_espacio
-        //     INNER JOIN profesores
-        //     ON res_solicitudes.cedula = profesores.cedula
-        //     INNER JOIN docentesporgrupo
-        //     ON res_solicitudes.ClaveGrupo = docentesporgrupo.ClaveGrupo
-        //     INNER JOIN Asignaturas
-        //     ON res_solicitudes.ClaveAsig = asignaturas.ClaveAsig
-        //     LIMIT 1
-        //     '
-        // );
-        // return $soli = Solicitudes::all();
-        // return $rsoli = Solicitudes::where('cedula', '=', $soli)->get();
-
-        // '(CASE res_solicitudes.status WHEN 0 THEN "rechazado" WHEN 1 THEN "espera" WHEN 2 THEN "aprobado" WHEN 3 THEN "finalizado" END) AS status from res_solicitudes'
-        if ($request->ajax()) {
+         if ($request->ajax()) {
             $docente = Session::get('cedula');
             //$data = DB::select('select * from res_solicitudes rs INNER JOIN res_espacios re ON re.id = rs.res_espacio_id  where cedula = ?', $soli)->get();
             $data = DB::table('res_solicitudes')
@@ -74,7 +31,7 @@ class SolicitudesController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
                     $id_solicitud = $data->id_solicitud;
-                    $btn = '<button type="button" class="edit btn btn-primary btn-sm btn-ver-dato" data-info="' . $id_solicitud . '">Editar</button>';
+                    $btn = '<button type="button" class="edit btn btn-success btn-sm btn-ver-dato" data-info="' . $id_solicitud . '">Editar</button>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
