@@ -39,7 +39,7 @@ new Vue({
         ClaveAsig: "",
         id_espacio: "",
         id_horario: "",
-        fecha_solicitud: moment().format("YYYY-MM-DD"),
+        fecha_solicitud: moment().format("DD-MM-YYYY"),
         fecha_solicitada: "",
         titulo_actividad: "",
         detalle_actividad: "",
@@ -116,9 +116,9 @@ new Vue({
         // evento asignaturas
         getAsignaturas(event) {
             var ClaveAsig = event.target.value;
-            this.$http.get(urlAsignaturas + ClaveAsig).then(function (json) {
+          this.$http.get(urlAsignaturas + ClaveAsig).then(function (json) {
                 this.asignaturas = json.data;
-            });
+            }  );
         },
 
         // guardar registro de solicitud
@@ -151,9 +151,11 @@ new Vue({
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.getSolicitudes();
+                    //this.getSolicitudes();
                     // limpiar
                     this.limpiar();
+                    $('#datatable_teacher_requests').DataTable().ajax.reload();
+
                 })
                 .catch(function (json) {
                     Swal.fire({
@@ -269,7 +271,7 @@ new Vue({
             this.ClaveAsig = "";
             this.id_espacio = "";
             this.id_horario = "";
-            this.fecha_solicitud = "";
+            //this.fecha_solicitud = "";
             this.fecha_solicitada = "";
             this.titulo_actividad = "";
             this.detalle_actividad = "";
