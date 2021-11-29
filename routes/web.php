@@ -34,6 +34,7 @@ Route::middleware(['rutas'])->group(function () {
     Route::view('solicitudes', 'directorCarreras.solicitudes');
     Route::view('recursos', 'directorCarreras.recursos');
     Route::view('registro_usuarios', 'directorCarreras.registroUsuarios');
+    Route::view('director-calendario', 'directorCarreras.calendariodirector');
 
     //Zona Vistas Docentes
     Route::view('docente-perfil', 'docentes.perfil');
@@ -67,12 +68,13 @@ Route::apiResource('apiDocentesGrupos', 'App\Http\Controllers\DocentesGruposCont
 Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 Route::apiResource('apiSoliDirector', 'App\Http\Controllers\SoliDirectorController');
 Route::get('apiUpdate', 'App\Http\Controllers\SoliDirectorController@prueba');
+Route::get('apiEventosDirector', [App\Http\Controllers\EventoDirectorController::class, 'index']);
 
 
 //  Api para traer al maestro de la solicitud
 Route::apiResource('apiSoliDocentes', 'App\Http\Controllers\SoliDocenteController');
 Route::apiResource('apiPerfilDocentes', 'App\Http\Controllers\PerfilController');
-Route::get('apiEventos', [App\Http\Controllers\EventoController::class, 'show']);
+Route::get('apiEventos', [App\Http\Controllers\EventoController::class, 'index']);
 
 
 

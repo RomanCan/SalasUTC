@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Solicitudes;
 use Illuminate\Support\Facades\DB;
 
-class EventoController extends Controller
+class EventoDirectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $evento = DB::select('SELECT titulo_actividad AS title , CONCAT(fecha_solicitada," ",hora_inicio) AS start, CONCAT(fecha_solicitada," ",hora_final) AS end FROM res_solicitudes WHERE res_solicitudes.status =2 || res_solicitudes.status =1');
+        $evento = DB::select('SELECT titulo_actividad AS title , CONCAT(fecha_solicitada," ",hora_inicio) AS start, CONCAT(fecha_solicitada," ",hora_final) AS end FROM res_solicitudes WHERE res_solicitudes.status = 1');
         return response()->json($evento);
     }
 
@@ -38,6 +38,7 @@ class EventoController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**

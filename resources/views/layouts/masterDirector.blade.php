@@ -41,6 +41,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
+    {{-- fullcalendar --}}
+    <link rel="stylesheet" href="fullcalendar/css/main.css">
+    <script src="fullcalendar/js/main.min.js"></script>
+    <script src="fullcalendar/js/locales-all.js"></script>
+
 </head>
 
 <body class="">
@@ -68,6 +73,12 @@
                         <a class="nav-link" href="{{ url('registro_usuarios') }}">
                             <i class="material-icons">switch_account</i>
                             <p>Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('director-calendario') }}">
+                            <i class="material-icons">event</i>
+                            <p>Calendario</p>
                         </a>
                     </li>
                     <li class="nav-item ">
