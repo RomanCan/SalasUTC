@@ -69,9 +69,14 @@ $(function() {
         ],
         drawCallback: function(e) {
             $('.btn-ver-dato').on('click', function() {
-                var id_solicitud = $(this).data('info');
+                var id_solicitud = $(this).data('id_solicitud');
                 ver_datos_solicitud(id_solicitud);
-                
+
+            });
+            $('.btn-finalizar').on('click', function() {
+                var id_solicitud = $(this).data('id_solicitud');
+                var id_espacio = $(this).data('id_espacio');
+                finalizar_espacio(id_solicitud, id_espacio);
             });
         }
     });
@@ -129,7 +134,6 @@ function ver_datos_solicitud(id_solicitud) {
            $('#titulo_actividad').val(data.titulo_actividad);
            $('#detalle_actividad').val(data.detalle_actividad);
            $('#cantidad_participantes').val(data.participantes);
-        
         },
         error: function(data) {}
     });
@@ -176,7 +180,6 @@ function get_clave_asignatura(clave_grupo,clave_asig = "") {
             $('#select_clave_asignatura').html(html);
             if(clave_asig != ""){
                 $('#select_clave_asignatura').val(clave_asig)//.change();
-                
             }
             clave_asig = $('#select_clave_asignatura').val();
            get_nombre_asignatura(clave_asig, clave_grupo);
@@ -231,5 +234,49 @@ function get_espacios(id_espacio, id_horario) {
            $('#select_horario').val(id_horario)//.change();
                 },
         error: function(data) {}
+    });
+}
+function finalizar_espacio(id_solicitud, id_espacio){
+    var urlUpdate = $('#url_finish_espacio').val();
+    Swal.fire({
+        title: "No podrás revertir este cambio!,¿Estás seguro de aceptar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        buttons: {
+            confirm: {
+                text: "Aceptar",
+                value: true,
+                visible: true,
+                className: "",
+                closeModal: true
+            },
+            cancel: {
+                text: "Cancelar",
+                value: false,
+                visible: true,
+                className: "",
+                closeModal: true,
+            }
+        }
+    }).then((isConfirm) => {
+        if (isConfirm) {
+            var solicitud = {
+                status: 3,
+                id: id_solicitud,
+                id_espacio: id_espacio
+            };
+            $.ajax({
+                url: urlUpdate,
+                type: "GET",
+                dataType: "json",
+                data: solicitud,
+                success: function(data) {
+                    console.log(data);
+                    // $('#dt_admin_solicitudes').dataTable.ajax.reload(null, false)
+                }
+            })
+        }
     });
 }

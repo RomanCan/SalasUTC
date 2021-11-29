@@ -9,11 +9,7 @@
             <br>
             <input type="text" placeholder="BUSCAR" v-model="buscar" class="form-control"><br>
             <button class="btn btn-md btn-success" data-toggle="modal" data-target="#agregar">Agregar</button>
-
-
             <br><br>
-
-
             <div class="row">
                 <div class="col-md-12 col-xs-12">
 
@@ -133,8 +129,6 @@
 
 @push('scripts')
     <script src="js/vue-resource.js"></script>
-
-
     <script src="js/director/recursos.js"></script>
 @endpush
 

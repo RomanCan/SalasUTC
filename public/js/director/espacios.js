@@ -1,6 +1,6 @@
 
 var route= document.querySelector("[name=route]").value;
-var UrlEspacio = route + '/apiEspacios';
+var UrlEspacio = route + '/apiEspacioSolicitud';
 new Vue({
     http:{
         headers:{
@@ -50,13 +50,14 @@ new Vue({
                 this.nombre="";
                 this.ubicacion="";
                 this.cupo="";
-                this.getEspacio();
+                // location.reload();
             }).catch(function(json){
                 Swal.fire({
                     icon: 'error',
                     title: '¡Ha ocurrido un error!',
                     text: '¡No deje campos vacíos!',
                 })
+                console.log(json);
             })
         },
         editarEspacio:function(id){
@@ -76,7 +77,8 @@ new Vue({
                 ubicacion: this.ubicacion,
                 cupo: this.cupo
             };
-            this.$http.patch(UrlEspacio + '/' + this.id_e,espac)
+            console.log(espac);
+            this.$http.put(UrlEspacio + '/' + this.id_espacio,espac)
             .then(function(){
                 $('#agregar_espacio').modal('hide');
                 Swal.fire({
@@ -91,12 +93,13 @@ new Vue({
                 this.ubicacion="";
                 this.cupo="";
                 this.editar=false;
-            }).catch(function(){
+            }).catch(function(json){
                 Swal.fire({
                     icon: 'error',
                     title: '¡Ha ocurrido un error!',
                     text: '¡No deje campos vacios!',
                 })
+                console.log(json);
             })
         },
         eliminarEspacio:function(id){

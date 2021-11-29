@@ -26,7 +26,7 @@
     <script src="js/vue.js"></script>
     <script src="js/vue-resource.js"></script>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="material/demo/demo.css" rel="stylesheet" />
+    {{-- <link href="material/demo/demo.css" rel="stylesheet" /> --}}
 
 
     <link rel="stylesheet" href="fullcalendar/css/main.css">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profesores;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class UsuariosController extends Controller
 {
@@ -13,13 +14,20 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return $usuarios = DB::select('SELECT * FROM profesores
-        INNER JOIN roles
-        ON profesores.id_rol = roles.id_rol
-        WHERE profesores.usuario != "" AND profesores.password !="" AND profesores.email != "" AND profesores.id_rol = "2"');
+        $data = DB::table('profesores')
+            ->join('roles', 'roles.id_rol', '=', 'profesores.id_rol')
+            ->select('profesores.nombre as nombre', 'profesores.nivelestudio as nivel', 'profesores.usuario as usuario', 'profesores.password as password', 'profesores.email as email')
+            ->where('profesores.usuario', '!=', '')
+            ->where('profesores.password', '!=', '')
+            ->where('profesores.email', '!=', '')
+            ->where('profesores.id_rol', '=', '2')
+            ->get();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+        return view('directorCarreras.registroUsuarios');
     }
 
     /**
@@ -55,7 +63,6 @@ class UsuariosController extends Controller
     public function update(Request $request, $id)
     {
         //
-
     }
 
     /**

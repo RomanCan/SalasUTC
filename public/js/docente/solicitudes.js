@@ -4,7 +4,7 @@ var urlSoliDocentes = route + "/" + "apiSoliDocentes";
 var urlDocentesGrupos = route + "/" + "getDocentesGrupos/";
 var urlClaveGrupo = route + "/" + "getClaveGrupo/";
 var urlAsignaturas = route + "/" + "getAsignaturas/";
-var urlEspacios = route + "/" + "apiEspacios";
+var urlEspacios = route + "/" + "apiEspacioSolicitud";
 var urlHorarios = route + "/" + "apiHorarios";
 var urlDg = route + "/" + "apiDocentesGrupos";
 var urlsolicitud_docente = route + "/solicitud_docente";
@@ -85,9 +85,14 @@ new Vue({
                 this.espacios = json.data;
             });
         },
-        getHorarios: function () {
+        // evento para traer horarios por espacios
+        //traemos horarios
+        getHorarios() {
             this.$http.get(urlHorarios).then(function (json) {
                 this.horarios = json.data;
+
+            }).catch(function(json){
+
             });
         },
         // evitar conflicto se creo datos de docentesgrupos

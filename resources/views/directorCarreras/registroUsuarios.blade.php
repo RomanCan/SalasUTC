@@ -1,43 +1,13 @@
 @extends('layouts.masterDirector')
 @section('contenido')
-<script>
-    $(document).ready(function() {
-    $('#datatable_users').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total registros)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    },
-    });
-} );
-</script>
     <div id="usuario">
-
-
         <div class="row">
-
             <div class="col-md-12">
                 <div class="col-md-5">
                     <button class="btn btn-info" @click="showModal"><i class="material-icons">person_add
                         </i>&nbsp;Agregar</button>
                 </div>
                 <br>
-
                 <div v-if="usuarios.length == 0">
                     <p class="text-center">
                         <strong>
@@ -48,8 +18,9 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <table id="datatable_users" class="table table-hover table-condensed" v-if="usuarios.length != 0">
+                        <table id="dt_admin_usuarios" class="data-table">
                             <thead>
+                                <th>#</th>
                                 <th>Docente</th>
                                 <th>Nivel de estudio</th>
                                 <th>Nombre de usuario</th>
@@ -57,14 +28,14 @@
                                 <th>Email</th>
                             </thead>
                             <tbody>
-                                <tr v-for="(user,index) in usuarios">
+                                {{-- <tr v-for="(user,index) in usuarios">
                                     <td>@{{ user . tratamiento }} @{{ user . nombre }} @{{ user . apellidop }}
                                         @{{ user . apellidom }}</td>
                                     <td>@{{ user . nivelestudio }}</td>
                                     <td>@{{ user . usuario }}</td>
                                     <td>@{{ user . password }}</td>
                                     <td>@{{ user . email }}</td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -124,14 +95,12 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 @endsection
 
 @push('scripts')
     <script src="js/director/usuarios.js"></script>
+    <script src="js/director/usuarios_dt.js"></script>
 @endpush
 <input type="hidden" name="route" value="{{ url('/') }}">
+<input type="hidden" id="url_usuarios" value="{{ url('apiUsuarios') }}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Espacios;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class EspaciosController extends Controller
 {
@@ -13,10 +14,28 @@ class EspaciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return $salas = Espacios::all();
+        $data = Espacios::select('id_espacio', 'nombre', 'ubicacion', 'cupo')->get();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $id_espacio = $data->id_espacio;
+                $nombre = $data->nombre;
+                $ubicacion = $data->ubicacion;
+                $cupo = $data->cupo;
+
+                $btn =
+                    '<button type="button" class="edit btn btn-success btn-sm btn-ver-dato"
+                 data-espacio="' .
+                    $id_espacio .
+                    '">Editar</button>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        // return view('directorCarreras.espacios');
     }
 
     /**
@@ -27,12 +46,6 @@ class EspaciosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $salas = new Espacios;
-        $salas->nombre = $request->get('nombre');
-        $salas->ubicacion = $request->get('ubicacion');
-        $salas->cupo = $request->get('cupo');
-        $salas->save();
     }
 
     /**
@@ -44,7 +57,6 @@ class EspaciosController extends Controller
     public function show($id)
     {
         //
-        return $salas = Espacios::find($id);
     }
 
     /**
@@ -56,12 +68,6 @@ class EspaciosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $salas = Espacios::find($id);
-        $salas->nombre = $request->get('nombre');
-        $salas->ubicacion = $request->get('ubicacion');
-        $salas->cupo = $request->get('cupo');
-        $salas->update();
     }
 
     /**
@@ -72,7 +78,5 @@ class EspaciosController extends Controller
      */
     public function destroy($id)
     {
-        //
-        return Espacios::destroy($id);
     }
 }

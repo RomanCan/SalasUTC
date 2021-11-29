@@ -1,6 +1,7 @@
 @extends('layouts.masterDocente')
 @section('contenido')
-    
+
+
     <div id="soli">
         <!-- Button trigger modal -->
 
@@ -35,7 +36,6 @@
                                                 @{{ doc . nombre }}
                                             </option>
                                         </select>
-
                                     </div>
                                 </div><br><br><br><br>
                                 <div class="col-md-6">
@@ -48,7 +48,7 @@
                                         </select>
                                         <!-- Para no probocar conflicto -->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveGrupo" @change="getDocentesGrupos" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <option v-for="da in dg" >@{{ da . ClaveGrupo }}</option>                                                                                                                                                                                                                            </select> -->
                                         <input type="text" v-model="ClaveGrupo" disabled class="form-control"
                                             v-if="editar">
                                     </div>
@@ -63,7 +63,7 @@
                                         </select>
                                         <!-- evitar conflicto al actualizar-->
                                         <!-- <select name="" id="" class="form-control" v-model="ClaveAsig" @change="getAsignaturas" class="form-control" v-if="editar">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <option v-for="di in dg" >@{{ di . ClaveAsig }}</option>                                                                                                                                                                                                                                                           </select> -->
 
                                     </div>
                                 </div>
@@ -81,11 +81,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+
+
                                         <label for="">Espacio</label>
-                                        <select name="" id="" v-model="id_espacio" class="form-control">
-                                            <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
-                                            </option>
-                                        </select>
+                                        <select name="" id="select_espacio" v-model="id_espacio" class="form-control">
+
+                                            <select name="id_espacio" id="" v-model="id_espacio" class="form-control">
+
+                                                <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
+                                                </option>
+                                            </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6" style="padding-top: 20px;">
@@ -115,6 +120,13 @@
                                             <option v-for="h in horarios" :value="h.id_horario">
                                                 @{{ h . hora_inicio }}</option>
                                         </select>
+
+                                        <select name="" id="start_time" v-model="id_horario" class="form-control">
+                                            <select name="" :value="id_horario" class="form-control start_time">
+                                                <option v-for="h in horarios" :value="h.id_horario">
+                                                    @{{ h . hora_inicio }}</option>
+                                            </select>
+
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-6">
@@ -165,134 +177,156 @@
         <!--{{-- fin del modal --}}-->
 
 
-           <!-- {{-- modal editar--}} -->
-           <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
-                        <h5 class="modal-title">Editar Solicitud</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                            @click="limpiar()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="">
-                            <!-- {{-- identificar los datos que estan llegando solo de este formulario --}} -->
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Docente</label>
-                                        <select name="" id="select_docente" class="form-control"> </select>
+        <!-- {{-- modal editar --}} -->
+        <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-hidden="true">
 
-                                    </div>
-                                </div><br><br><br><br>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Clave de Grupo</label>
-                                        <select name="" id="select_clave_grupo" class="form-control"
-                                            class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Clave de Asignatura</label>
-                                        <select id="select_clave_asignatura" class="form-control" class="form-control"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="ClaveAsig">Asignatura</label>
-                                        <select name="" id="select_nombre_asignatura" class="form-control">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Espacio</label>
-                                        <select name="" id="select_espacio" class="form-control select_espacio">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Fecha de Solicitud</label><br>
-                                        <input  type="text" class="form-control" id="fecha_solicitud" disabled>
-                                    </div>
-                                </div>
+            <!-- {{-- modal editar --}} -->
+            <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-hidden="true">
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Fecha Solicitada</label><br>  
-                                        <input type="date" class="form-control" id="requested_date"
-                                     class="requested_date">
-                                    </div>
-                                </div>  
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Horarios</label>
-                                        <select name="" id="select_horario" class="form-control start_time">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Titulo de la actividad</label><br>
-                                        <input type="text" class="form-control" id="titulo_actividad">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Detalle de la actividad</label><br>
-                                        <input type="text" class="form-control" id="detalle_actividad">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
+                            <h5 class="modal-title">Editar Solicitud</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                @click="limpiar()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="">
+                                <!-- {{-- identificar los datos que estan llegando solo de este formulario --}} -->
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Docente</label>
+                                            <select name="" id="select_docente" class="form-control"> </select>
 
+                                        </div>
+                                    </div><br><br><br><br>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Clave de Grupo</label>
+                                            <select name="" id="select_clave_grupo" class="form-control"
+                                                class="form-control">
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Cantidad de participantes</label><br>
-                                        <input type="number" class="form-control" id="cantidad_participantes" min="0">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Clave de Asignatura</label>
+                                            <select id="select_clave_asignatura" class="form-control"
+                                                class="form-control"></select>
+
+                                            <select id="select_clave_asignatura" class="form-control"
+                                                class="form-control"></select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ClaveAsig">Asignatura</label>
+                                            <select name="" id="select_nombre_asignatura" class="form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Espacio</label>
+                                            <select name="" id="select_espacio" class="form-control select_espacio">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Fecha de Solicitud</label><br>
+                                            <input type="text" class="form-control" id="fecha_solicitud" disabled>
+
+                                            <input type="text" class="form-control" id="fecha_solicitud" disabled>
+
+                                        </div>
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Fecha Solicitada</label><br>
+                                            <input type="date" class="form-control" id="requested_date"
+                                                class="requested_date">
+                                        </div>
+                                    </div>
+
+                                    <label for="">Fecha Solicitada</label><br>
+                                    <input type="date" class="form-control" id="requested_date" class="requested_date">
                                 </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Horarios</label>
+                                <select name="" id="select_horario" class="form-control start_time">
+                                </select>
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Titulo de la actividad</label><br>
+                                <input type="text" class="form-control" id="titulo_actividad">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Detalle de la actividad</label><br>
+                                <input type="text" class="form-control" id="detalle_actividad">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Cantidad de participantes</label><br>
+                                <input type="number" class="form-control" id="cantidad_participantes" min="0">
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()"
-                            v-if="!editar">Guardar</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal"
-                            @click="actualizarSolicitud(id_solicitud)" v-if="editar">Actualizar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" @click="limpiar()">Cerrar</button>
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()"
+                        v-if="!editar">Guardar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        @click="actualizarSolicitud(id_solicitud)" v-if="editar">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="limpiar()">
+                        Cerrar</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="limpiar()">Cerrar</button>
+
                 </div>
             </div>
-
         </div>
-        <!--{{-- fin del modal --}}-->
 
-        <!-- mostrar tabla de solicitud -->
-        <div class="card">
-            <div class="card-body">
-                <!-- {{-- tabla --}} -->
-                <table id="datatable_teacher_requests" class="table table-striped table-condensed">
-                    <thead class="thead">
-                        <th>#</th>
-                        <th>Espacio</th>
-                        <th>Titulo / Motivo</th>
-                        <th>Detalle</th>
-                        <th>Asignatura</th>
-                        <th>Fecha solicitada</th>
-                        <th>Hora de inicio</th>
-                        <th>Hora de finalización</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
+    </div>
+    <!--{{-- fin del modal --}}-->
 
-                    </thead>
-                    <tbody class="tbody">
-                        {{-- <tr v-for="(sol,index) in solicitudes">
+    <!-- mostrar tabla de solicitud -->
+    <div class="card">
+        <div class="card-body">
+            <!-- {{-- tabla --}} -->
+            <table id="datatable_teacher_requests" class="table table-striped table-condensed">
+                <thead class="thead">
+                    <th>#</th>
+                    <th>Espacio</th>
+                    <th>Titulo / Motivo</th>
+                    <th>Detalle</th>
+                    <th>Asignatura</th>
+                    <th>Fecha solicitada</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de finalización</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+
+                </thead>
+                <tbody class="tbody">
+                    {{-- <tr v-for="(sol,index) in solicitudes">
                             <td>@{{ index + 1 }}</td>
                             <td>@{{ sol . espacio . nombre }}</td>
                             <td>@{{ sol . titulo_actividad }}</td>
@@ -342,10 +376,10 @@
                             </td>
 
                         </tr> --}}
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 
 
     </div>
@@ -356,6 +390,8 @@
 @push('scripts')
     <script src="js/moment-with-locales.js"></script>
     <script src="js/docente/solicitudes.js"></script>
+    <script src="js/docente/solicitudes_dt.js"></script>
+
     <script src="js/docente/validaciones_fechas.js"></script>
     <script src="js/docente/solicitudes_dt.js"></script>
 @endpush
@@ -368,3 +404,6 @@
 <input type="hidden" id="url_get_espacios" value="{{ url('/apiEspacios') }}">
 
 
+
+<input type="hidden" id="url_get_espacios" value="{{ url('/apiEspacioSolicitud') }}">
+<input type="hidden" id="url_finish_espacio" value="{{ url('apiUpdateSolicitudDocente') }}">
