@@ -15,8 +15,8 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $evento = DB::select('SELECT titulo_actividad AS title , CONCAT(fecha_solicitada," ",hora_inicio) AS start, CONCAT(fecha_solicitada," ",hora_final) AS end FROM res_solicitudes WHERE res_solicitudes.status =2 || res_solicitudes.status =1');
-        return response()->json($evento);
+        return $evento = DB::select("select res_solicitudes.titulo_actividad AS title, CONCAT(res_solicitudes.fecha_solicitada,' ',res_horarios.hora_inicio) AS start, CONCAT(res_solicitudes.fecha_solicitada,' ',res_horarios.hora_final) AS end, res_solicitudes.status as status from res_solicitudes JOIN res_horarios ON res_solicitudes.id_horario = res_horarios.id_horario WHERE res_solicitudes.status = 1 || res_solicitudes.status = 2");
+
     }
 
     /**
