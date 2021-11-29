@@ -15,19 +15,11 @@ class DocentesController extends Controller
      */
     public function index()
     {
-        //
-        // return $docentes = Profesores::all();
-
-        return $docentes = DB::select('SELECT * FROM profesores
-        INNER JOIN roles
-        ON profesores.id_rol = roles.id_rol
-        WHERE profesores.usuario = ""
-        AND profesores.password =""
-        AND profesores.email = ""
-        AND profesores.id_rol != "1"
-        ');
-
-        
+        return $docentes = Profesores::all()
+        ->where('usuario', '=', '')
+                ->where('password', '=', '')
+                ->where('email', '=', '')
+                ->where('id_rol', '=', '2');
     }
 
     /**

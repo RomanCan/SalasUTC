@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    $('#select_espacio').on('change', function () {
+
+    $('.select_espacio').on('change', function () {
      get_horarios();
     });
 
