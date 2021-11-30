@@ -143,8 +143,6 @@ class SoliDirectorController extends Controller
         $soli = Solicitudes::find($id_solicitud);
         $soli->status = $s;
 
-        // DB::select('select * from users where active = ?', [1])
-
         if ($request->status == 2) {
             $cupo = 0;
             $id_espacio = $request->get('id_espacio');

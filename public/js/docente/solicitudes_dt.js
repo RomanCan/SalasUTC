@@ -212,7 +212,6 @@ function get_nombre_asignatura(clave_asig,clave_grupo) {
     });
 }
 
-
 function get_espacios(id_espacio, id_horario) {
     var url = $('#url_get_espacios').val();
     $.ajax({
@@ -264,7 +263,7 @@ function finalizar_espacio(id_solicitud, id_espacio){
         if (isConfirm) {
             var solicitud = {
                 status: 3,
-                id: id_solicitud,
+                id_solicitud: id_solicitud,
                 id_espacio: id_espacio
             };
             $.ajax({

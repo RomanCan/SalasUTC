@@ -80,16 +80,17 @@ class SolicitudesController extends Controller
     }
     public function update_solicitud(Request $request)
     {
-        $s = $request->get('status');
-        $id_solicitud = $request->get('id');
+        $status = $request->get('status');
+        $id_solicitud = $request->get('id_solicitud');
+
         $soli = Solicitudes::find($id_solicitud);
-        $soli->status = $s;
-        if ($request->status === 3) {
-            $cupo = 1;
-            $id_espacio = $request->get('id_espacio');
-            DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
-        }
+        $soli->status = $status;
         $soli->update();
+        if ($status == 3) {
+            $id_espacio = $request->get('id_espacio');
+            // $cupo = 1;
+            DB::update("UPDATE res_espacios SET cupo = 1 WHERE id_espacio = $id_espacio");
+        }
     }
 
     /**

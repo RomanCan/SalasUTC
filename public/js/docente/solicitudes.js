@@ -39,7 +39,7 @@ new Vue({
         ClaveAsig: "",
         id_espacio: "",
         id_horario: "",
-        fecha_solicitud: moment().format("DD-MM-YYYY"),
+        fecha_solicitud: moment().format("YYYY-MM-DD"),
         fecha_solicitada: "",
         titulo_actividad: "",
         detalle_actividad: "",
@@ -146,6 +146,7 @@ new Vue({
                 // hora_inicio: this.hora_inicio,
                 // hora_final: this.hora_final,
             };
+            console.log(solicitud);
             this.$http
                 .post(urlSolicitudes, solicitud)
                 .then(function (json) {
