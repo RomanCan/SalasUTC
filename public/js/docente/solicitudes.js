@@ -29,6 +29,7 @@ new Vue({
         espacio: "",
         horarios: [],
         solicitudes: [],
+        errors:[],
         // datos docentes por grupos
         dg: [],
         as: [],
@@ -146,9 +147,7 @@ new Vue({
                 // hora_inicio: this.hora_inicio,
                 // hora_final: this.hora_final,
             };
-            console.log(solicitud);
-            this.$http
-                .post(urlSolicitudes, solicitud)
+            this.$http.post(urlSolicitudes, solicitud)
                 .then(function (json) {
                     Swal.fire({
                         position: "center",
@@ -157,19 +156,14 @@ new Vue({
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    //this.getSolicitudes();
-                    // limpiar
                     this.limpiar();
+                    $("#Agregar").modal("hide");
                     $('#datatable_teacher_requests').DataTable().ajax.reload();
-
                 })
-                .catch(function (json) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "¡Ha ocurrido un error!",
-                        text: "¡No deje campos vacíos!",
-                    });
-                    console.log(json);
+                .catch(function (error) {
+                    if(error.status === 422){
+                        this.errors = error.data.errors;
+                    }
                 });
         },
 

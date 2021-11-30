@@ -60,6 +60,39 @@ class SolicitudesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(
+            $request,
+            [
+                'cedula' => 'required',
+                'id_espacio' => 'required',
+                'id_horario' => 'required',
+                'fecha_solicitud' => 'required',
+                'fecha_solicitada' => 'required',
+                'titulo_actividad' => 'required',
+                'detalle_actividad' => 'required',
+                'status' => 'required',
+                'ClaveGrupo' => 'required',
+                'ClaveAsig' => 'required',
+                'asignatura' => 'required',
+                'participantes' => 'required',
+                'tipo_solicitud' => 'required',
+            ],
+            [
+                'cedula.required' => 'el campo cedula es requerido',
+                'id_espacio.required' => 'el campo espacio es requerido',
+                'id_horario.required' => 'el campo horario es requerido',
+                'fecha_solicitud.required' => 'el campo fecha de solicitud es requerido',
+                'fecha_solicitada.required' => 'el campo fecha solicitada es requerido',
+                'titulo_actividad.required' => 'el campo titulo de actividad es requerido',
+                'detalle_actividad.required' => 'el campo detalle de actividad es requerido',
+                'status.required' => 'el campo es requerido',
+                'ClaveGrupo.required' => 'el campo clave de grupo es requerido',
+                'ClaveAsig.required' => 'el campo clave de asignatura es requerido',
+                'asignatura.required' => 'el campo asignatura es requerido',
+                'participantes.required' => 'el campo participantes es requerido',
+            ],
+        );
+
         $soli = new Solicitudes();
         $soli->cedula = $request->get('cedula');
         $soli->id_espacio = $request->get('id_espacio');
