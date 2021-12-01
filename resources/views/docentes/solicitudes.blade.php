@@ -166,7 +166,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Espacio</label>
-                                        <select name="id_espacio" id="" v-model="id_espacio" class="form-control">
+                                        <select name="id_espacio" id="" v-model="id_espacio" class="form-control select_espacio">
                                             <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
                                             </option>
                                         </select>
@@ -189,7 +189,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Fecha Solicitada</label> <br>
-                                        <input type="date" class="form-control" id="" v-model="fecha_solicitada">
+                                        <input type="date" class="form-control requested_date" id="" v-model="fecha_solicitada">
                                         <div v-if="errors && errors.fecha_solicitada">
                                             <p class="text-danger">@{{ errors . fecha_solicitada[0] }}</p>
                                         </div>
@@ -204,7 +204,7 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="">Horarios</label>
-                                            <select name="" id="" class="form-control" v-model="id_horario">
+                                            <select name="" id="" class="form-control start_time" v-model="id_horario">
                                                 <option v-for="h in horarios" :value="h.id_horario">
                                                     @{{ h . hora_inicio }}-@{{ h . hora_final }}
                                                 </option>
@@ -336,7 +336,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Fecha Solicitada</label><br>
-                                        <input type="date" class="form-control" id="requested_date"
+                                        <input type="date" class="form-control requested_date" id="requested_date"
                                             class="requested_date">
                                     </div>
                                 </div>
