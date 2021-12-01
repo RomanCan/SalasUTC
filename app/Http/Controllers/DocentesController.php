@@ -16,10 +16,10 @@ class DocentesController extends Controller
     public function index()
     {
         return $docentes = Profesores::all()
-        ->where('usuario', '=', '')
-                ->where('password', '=', '')
-                ->where('email', '=', '')
-                ->where('id_rol', '=', '2');
+            ->where('usuario', '=', '')
+            ->where('password', '=', '')
+            ->where('email', '=', '')
+            ->where('id_rol', '=', '2');
     }
 
     /**
@@ -54,6 +54,23 @@ class DocentesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(
+            $request,
+            [
+                'usuario' => ['required', 'unique:profesores,usuario'],
+                'password' => 'required',
+                'email' => ['required', 'email', 'unique:profesores.email,$id']
+            ],
+            [
+                'usuario.required' => 'No deje el campo vacío',
+                'usuario.unique' => 'El usuario ya existe, intente con otro nombre de usuario',
+                'password.required' => 'Es necesario que se ingrese una contraseña',
+                'email.required' => 'El email es obligatorio',
+                'email.unique' => 'El correo ya existe',
+                'email.email' => 'Ingrese un correo válido'
+            ]
+        );
+
         //
         $docentes = Profesores::find($id);
         $docentes->id_rol = $request->get('id_rol');

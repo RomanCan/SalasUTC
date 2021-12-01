@@ -22,6 +22,7 @@ new Vue({
         usuario:'',
         password:'',
         email:'',
+        errors:[],
     },
 
     created(){
@@ -33,7 +34,7 @@ new Vue({
     		this.$http.get(urlPerfilDocente)
     			.then(function(json){
     				this.docentes = json.data;
-    				console.log(json);
+    				// console.log(json);
     			});
     	},
 
@@ -67,15 +68,24 @@ new Vue({
                       })
                 this.getUsuarioDocentes();
                 $('#Mostrar').modal('hide');
-            }).catch(function(json){
-                Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'Ha ocurrido un error',
-                        text: 'Verifique sus datos',
-                      })
-                console.log(json);
+            }).catch(function(error){
+                if(error.status === 422){
+                    this.errors = error.data.errors;
+                }
+                // this.errors = "";
+                // Swal.fire({
+                //         position: 'center',
+                //         icon: 'error',
+                //         title: 'Ha ocurrido un error',
+                //         text: 'Verifique sus datos',
+                //       })
+                // console.log(json);
             });
+        },
+
+        limpiar: function(){
+            this.errors = "";
         }
+
     }
 });

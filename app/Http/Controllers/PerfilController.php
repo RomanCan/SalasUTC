@@ -16,7 +16,7 @@ class PerfilController extends Controller
     public function index()
     {
         $perfil = Session::get('cedula');
-        return $profesor = Profesores::where('cedula','=', $perfil)->get();
+        return $profesor = Profesores::where('cedula', '=', $perfil)->get();
     }
 
     /**
@@ -50,6 +50,27 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(
+            $request,
+            [
+                'usuario' => 'required',
+                // 'usuario' => ['required', 'unique:profesores,usuario'],
+                'password' => 'required',
+                // 'password' => ['required', 'unique:profesores,password'],
+                'email' => ['required', 'email']
+                // 'email' => ['required', 'email', 'unique:profesores,email'],
+            ],
+            [
+                'usuario.required' => 'No deje el campo vacío',
+                // 'usuario.unique' => 'El usuario ya existe, intente con otro nombre de usuario',
+                'password.required' => 'Es necesario que se ingrese una contraseña',
+                // 'password.unique' => 'La contraseña ya existe, inserte otra opción',
+                'email.required' => 'El email es obligatorio',
+                // 'email.unique' => 'El correo ya existe',
+                'email.email' => 'Ingrese un correo válido'
+            ],
+        );
+
         $perfil = Profesores::find($id);
         $perfil->cedula = $request->get('cedula');
         $perfil->usuario = $request->get('usuario');

@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="modal fade" tabindex="-1" role="dialog" id="agregar_user">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
                         {{-- @csrf --}}
                         <div class="modal-content">
                             <div class="modal-header" style="background: #2387FF; color: #fff">
@@ -59,31 +59,44 @@
                             </div>
                             <div class="modal-body" align="center">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-6">
-                                        <select class="form-control" v-model="cedula">
-
-                                            <option v-for="doc in docentes" :value="doc.cedula">
-                                                @{{ doc . nombre }} @{{ doc . apellidop }} @{{ doc . apellidom }}
-
-                                            </option>
-
-                                        </select>
-                                        <br>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="" style="color: #000000"><b>Seleccione al docente:</b></label>
+                                            <select class="form-control" v-model="cedula">
+                                                <option v-for="doc in docentes" :value="doc.cedula">
+                                                    @{{ doc . nombre }} @{{ doc . apellidop }} @{{ doc . apellidom }}
+                                                </option>
+                                            </select>
+                                        </div>
                                         <button v-if="cedula" class="btn btn-outline-success" :href="cedula"
                                             @click="editarI(cedula)"><i
                                                 class="material-icons">manage_accounts</i>&nbsp;Editar</button>
                                         <hr>
-
                                     </div>
-                                    <div class="col-md-12 col-sm-6 col-xs-6 text-left" v-if="editarInfo">
-                                        <label for="">Nombre de usuario:</label><input type="text" class="form-control"
-                                            placeholder="Nombre de usuario" v-model="usuario">
-                                        <label for="">Contraseña:</label><input type="text" class="form-control"
-                                            placeholder="Contraseña" v-model="password">
-                                        <label for="">Email:</label><input type="email" class="form-control"
-                                            placeholder="Email" v-model="email">
-                                        <br>
-
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-left" v-if="editarInfo">
+                                        <div class="form-group">
+                                            <label for="" style="color: #000000"><b>Nombre de usuario:</b></label>
+                                            <input type="text" class="form-control" placeholder="Nombre de usuario"
+                                                v-model="usuario">
+                                            <div v-if="errors && errors.usuario">
+                                                <small class="text-danger">@{{ errors . usuario[0] }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" style="color: #000000"><b>Contraseña:</b></label>
+                                            <input type="text" class="form-control" placeholder="Contraseña"
+                                                v-model="password">
+                                            <div v-if="errors && errors.password">
+                                                <small class="text-danger">@{{ errors . password[0] }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" style="color: #000000"><b>Email:</b></label>
+                                            <input type="email" class="form-control" placeholder="Email" v-model="email">
+                                            <div v-if="errors && errors.email">
+                                                <small class="text-danger">@{{ errors . email[0] }}</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
