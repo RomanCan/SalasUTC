@@ -10,7 +10,7 @@ class Solicitudes extends Model
     use HasFactory;
     protected $table = 'res_solicitudes';
     protected $primaryKey = 'id_solicitud';
-    protected $with = ['espacio', 'profesor', 'asignatura','horarios'];
+    protected $with = ['espacio', 'profesor', 'asignaturas','horarios'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -44,7 +44,7 @@ class Solicitudes extends Model
     {
         return $this->belongsTo(Profesores::class, 'cedula', 'cedula');
     }
-    public function asignatura()
+    public function asignaturas()
     {
         return $this->belongsTo(Asignaturas::class, 'ClaveAsig', 'ClaveAsig');
     }
