@@ -67,8 +67,8 @@
                             <div class="modal-body" align="center">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-6">
-                                        <label>Nombre:</label><input type="text" placeholder="Nombre" class="form-control"
-                                            required> <br>
+                                        <label>Nombre:</label><input type="text" v-model="nombre" placeholder="Nombre"
+                                            class="form-control" required> <br>
                                         {{-- <label>Ubicación:</label><input type="text" placeholder="Ubicación"
                                             v-model="ubicacion" class="form-control" required> --}}
                                         <select name="" id="" v-model="ubicacion">
@@ -144,9 +144,8 @@
 @push('scripts')
     <script src="js/director/espacios.js"></script>
     <script src="js/director/espacios_dt.js"></script>
-
 @endpush
-
 <input type="hidden" name="route" value="{{ url('/') }}">
 <input type="hidden" id="url_espacios" value="{{ url('apiEspacios') }}">
-<input type="hidden" id="url_espacios_update" value="{{ url('apiEspacioSolicitud') }}">
+<input type="hidden" id="url_espacios_all" value="{{ url('apiEspacioSolicitud') }}">
+<input type="hidden" id="url_espacios_update" value="{{ url('apiEspacioUpdate') }}">

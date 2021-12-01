@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-body">
                 <!-- {{-- tabla --}} -->
-                <table id="datatable_teacher_requests" class="table table-striped table-condensed">
+                <table id="datatable_teacher_requests" class="dataTable table-striped">
                     <thead class="thead">
                         <th>#</th>
                         <th>Espacio</th>
@@ -370,13 +370,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="agregarSol()"
-                            v-if="!editar">Guardar</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal"
-                            @click="actualizarSolicitud(id_solicitud)" v-if="editar">Actualizar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" @click="limpiar()">
-                            Cerrar</button>
-
+                        <button type="button" class="btn btn-success btn-update">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -402,5 +396,5 @@
 <input type="hidden" id="url_get_clave_asignatura" value="{{ url('/getDocentesGrupos') }}">
 <input type="hidden" id="url_get_nombre_asignatura" value="{{ url('/getAsignaturas') }}">
 <input type="hidden" id="url_get_espacios" value="{{ url('/apiEspacioSolicitud') }}">
-{{-- <input type="hidden" id="url_get_espacios" value="{{ url('/apiEspacioSolicitud') }}"> --}}
-<input type="hidden" id="url_finish_espacio" value="{{ url('apiUpdateSolicitudDocente') }}">
+<input type="hidden" id="url_finish_espacio" value="{{ url('apiAceptarSolicitudDocente') }}">
+<input type="hidden" id="url_update_solicitud" value="{{ url('apiUpdateSolicitudDocente') }}">

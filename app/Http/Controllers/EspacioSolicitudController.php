@@ -39,20 +39,30 @@ class EspacioSolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        $salas = Espacios::find($id);
-        $salas->nombre = $request->get('nombre');
-        $salas->ubicacion = $request->get('ubicacion');
-        $salas->cupo = $request->get('cupo');
+        $id_espacio = $request->get('id_espacio');
+        $nombre=$request->get('nombre');
+        $ubicacion=$request->get('ubicacion');
+        $cupo=$request->get('cupo');
+
+        $salas = Espacios::find($id_espacio);
+        $salas->nombre = $nombre;
+        $salas->ubicacion = $ubicacion;
+        $salas->cupo = $cupo;
         $salas->update();
     }
-    public function prueba(Request $request,$id){
-        $salas = Espacios::find($id);
-        $salas->nombre = $request->get('nombre');
-        $salas->ubicacion = $request->get('ubicacion');
-        $salas->cupo = $request->get('cupo');
+    public function prueba(Request $request){
+        $id_espacio = $request->get('id_espacio');
+        $nombre=$request->get('nombre');
+        $ubicacion=$request->get('ubicacion');
+        $cupo=$request->get('cupo');
+
+        $salas = Espacios::find($id_espacio);
+        $salas->nombre = $nombre;
+        $salas->ubicacion = $ubicacion;
+        $salas->cupo = $cupo;
         $salas->update();
     }
     /**

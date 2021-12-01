@@ -1,242 +1,281 @@
 //= require public/docente/validaciones_fecha.js
 var cedula_profesor = null;
-$(function() {
-    var table = $('#datatable_teacher_requests').DataTable({
+$(function () {
+    var table = $("#datatable_teacher_requests").DataTable({
         processing: true,
         //   serverSide: true,
         //ajax: "{{ url('apiSolicitudes') }}",
         ajax: $("#url_ver_solicitud").val(),
         columns: [{
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+                data: "DT_RowIndex",
+                name: "DT_RowIndex",
             },
             {
-                data: 'nombre_espacio',
-                name: 'nombre_espacio'
+                data: "nombre_espacio",
+                name: "nombre_espacio",
             },
             {
-                data: 'titulo_actividad',
-                name: 'titulo_actividad'
+                data: "titulo_actividad",
+                name: "titulo_actividad",
             },
             {
-                data: 'detalle_actividad',
-                name: 'detalle_actividad'
+                data: "detalle_actividad",
+                name: "detalle_actividad",
             },
             {
-                data: 'asignatura',
-                name: 'asignatura'
+                data: "asignatura",
+                name: "asignatura",
             },
             {
-                data: 'fecha_solicitada',
-                name: 'fecha_solicitada'
+                data: "fecha_solicitada",
+                name: "fecha_solicitada",
             },
             {
-                data: 'hora_inicio',
-                name: 'hora_inicio'
+                data: "hora_inicio",
+                name: "hora_inicio",
             },
             {
-                data: 'hora_final',
-                name: 'hora_final'
+                data: "hora_final",
+                name: "hora_final",
             },
             {
-                data: 'status',
-                name: 'status',
-                "render": function(data, type, row, meta) {
-                    text = ""
+                data: "status",
+                name: "status",
+                render: function (data, type, row, meta) {
+                    text = "";
                     switch (data) {
                         case 0:
-                            text = "Rechazado"
+                            text = "Rechazado";
                             break;
                         case 1:
-                            text = "Pendiente"
+                            text = "Pendiente";
                             break;
                         case 2:
-                            text = "Aceptado"
+                            text = "Aceptado";
                             break;
                         case 3:
-                            text = "Finalizado"
+                            text = "Finalizado";
                             break;
                     }
                     return text;
-                }
+                },
             },
             {
-                data: 'action',
-                name: 'action',
-
+                data: "action",
+                name: "action",
             },
-
         ],
-        drawCallback: function(e) {
-            $('.btn-ver-dato').on('click', function() {
-                var id_solicitud = $(this).data('id_solicitud');
-                ver_datos_solicitud(id_solicitud);
+        drawCallback: function (e) {
+            $(".btn-ver-dato").on("click", function () {
+                var id_solicitud = $(this).data("id");
+                var status = $(this).data("status");
+                var asignatura = $(this).data("asignatura");
 
+                ver_datos_solicitud(id_solicitud, status, asignatura);
             });
-            $('.btn-finalizar').on('click', function() {
-                var id_solicitud = $(this).data('id_solicitud');
-                var id_espacio = $(this).data('id_espacio');
+            $(".btn-finalizar").on("click", function () {
+                var id_solicitud = $(this).data("id");
+                var id_espacio = $(this).data("id_espacio");
                 finalizar_espacio(id_solicitud, id_espacio);
             });
-        }
+        },
     });
 
-
-    $('#select_clave_grupo').on('change', function () {
-        get_clave_asignatura($(this).val())
+    $("#select_clave_grupo").on("change", function () {
+        get_clave_asignatura($(this).val());
     });
 
-    $('#select_clave_asignatura').on('change', function () {
-        get_nombre_asignatura($(this).val(), $('#select_clave_grupo option:selected').val());
+    $("#select_clave_asignatura").on("change", function () {
+        get_nombre_asignatura(
+            $(this).val(),
+            $("#select_clave_grupo option:selected").val()
+        );
     });
-
 });
 
-function ver_datos_solicitud(id_solicitud) {
-
-    var url = $('#url_ver_solicitud').val() + "/" + id_solicitud;
+function ver_datos_solicitud(id_solicitud, status, asignatura) {
+    var url = $("#url_ver_solicitud").val() + "/" + id_solicitud;
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         data: {},
-        success: function(data) {
-            console.log(data);
-            $('#modal_edit').modal('show');
-            var html = '<option id="'+data.profesor.cedula+'">'+data.profesor.nombre+' '+data.profesor.apellidop+' '+data.profesor.apellidom+'</option>'
-
-
-            $('#select_docente').html(html);
-            $('#select_docente').val(data.cedula).change();
+        success: function (data) {
+            // console.log(data);
+            $("#modal_edit").modal("show");
+            var html =
+                '<option id="' +
+                data.profesor.cedula +
+                '">' +
+                data.profesor.nombre +
+                " " +
+                data.profesor.apellidop +
+                " " +
+                data.profesor.apellidom +
+                "</option>";
+            $("#select_docente").html(html);
+            $("#select_docente").val(data.cedula).change();
             cedula_profesor = data.cedula;
-            get_clave_grupo(data.ClaveGrupo)
+            get_clave_grupo(data.ClaveGrupo);
             get_clave_asignatura(data.ClaveGrupo, data.ClaveAsig);
-           get_espacios(data.id_espacio, data.id_horario);
-           var formattedDate = new Date(data.fecha_solicitud);
-           var d = formattedDate.getDate() + 1;
-           var m =  formattedDate.getMonth();
-           m += 1;  // JavaScript months are 0-11
-           var y = formattedDate.getFullYear();
+            get_espacios(data.id_espacio, data.id_horario);
 
-           fecha_solicitud = d + "/" + m + "/" + y
-           $('#fecha_solicitud').val(fecha_solicitud);
+            var formattedDate = new Date(data.fecha_solicitud);
+            var d = formattedDate.getDate() + 1;
+            var m = formattedDate.getMonth();
+            m += 1; // JavaScript months are 0-11
+            var y = formattedDate.getFullYear();
+            fecha_solicitud = y + "/" + m + "/" + d;
+            $("#fecha_solicitud").val(fecha_solicitud);
 
-           var formattedDate = new Date(data.fecha_solicitada);
-           var d = formattedDate.getDate() + 1;
-           var m =  formattedDate.getMonth();
-           m += 1;  // JavaScript months are 0-11
-           var y = formattedDate.getFullYear();
+            var formattedDates = new Date(data.fecha_solicitada);
+            var d = formattedDates.getDate() + 1;
+            var m = formattedDates.getMonth();
+            m += 1; // JavaScript months are 0-11
+            var y = formattedDates.getFullYear();
+            fecha_solicitada = y + "/" + m + "/" + d;
 
-           fecha_solicitada = d + "/" + m + "/" + y
-           console.log(fecha_solicitada)
+            $("#requested_date").val(fecha_solicitada);
+            $("#titulo_actividad").val(data.titulo_actividad);
+            $("#detalle_actividad").val(data.detalle_actividad);
+            $("#cantidad_participantes").val(data.participantes);
 
-           $('#requested_date').val(fecha_solicitada);
-           $('#titulo_actividad').val(data.titulo_actividad);
-           $('#detalle_actividad').val(data.detalle_actividad);
-           $('#cantidad_participantes').val(data.participantes);
+            $(".btn-update").on("click", function () {
+                var solici = {
+                    id_solicitud: id_solicitud,
+                    id_espacio: $("#select_espacio").val(),
+                    status: status,
+                    ClaveAsig: $("#select_clave_asignatura").val(),
+                    ClaveGrupo: $("#select_clave_grupo").val(),
+                    asignatura: asignatura,
+                    cedula: $("#select_docente").val(),
+                    detalle_actividad: $("#detalle_actividad").val(),
+                    fecha_solicitada: $("#requested_date").val(),
+                    fecha_solicitud: $("#fecha_solicitud").val(),
+                    id_horario: $("#select_horario").val(),
+                    participantes: $("#cantidad_participantes").val(),
+                    titulo_actividad: $("#titulo_actividad").val(),
+                };
+                update_solicitud(solici);
+
+            });
         },
-        error: function(data) {}
+        error: function (data) {},
     });
 }
 
 function get_clave_grupo(clave_grupo) {
-    var url = $('#url_get_clave_grupo').val() + "/" + cedula_profesor;
+    var url = $("#url_get_clave_grupo").val() + "/" + cedula_profesor;
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         data: {},
-        success: function(data) {
+        success: function (data) {
             html = "";
-            $.each(data, function(idx, item) {
-                html += '<option value="' + item.ClaveGrupo + '">' + item.ClaveGrupo +
-                    '</option>'
+            $.each(data, function (idx, item) {
+                html +=
+                    '<option value="' +
+                    item.ClaveGrupo +
+                    '">' +
+                    item.ClaveGrupo +
+                    "</option>";
             });
-            $('#select_clave_grupo').html(html);
+            $("#select_clave_grupo").html(html);
 
-            $('#select_clave_grupo').val(clave_grupo)//.change();
+            $("#select_clave_grupo").val(clave_grupo); //.change();
 
             //$('#select_clave_grupo').selectpicker('refresh');
-
         },
-        error: function(data) {}
+        error: function (data) {},
     });
 }
 
-function get_clave_asignatura(clave_grupo,clave_asig = "") {
-    var url = $('#url_get_clave_asignatura').val() + "/" + clave_grupo;
+function get_clave_asignatura(clave_grupo, clave_asig = "") {
+    var url = $("#url_get_clave_asignatura").val() + "/" + clave_grupo;
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
         async: false,
         data: {},
-        success: function(data) {
+        success: function (data) {
             html = "";
-            $.each(data, function(idx, item) {
-                html += '<option value="' + item.ClaveAsig + '">' + item.ClaveAsig +
-                    '</option>'
+            $.each(data, function (idx, item) {
+                html +=
+                    '<option value="' +
+                    item.ClaveAsig +
+                    '">' +
+                    item.ClaveAsig +
+                    "</option>";
             });
-            $('#select_clave_asignatura').html(html);
-            if(clave_asig != ""){
-                $('#select_clave_asignatura').val(clave_asig)//.change();
+            $("#select_clave_asignatura").html(html);
+            if (clave_asig != "") {
+                $("#select_clave_asignatura").val(clave_asig); //.change();
             }
-            clave_asig = $('#select_clave_asignatura').val();
-           get_nombre_asignatura(clave_asig, clave_grupo);
-
+            clave_asig = $("#select_clave_asignatura").val();
+            get_nombre_asignatura(clave_asig, clave_grupo);
         },
-        error: function(data) {}
+        error: function (data) {},
     });
 }
 
-function get_nombre_asignatura(clave_asig,clave_grupo) {
-    var url = $('#url_get_nombre_asignatura').val() + "/" + clave_asig;
+function get_nombre_asignatura(clave_asig, clave_grupo) {
+    var url = $("#url_get_nombre_asignatura").val() + "/" + clave_asig;
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
-        async:false,
+        async: false,
         data: {
             clave_asig: clave_asig,
         },
-        success: function(data) {
+        success: function (data) {
             html = "";
-            $.each(data, function(idx, item) {
-                html += '<option value="' + item.clave_grupo + '">' + item.Nombre +
-                    '</option>'
+            $.each(data, function (idx, item) {
+                html +=
+                    '<option value="' +
+                    item.clave_grupo +
+                    '">' +
+                    item.Nombre +
+                    "</option>";
             });
-            $('#select_nombre_asignatura').html(html);
-            $('#select_nombre_asignatura').val(clave_grupo)//.change();
+            $("#select_nombre_asignatura").html(html);
+            $("#select_nombre_asignatura").val(clave_grupo); //.change();
         },
-        error: function(data) {}
+        error: function (data) {},
     });
 }
 
 function get_espacios(id_espacio, id_horario) {
-    var url = $('#url_get_espacios').val();
+    var url = $("#url_get_espacios").val();
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json",
-        data: {
-        },
-        success: function(data) {
+        data: {},
+        success: function (data) {
             html = "";
-            $.each(data, function(idx, item) {
-                html += '<option value="' + item.id_espacio + '">' + item.nombre +
-                    '</option>'
+            $.each(data, function (idx, item) {
+                html +=
+                    '<option value="' +
+                    item.id_espacio +
+                    '">' +
+                    item.nombre +
+                    "</option>";
             });
-            $('#select_espacio').html(html);
-            $('#select_espacio').val(id_espacio)//.change();
+            $("#select_espacio").html(html);
+            $("#select_espacio").val(id_espacio); //.change();
             get_horarios();
 
-           $('#select_horario').val(id_horario)//.change();
-                },
-        error: function(data) {}
+            $("#select_horario").val(id_horario); //.change();
+        },
+        error: function (data) {},
     });
 }
-function finalizar_espacio(id_solicitud, id_espacio){
-    var urlUpdate = $('#url_finish_espacio').val();
+
+function finalizar_espacio(id_solicitud, id_espacio) {
+    var urlUpdate = $("#url_finish_espacio").val();
     Swal.fire({
         title: "No podrás revertir este cambio!,¿Estás seguro de aceptar?",
         icon: "warning",
@@ -249,7 +288,7 @@ function finalizar_espacio(id_solicitud, id_espacio){
                 value: true,
                 visible: true,
                 className: "",
-                closeModal: true
+                closeModal: true,
             },
             cancel: {
                 text: "Cancelar",
@@ -257,25 +296,51 @@ function finalizar_espacio(id_solicitud, id_espacio){
                 visible: true,
                 className: "",
                 closeModal: true,
-            }
-        }
+            },
+        },
     }).then((isConfirm) => {
         if (isConfirm) {
             var solicitud = {
                 status: 3,
                 id_solicitud: id_solicitud,
-                id_espacio: id_espacio
+                id_espacio: id_espacio,
             };
             $.ajax({
                 url: urlUpdate,
                 type: "GET",
                 dataType: "json",
                 data: solicitud,
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
                     // $('#dt_admin_solicitudes').dataTable.ajax.reload(null, false)
-                }
-            })
+                },
+            });
         }
     });
+}
+
+function update_solicitud(solici) {
+    // console.log(solici);
+    var urlUpdateSolicitud = $("#url_update_solicitud").val();
+
+    $.ajax({
+        url: urlUpdateSolicitud,
+        type: "GET",
+        dataType: "json",
+        data: solici,
+        success : function(data){
+            alert(data);
+        }
+    }).done(function(data){
+        $("#modal_edit").modal("hide");
+            $('#datatable_teacher_requests').DataTable().ajax.reload();
+            return Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "¡Guardado exitosamente!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+    })
+
 }

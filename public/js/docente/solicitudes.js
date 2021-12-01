@@ -9,6 +9,8 @@ var urlHorarios = route + "/" + "apiHorarios";
 var urlDg = route + "/" + "apiDocentesGrupos";
 var urlsolicitud_docente = route + "/solicitud_docente";
 
+
+
 new Vue({
     el: "#soli",
     // token
@@ -242,9 +244,10 @@ new Vue({
                 // hora_inicio: this.hora_inicio,
                 // hora_final: this.hora_final,
             };
+            console.log(solicitud);
             this.$http
-                .patch(urlSolicitudes + "/" + id, solicitud)
-                .then(function () {
+                .patch(urlUpdateSolicitud + "/" + id, solicitud)
+                .then(function (json) {
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -252,16 +255,17 @@ new Vue({
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.getSolicitudes();
-                    this.limpiar();
-                    this.editar = false;
+                    // this.getSolicitudes();
+                    // this.limpiar();
+                    // this.editar = false;
                 })
-                .catch(function () {
+                .catch(function (json) {
                     Swal.fire({
                         icon: "error",
                         title: "¡Ha ocurrido un error!",
                         text: "¡No deje campos vacios!",
                     });
+                    console.log(json);
                 });
         },
         limpiar: function () {

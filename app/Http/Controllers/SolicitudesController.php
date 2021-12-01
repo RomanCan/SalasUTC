@@ -24,7 +24,7 @@ class SolicitudesController extends Controller
             $data = DB::table('res_solicitudes')
                 ->join('res_espacios', 'res_solicitudes.id_espacio', '=', 'res_espacios.id_espacio')
                 ->join('res_horarios', 'res_solicitudes.id_horario', '=', 'res_horarios.id_horario')
-                ->select('res_solicitudes.id_espacio as id_espacio', 'res_espacios.nombre as nombre_espacio', 'res_solicitudes.id_solicitud as id_solicitud', 'res_solicitudes.titulo_actividad as titulo_actividad', 'res_solicitudes.detalle_actividad as detalle_actividad', 'res_solicitudes.asignatura as asignatura', 'res_horarios.hora_inicio as hora_inicio', 'res_horarios.hora_final as hora_final', 'res_solicitudes.fecha_solicitada as fecha_solicitada', 'res_solicitudes.status as status')
+                ->select('res_solicitudes.id_horario as id_horario', 'res_solicitudes.participantes as participantes', 'res_solicitudes.cedula as cedula', 'res_solicitudes.fecha_solicitud as fecha_solicitud', 'res_solicitudes.ClaveAsig as ClaveAsig', 'res_solicitudes.ClaveGrupo as ClaveGrupo', 'res_solicitudes.id_espacio as id_espacio', 'res_espacios.nombre as nombre_espacio', 'res_solicitudes.id_solicitud as id_solicitud', 'res_solicitudes.titulo_actividad as titulo_actividad', 'res_solicitudes.detalle_actividad as detalle_actividad', 'res_solicitudes.asignatura as asignatura', 'res_horarios.hora_inicio as hora_inicio', 'res_horarios.hora_final as hora_final', 'res_solicitudes.fecha_solicitada as fecha_solicitada', 'res_solicitudes.status as status')
                 ->where('cedula', '=', $docente)
                 ->get();
             return Datatables::of($data)
@@ -33,13 +33,42 @@ class SolicitudesController extends Controller
                     $id_solicitud = $data->id_solicitud;
                     $id_espacio = $data->id_espacio;
                     $status = $data->status;
+                    // $ClaveAsig = $data->ClaveAsig;
+                    // $ClaveGrupo = $data->ClaveGrupo;
+                    $asignatura = $data->asignatura;
+                    // $cedula = $data->cedula;
+                    // $detalle_actividad = $data->detalle_actividad;
+                    // $fecha_solicitada = $data->fecha_solicitada;
+                    // $fecha_solicitud = $data->fecha_solicitud;
+                    // $id_horario = $data->id_horario;
+                    // $participantes = $data->participantes;
+
+                    // $titulo_actividad = $data->titulo_actividad;
                     if ($status === 0) {
                         return $mensaje = '<span style=" color: rgb(233, 32, 18)"> <i class="material-icons">warning</i></span>';
                     } elseif ($status === 1) {
-                        $btn = '<button type="button" class="edit btn btn-success btn-sm btn-ver-dato" data-id_solicitud="' . $id_solicitud . '" data->Editar</button>';
+                        $btn =
+                            '<button type="button" class="edit btn btn-success btn-sm btn-ver-dato"
+                         data-id="' .
+                            $id_solicitud .
+                            '" data-status ="' .
+                            $status .
+                            '"
+                            data-asignatura ="' .
+                            $asignatura .
+                            '"
+                            >Editar</button>';
                         return $btn;
                     } elseif ($status === 2) {
-                        $btn = '<button type="button" class="edit btn btn-info btn-sm btn-finalizar" data-id_solicitud="' . $id_solicitud . '" data-id_espacio = "' . $id_espacio . '">Finalizar</button>';
+                        $btn =
+                            '<button type="button" class="edit btn btn-info btn-sm btn-finalizar"
+                         data-id="' .
+                            $id_solicitud .
+                            '"
+                         data-id_espacio = "' .
+                            $id_espacio .
+                            '"
+                         >Finalizar</button>';
                         return $btn;
                     } elseif ($status === 3) {
                         return $mensaje = '<span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>';
@@ -75,7 +104,7 @@ class SolicitudesController extends Controller
                 'ClaveAsig' => 'required',
                 'asignatura' => 'required',
                 'participantes' => 'required',
-                'tipo_solicitud' => 'required',
+                // 'tipo_solicitud' => 'required',
             ],
             [
                 'cedula.required' => 'el campo cedula es requerido',
@@ -111,7 +140,7 @@ class SolicitudesController extends Controller
         $soli->tipo_solicitud = $request->get('tipo_solicitud');
         $soli->save();
     }
-    public function update_solicitud(Request $request)
+    public function aceptar_solicitud(Request $request)
     {
         $status = $request->get('status');
         $id_solicitud = $request->get('id_solicitud');
@@ -124,6 +153,31 @@ class SolicitudesController extends Controller
             // $cupo = 1;
             DB::update("UPDATE res_espacios SET cupo = 1 WHERE id_espacio = $id_espacio");
         }
+    }
+    public function update_solicitud(Request $request)
+    {
+        $id_soli = $request->get('id_solicitud');
+        $soli = Solicitudes::find($id_soli);
+        // $soli->cedula = $request->get('cedula');
+        $soli->id_espacio = $request->get('id_espacio');
+        $soli->id_horario = $request->get('id_horario');
+        $soli->fecha_solicitud = $request->get('fecha_solicitud');
+        $soli->fecha_solicitada = $request->get('fecha_solicitada');
+        $soli->fecha_autorizacion = $request->get('fecha_autorizacion');
+        // $soli->hora_inicio = $request->get('hora_inicio');
+        // $soli->hora_final = $request->get('hora_final');
+        $soli->titulo_actividad = $request->get('titulo_actividad');
+        $soli->detalle_actividad = $request->get('detalle_actividad');
+        $soli->status = $request->get('status');
+        $soli->ClaveGrupo = $request->get('ClaveGrupo');
+        $soli->ClaveAsig = $request->get('ClaveAsig');
+        $soli->asignatura = $request->get('asignatura');
+        $soli->participantes = $request->get('participantes');
+        // $soli->tipo_solicitud = $request->get('tipo_solicitud');
+        $soli->update();
+        $cupo = 1;
+        $id_espacio = $request->id_espacio;
+        DB::update("UPDATE res_espacios SET cupo = $cupo WHERE id_espacio = $id_espacio");
     }
 
     /**

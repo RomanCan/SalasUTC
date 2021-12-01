@@ -48,7 +48,7 @@ function agregar_datos_espacios() {
 
 function ver_datos_espacios(id_espacio) {
 
-    var url_u = $('#url_espacios_update').val() + "/" + id_espacio;
+    var url_u = $('#url_espacios_all').val() + "/" + id_espacio;
     $.ajax({
         url: url_u,
         type: "GET",
@@ -64,20 +64,21 @@ function ver_datos_espacios(id_espacio) {
             $('#editar_espacio').modal('show');
             $('#btn_actualizar').on('click', function(){
 
+
+
+                var url_update = $('#url_espacios_update').val();
                 var espacio ={
-                    // id_espacio:$(''),
+                    id_espacio:data.id_espacio,
                     nombre:$('#nombre_espacio').val(),
                     ubicacion:$('#ubicacion_espacio').val(),
                     cupo:$('#cupo_espacio').val(),
                 };
-                console.log(espacio);
-
                 $.ajax({
-                    headers: {
-                      'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                    },
-                    url: url_u,
-                    type: "PUT",
+                    // headers: {
+                    //   'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                    // },
+                    url: url_update,
+                    type: "get",
                     dataType: "json",
                     data: espacio,
                     success: function(data) {

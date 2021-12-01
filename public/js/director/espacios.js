@@ -35,7 +35,7 @@ new Vue({
             var e={
                 nombre: this.nombre,
                 ubicacion: this.ubicacion,
-                cupo: this.cupo
+                cupo: 1
             };
             this.$http.post(UrlEspacio,e)
             .then(function(json){
@@ -47,17 +47,14 @@ new Vue({
                     showConfirmButton: false,
                     timer: 1500
                 })
-                this.nombre="";
-                this.ubicacion="";
-                this.cupo="";
-                // location.reload();
+                $('#dt_admin_espacios').DataTable().ajax.reload();
+                salir();
             }).catch(function(json){
                 Swal.fire({
                     icon: 'error',
                     title: '¡Ha ocurrido un error!',
                     text: '¡No deje campos vacíos!',
                 })
-                console.log(json);
             })
         },
         editarEspacio:function(id){
@@ -87,19 +84,15 @@ new Vue({
                     title: '¡Actualizado exitosamente!',
                     showConfirmButton: false,
                     timer: 1500
-                })
-                this.getEspacio();
-                this.nombre="";
-                this.ubicacion="";
-                this.cupo="";
-                this.editar=false;
+                });
+                $('#dt_admin_espacios').DataTable().ajax.reload();
+                salir();
             }).catch(function(json){
                 Swal.fire({
                     icon: 'error',
                     title: '¡Ha ocurrido un error!',
                     text: '¡No deje campos vacios!',
                 })
-                console.log(json);
             })
         },
         eliminarEspacio:function(id){
@@ -124,7 +117,6 @@ new Vue({
                         })
                         this.getEspacio();
                     }).catch(function(json){
-                        console.log(json);
                     })
                 }
             })

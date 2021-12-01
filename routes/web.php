@@ -55,10 +55,12 @@ Route::middleware(['rutas'])->group(function () {
 //Zona de APIS
 Route::apiResource('apiSolicitudes', 'App\Http\Controllers\SolicitudesController');
 Route::get('apiUpdateSolicitudDocente', 'App\Http\Controllers\SolicitudesController@update_solicitud');
+Route::get('apiAceptarSolicitudDocente', 'App\Http\Controllers\SolicitudesController@aceptar_solicitud');
+
 
 Route::apiResource('apiEspacios', 'App\Http\Controllers\EspaciosController');
 Route::apiResource('apiEspacioSolicitud', 'App\Http\Controllers\EspacioSolicitudController');
-Route::get('apiEspacioPrueba', 'App\Http\Controllers\EspacioSolicitudController@prueba');
+Route::get('apiEspacioUpdate', 'App\Http\Controllers\EspacioSolicitudController@update');
 
 Route::apiResource('apiRecurso', 'App\Http\Controllers\ApiRecursoController');
 Route::apiResource('apiRol', 'App\Http\Controllers\RolesController');
