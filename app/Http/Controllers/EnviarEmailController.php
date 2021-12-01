@@ -91,7 +91,6 @@ class EnviarEmailController extends Controller
             $apellidom,
             $emailSchool,
             $email,
-
             $espacio,
             $fecha_solicitada,
             $titulo_actividad,

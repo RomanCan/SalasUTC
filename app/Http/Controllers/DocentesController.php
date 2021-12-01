@@ -59,7 +59,7 @@ class DocentesController extends Controller
             [
                 'usuario' => ['required', 'unique:profesores,usuario'],
                 'password' => 'required',
-                'email' => ['required', 'email', 'unique:profesores.email,$id']
+                'email' => ['required', 'email', 'unique:profesores,email']
             ],
             [
                 'usuario.required' => 'No deje el campo vacío',
@@ -70,7 +70,6 @@ class DocentesController extends Controller
                 'email.email' => 'Ingrese un correo válido'
             ]
         );
-
         //
         $docentes = Profesores::find($id);
         $docentes->id_rol = $request->get('id_rol');

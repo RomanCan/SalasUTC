@@ -13,6 +13,20 @@ class EspacioSolicitudController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate(
+            $request,
+            [
+                'nombre' => 'required',
+                'ubicacion' => 'required',
+                'cupo' => 'required',
+            ],
+            [
+                'nombre.required' => 'el campo nombre es requerido',
+                'ubicacion.required' => 'el campo ubicacion es requerido',
+                'cupo.required' => 'el campo cupo es requerido',
+               
+            ],
+        );
         $salas = new Espacios();
         $salas->nombre = $request->get('nombre');
         $salas->ubicacion = $request->get('ubicacion');

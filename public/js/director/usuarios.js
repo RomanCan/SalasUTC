@@ -87,20 +87,22 @@ new Vue({
                 email: this.email,
             };
 
-            // Swal.fire({
-            //     title: "No podrás revertir este cambio!,¿Estás seguro?",
-            //     icon: "warning",
-            //     showCancelButton: true,
-            //     confirmButtonColor: "#3085d6",
-            //     cancelButtonColor: "#d33",
-            //     confirmButtonText: "Sí, guardar",
-            //     cancelButtonText: "No, cancelar",
-            // })
-            // .then((result) => {
-            //     if (result.value) {
+            Swal.fire({
+                title: "No podrás revertir este cambio!,¿Estás seguro?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, guardar",
+                cancelButtonText: "No, cancelar",
+            })
+            .then((result) => {
+                if (result.value) {
                     this.$http
                         .patch(UrlDocentes + "/" + this.i_cedula, doc)
                         .then(function (json) {
+                            $('#agregar_user').modal('hide');
+                            $("#dt_admin_usuarios").DataTable().ajax.reload();
                             Swal.fire({
                                 position: "center",
                                 icon: "success",
@@ -110,15 +112,17 @@ new Vue({
                             });
                             this.enviarEmail();
                             this.salir();
-                            window.location.reload();
+                            // window.location.reload();
                         }).catch(function(error){
                             if(error.status === 422){
                                 this.errors = error.data.errors;
+                            $('#agregar_user').modal('show');
+
                             }
                         });
-                // }
-            // }
-            // );
+                }
+            }
+            );
         },
         enviarEmail: function () {
             var user = {
@@ -137,7 +141,7 @@ new Vue({
         },
         salir: function () {
             this.errors = "";
-            $("#agregar_user").modal("hide");
+            // $("#agregar_user").modal("hide");
             this.cedula = "";
             this.id_rol = "";
             this.nombre = "";

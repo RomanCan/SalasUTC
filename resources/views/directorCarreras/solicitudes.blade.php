@@ -8,7 +8,7 @@
                         <div v-if="solicitudes == ''">
                             <h4><b>No han realizado solicitudes</b></h4>
                         </div>
-                        <table id="dt_admin_solicitudes" class="table table-hover">
+                        <table id="dt_admin_solicitudes" class="data-table table-hover">
                             <thead>
                                 <th>Docente</th>
                                 <th>Materia</th>

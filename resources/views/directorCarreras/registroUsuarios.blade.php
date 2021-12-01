@@ -18,7 +18,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <table id="dt_admin_usuarios" class="data-table">
+                        <table id="dt_admin_usuarios" class="data-table table-hover">
                             <thead>
                                 <th>#</th>
                                 <th>Docente</th>

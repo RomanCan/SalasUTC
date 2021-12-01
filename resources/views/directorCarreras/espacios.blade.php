@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-body">
                         {{-- tabla --}}
-                        <table id="dt_admin_espacios" class="data-table">
+                        <table id="dt_admin_espacios" class="data-table table-hover">
                             <thead>
                                 <th>#</th>
                                 <th>Nombre</th>
@@ -69,6 +69,9 @@
                                     <div class="col-md-12 col-sm-6 col-xs-6">
                                         <label>Nombre:</label><input type="text" v-model="nombre" placeholder="Nombre"
                                             class="form-control" required> <br>
+                                        <div v-if="errors && errors.nombre">
+                                            <small class="text-danger">@{{ errors . nombre[0] }}</small>
+                                        </div>
                                         {{-- <label>Ubicación:</label><input type="text" placeholder="Ubicación"
                                             v-model="ubicacion" class="form-control" required> --}}
                                         <select name="" id="" v-model="ubicacion">
@@ -77,6 +80,9 @@
                                             <option value="Edificio 2">Edificio 2</option>
                                             <option value="Edificio 3">Edificio 3</option>
                                         </select>
+                                        <div v-if="errors && errors.ubicacion">
+                                            <small class="text-danger">@{{ errors . ubicacion[0] }}</small>
+                                        </div>
                                     </div>
                                     <div hidden="true" class="col-md-6 col-sm-6 col-xs-6">
                                         {{-- <label>Cupo:</label><input type="text" placeholder="Cupo" v-model="cupo" --}}
@@ -107,12 +113,13 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span
                                         aria-hidden="true" @click="salir">x</span></button>
                             </div>
-                            <div class="modal-body" align="center">
+                            <div class="modal-body" align="center" id="modal_values">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-6">
-                                        <label>Nombre:</label><input type="text" id="nombre_espacio" placeholder="Nombre"
-                                            class="form-control" required>
+                                        <label for="nombre_espacio">Nombre:</label><input type="text" id="nombre_espacio"
+                                            name="nombre_espacio" placeholder="Nombre" class="form-control" required>
                                         <br>
+                                        {{-- <div class="alert-message" id="nameError"></div> --}}
                                         {{-- <label>Ubicación:</label><input type="text" id="ubicacion_espacio"
                                             placeholder="Ubicación" v-model="ubicacion" class="form-control" required> --}}
                                         <select id="ubicacion_espacio" required>
@@ -122,6 +129,9 @@
                                             <option value="Edificio 3">Edificio 3</option>
                                         </select>
                                     </div>
+                                    {{-- <div v-if="errors && errors.ubicacion" id="error_ubicacion">
+                                        <small class="text-danger">@{{ errors . ubicacion[0] }}</small>
+                                    </div> --}}
                                     <div hidden="true" class="col-md-6 col-sm-6 col-xs-6">
                                         <label>Cupo:</label><input type="text" id="cupo_espacio" placeholder="Cupo"
                                             class="form-control" required>
