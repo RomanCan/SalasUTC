@@ -108,3 +108,6 @@ Route::apiResource('apiHorarios', 'App\Http\Controllers\HorariosController');
 //Envio de Email
 // Route::POST('contact', 'App\Http\Controllers\EnviarEmailController@mensaje');
 // Route::POST('username', 'App\Http\Controllers\EnviarEmailController@user');
+
+// apartado de pdf
+Route::get('reporte/{id}', 'App\Http\Controllers\FpdfController@reporte');
