@@ -76,7 +76,7 @@
                 <div class="modal fade" id="Mostrar" tabindex="-1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header" style="background: #2c3134; color: #fff">
+                            <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
                                 <h5 class="modal-title">Actualizar datos</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     @click="limpiar()">
