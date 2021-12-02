@@ -59,21 +59,22 @@
                 <div class="modal fade" tabindex="-1" role="dialog" id="agregar_espacio">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header" style="background: #2387FF; color: #fff">
-                                <h4 class="modal-title">Guardar Espacio</h4>
+                            <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
+                                <h4 class="modal-title">Nuevo espacio</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span
                                         aria-hidden="true" @click="salir">x</span></button>
                             </div>
-                            <div class="modal-body" align="center">
+                            <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-6">
-                                        <label>Nombre:</label><input type="text" v-model="nombre" placeholder="Nombre"
-                                            class="form-control" required> <br>
+                                        <label style="color: #000000"><b>Nombre:</b></label><input type="text"
+                                            v-model="nombre" placeholder="Nombre" class="form-control" required> <br>
                                         <div v-if="errors && errors.nombre">
                                             <small class="text-danger">@{{ errors . nombre[0] }}</small>
                                         </div>
                                         {{-- <label>Ubicación:</label><input type="text" placeholder="Ubicación"
                                             v-model="ubicacion" class="form-control" required> --}}
+                                        <label style="color: #000000"><b>Edificio:</b></label>
                                         <select name="" id="" v-model="ubicacion">
                                             <option value="" disabled="">Seleccione un edificio</option>
                                             <option value="Edificio 1">Edificio 1</option>
@@ -108,20 +109,22 @@
                     <div class="modal-dialog" role="document">
 
                         <div class="modal-content">
-                            <div class="modal-header" style="background: #2387FF; color: #fff">
-                                <h4 class="modal-title">Editar Espacio</h4>
+                            <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
+                                <h4 class="modal-title">Editar espacio</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span
                                         aria-hidden="true" @click="salir">x</span></button>
                             </div>
-                            <div class="modal-body" align="center" id="modal_values">
+                            <div class="modal-body" id="modal_values">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-6">
-                                        <label for="nombre_espacio">Nombre:</label><input type="text" id="nombre_espacio"
-                                            name="nombre_espacio" placeholder="Nombre" class="form-control" required>
+                                        <label for="nombre_espacio" style="color: #000000"><b>Nombre:</b></label><input
+                                            type="text" id="nombre_espacio" name="nombre_espacio" placeholder="Nombre"
+                                            class="form-control" required>
                                         <br>
                                         {{-- <div class="alert-message" id="nameError"></div> --}}
-                                        {{-- <label>Ubicación:</label><input type="text" id="ubicacion_espacio"
+                                        {{-- <input type="text" id="ubicacion_espacio"
                                             placeholder="Ubicación" v-model="ubicacion" class="form-control" required> --}}
+                                        <label style="color: #000000"><b>Ubicación:</b></label>
                                         <select id="ubicacion_espacio" required>
                                             <option value="" disabled="">Seleccione un edificio</option>
                                             <option value="Edificio 1">Edificio 1</option>

@@ -50,7 +50,7 @@
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                         {{-- @csrf --}}
                         <div class="modal-content">
-                            <div class="modal-header" style="background: #2387FF; color: #fff">
+                            <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
 
                                 <h4 class="modal-title" v-if="editar">Editar Espacio</h4>
                                 <h4 class="modal-title" v-if="!editar">Guardar información del docente</h4>
@@ -68,7 +68,7 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <button v-if="cedula" class="btn btn-outline-success" :href="cedula"
+                                        <button v-if="cedula" class="btn btn-success" :href="cedula"
                                             @click="editarI(cedula)"><i
                                                 class="material-icons">manage_accounts</i>&nbsp;Editar</button>
                                         <hr>
