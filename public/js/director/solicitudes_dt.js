@@ -119,10 +119,15 @@ function get_solicitud(id_solicitud, id_espacio) {
                 type: "GET",
                 dataType: "json",
                 data: solicitud,
-                success: function() {
-                    $('#dt_admin_solicitudes').dataTable.ajax.reload(null, false)
-                }
-            })
+            });
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "¡La solicitud ha sido aceptada!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            $("#dt_admin_solicitudes").DataTable().ajax.reload();
         }
     });
 }
@@ -163,10 +168,16 @@ function rechazar_solicitud(id_solicitud, id_espacio) {
                 type: "GET",
                 dataType: "json",
                 data: solicitud,
-                success: function() {
-                    $('#dt_admin_solicitudes').dataTable.ajax.reload(null, false)
-                }
-            })
+            });
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "¡La solicitud ha sido rechazada!",
+                showConfirmButton: true,
+                // timer: 1500,
+            });
+            $("#dt_admin_solicitudes").DataTable().ajax.reload();
+
         }
     });
 };
