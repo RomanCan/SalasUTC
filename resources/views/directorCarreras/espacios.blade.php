@@ -68,10 +68,10 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-6">
                                         <label style="color: #000000"><b>Nombre:</b></label><input type="text"
-                                            v-model="nombre" placeholder="Nombre" class="form-control" required> <br>
+                                            v-model="nombre" placeholder="Nombre" class="form-control" required>
                                         <div v-if="errors && errors.nombre">
                                             <small class="text-danger">@{{ errors . nombre[0] }}</small>
-                                        </div>
+                                        </div><br>
                                         {{-- <label>Ubicación:</label><input type="text" placeholder="Ubicación"
                                             v-model="ubicacion" class="form-control" required> --}}
                                         <label style="color: #000000"><b>Edificio:</b></label>

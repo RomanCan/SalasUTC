@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Espacios;
+
 class EspacioSolicitudController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         return $espacios = Espacios::all();
     }
     public function store(Request $request)
@@ -21,10 +23,10 @@ class EspacioSolicitudController extends Controller
                 'cupo' => 'required',
             ],
             [
-                'nombre.required' => 'el campo nombre es requerido',
-                'ubicacion.required' => 'el campo ubicacion es requerido',
+                'nombre.required' => 'Ingrese el nombre.',
+                'ubicacion.required' => 'Establezca la ubicación.',
                 'cupo.required' => 'el campo cupo es requerido',
-               
+
             ],
         );
         $salas = new Espacios();
@@ -57,9 +59,9 @@ class EspacioSolicitudController extends Controller
     {
         //
         $id_espacio = $request->get('id_espacio');
-        $nombre=$request->get('nombre');
-        $ubicacion=$request->get('ubicacion');
-        $cupo=$request->get('cupo');
+        $nombre = $request->get('nombre');
+        $ubicacion = $request->get('ubicacion');
+        $cupo = $request->get('cupo');
 
         $salas = Espacios::find($id_espacio);
         $salas->nombre = $nombre;
@@ -67,11 +69,12 @@ class EspacioSolicitudController extends Controller
         $salas->cupo = $cupo;
         $salas->update();
     }
-    public function prueba(Request $request){
+    public function prueba(Request $request)
+    {
         $id_espacio = $request->get('id_espacio');
-        $nombre=$request->get('nombre');
-        $ubicacion=$request->get('ubicacion');
-        $cupo=$request->get('cupo');
+        $nombre = $request->get('nombre');
+        $ubicacion = $request->get('ubicacion');
+        $cupo = $request->get('cupo');
 
         $salas = Espacios::find($id_espacio);
         $salas->nombre = $nombre;
