@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Solicitudes;
 use App\Models\Horarios;
+use App\Models\Profesores;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use DataTables;
@@ -20,6 +22,7 @@ class SolicitudesController extends Controller
     {
         if ($request->ajax()) {
             $docente = Session::get('cedula');
+
             //$data = DB::select('select * from res_solicitudes rs INNER JOIN res_espacios re ON re.id = rs.res_espacio_id  where cedula = ?', $soli)->get();
             $data = DB::table('res_solicitudes')
                 ->join('res_espacios', 'res_solicitudes.id_espacio', '=', 'res_espacios.id_espacio')
@@ -33,16 +36,15 @@ class SolicitudesController extends Controller
                     $id_solicitud = $data->id_solicitud;
                     $id_espacio = $data->id_espacio;
                     $status = $data->status;
-                    // $ClaveAsig = $data->ClaveAsig;
+                    $ClaveAsig = $data->ClaveAsig;
                     // $ClaveGrupo = $data->ClaveGrupo;
                     $asignatura = $data->asignatura;
-                    // $cedula = $data->cedula;
+                    $cedula = $data->cedula;
                     // $detalle_actividad = $data->detalle_actividad;
                     // $fecha_solicitada = $data->fecha_solicitada;
                     // $fecha_solicitud = $data->fecha_solicitud;
-                    // $id_horario = $data->id_horario;
+                    $id_horario = $data->id_horario;
                     // $participantes = $data->participantes;
-
                     // $titulo_actividad = $data->titulo_actividad;
                     if ($status === 0) {
                         return $mensaje = '<span style=" color: rgb(233, 32, 18)"> <i class="material-icons">warning</i></span>';
@@ -71,7 +73,30 @@ class SolicitudesController extends Controller
                          >Finalizar</button>';
                         return $btn;
                     } elseif ($status === 3) {
-                        return $mensaje = '<span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>';
+                        return $mensaje =
+                            '
+
+
+                            <button type="button"class="edit btn btn-danger btn-sm btn-pdf"
+                                data-idsolicitud="' .
+                            $id_solicitud .
+                            '"
+                                data-cedula ="' .
+                            $cedula .
+                            '"
+                                data-idespacio ="' .
+                            $id_espacio .
+                            '"
+                                data-idhorario = "' .
+                            $id_horario .
+                            '"
+                            data-claveasignatura = "' .
+                            $ClaveAsig .
+                            '"
+                            >
+                            <i class="material-icons">file_download</i></button>
+
+                        ';
                     }
                 })
                 ->rawColumns(['action'])

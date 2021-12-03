@@ -1,5 +1,13 @@
 @extends('layouts.masterDocente')
 @section('contenido')
+    <script type="text/javascript">
+        function soloNumeros(e) {
+            var keynum = window.event ? window.event.keyCode : e.which;
+            if ((keynum == 8) || (keynum == 46))
+                return true;
+            return /\d/.test(String.fromCharCode(keynum));
+        }
+    </script>
     <div id="soli">
         <!-- Button trigger modal -->
 
@@ -11,7 +19,7 @@
         <div class="card">
             <div class="card-body">
                 <!-- {{-- tabla --}} -->
-                <table id="datatable_teacher_requests" class="dataTable table-striped">
+                <table id="datatable_teacher_requests" class="dataTable table-hover">
                     <thead class="thead">
                         <th>#</th>
                         <th>Espacio</th>
@@ -76,14 +84,14 @@
                             </td>
 
                         </tr> --}}
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
         <!-- {{-- modal --}} -->
         <div class="modal fade" id="Agregar" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
                         <h5 class="modal-title">Nueva Solicitud</h5>
@@ -99,7 +107,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Docente</label>
+                                        <label style="color: #000"> <b>Docente:</b> </label>
                                         <select name="" id="" v-model="cedula" @change="getClaveGrupo"
                                             class="form-control">
                                             <option v-for="doc in docentes" :value="doc.cedula">
@@ -113,7 +121,7 @@
                                 </div><br><br><br><br>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Clave de Grupo</label>
+                                        <label style="color: #000"> <b>Clave de Grupo:</b> </label>
                                         <select name="" id="" class="form-control" v-model="ClaveGrupo"
                                             @change="getDocentesGrupos" class="form-control" v-if="!editar">
                                             <option v-for="d in clavegrupos" :value="d.ClaveGrupo">
@@ -133,7 +141,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Clave de Asignatura</label>
+                                        <label style="color: #000"> <b>Clave de Asignatura:</b> </label>
                                         <select name="" id="" class="form-control" v-model="ClaveAsig"
                                             @change="getAsignaturas" class="form-control" v-if="!editar">
                                             <option v-for="de in docentesgrupos">
@@ -151,7 +159,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ClaveAsig">Asignatura</label>
+                                        <label style="color: #000"> <b>Asignatura:</b> </label>
                                         <select name="" id="" v-model="asignatura" class="form-control" v-if="!editar">
                                             <option v-for="a in asignaturas">
                                                 @{{ a . Nombre }}</option>
@@ -166,7 +174,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Espacio</label>
+                                        <label style="color: #000"> <b>Espacio:</b> </label>
                                         <select name="id_espacio" id="" v-model="id_espacio"
                                             class="form-control select_espacio">
                                             <option v-for="e in espacios" :value="e.id_espacio">@{{ e . nombre }}
@@ -179,7 +187,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Fecha de Solicitud</label><br>
+                                        <label style="color: #000"> <b>Fecha de Solicitud:</b> </label><br>
                                         <input type="date" class="form-control" v-model="fecha_solicitud" disabled>
                                         <div v-if="errors && errors.fecha_solicitud">
                                             <p class="text-danger">@{{ errors . fecha_solicitud[0] }}</p>
@@ -190,7 +198,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Fecha Solicitada</label> <br>
+                                        <label style="color: #000"> <b>Fecha Solicitada:</b> </label> <br>
                                         <input type="date" class="form-control requested_date" id=""
                                             v-model="fecha_solicitada">
                                         <div v-if="errors && errors.fecha_solicitada">
@@ -206,7 +214,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <label for="">Horarios</label>
+                                            <label style="color: #000"> <b>Horarios disponibles:</b> </label>
                                             <select name="" id="" class="form-control start_time" v-model="id_horario">
                                                 <option v-for="h in horarios" :value="h.id_horario">
                                                     @{{ h . hora_inicio }}-@{{ h . hora_final }}
@@ -230,32 +238,32 @@
                                 </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Titulo de la actividad</label> <br>
+                                        <label style="color: #000"> <b>Titulo de la actividad:</b> </label> <br>
                                         <input type="text" class="form-control" v-model="titulo_actividad">
                                         <div v-if="errors && errors.titulo_actividad">
                                             <p class="text-danger">@{{ errors . titulo_actividad[0] }}</p>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Detalle de la actividad</label> <br>
-                                        <input type="text" class="form-control" v-model="detalle_actividad">
-                                        <div v-if="errors && errors.detalle_actividad">
-                                            <p class="text-danger">@{{ errors . detalle_actividad[0] }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Cantidad de participantes</label> <br>
-                                        <input type="number" class="form-control" v-model="participantes" min="0">
+                                        <label style="color: #000"> <b>Cantidad de participantes:</b> </label> <br>
+                                        <input type="text" class="form-control" pattern="/^-?\d+\.?\d*$/"
+                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                            v-model="participantes" maxlength="3">
                                         <div v-if="errors && errors.participantes">
                                             <p class="text-danger">@{{ errors . participantes[0] }}</p>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label style="color: #000"> <b>Detalles de la actividad:</b> </label> <br>
+                                        <textarea type="text" class="form-control" v-model="detalle_actividad"></textarea>
+                                        <div v-if="errors && errors.detalle_actividad">
+                                            <p class="text-danger">@{{ errors . detalle_actividad[0] }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -272,7 +280,7 @@
 
         <!-- {{-- modal editar --}} -->
         <div class="  modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: rgb(242 145 0); color: #fff">
                         <h5 class="modal-title">Editar Solicitud</h5>
@@ -288,14 +296,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Docente</label>
+                                        <label style="color: #000"> <b>Docente:</b> </label>
                                         <select name="" id="select_docente" class="form-control"> </select>
 
                                     </div>
                                 </div><br><br><br><br>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Clave de Grupo</label>
+                                        <label style="color: #000"> <b>Clave de Grupo:</b> </label>
                                         <select name="" id="select_clave_grupo" class="form-control"
                                             class="form-control">
                                         </select>
@@ -303,7 +311,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Clave de Asignatura</label>
+                                        <label style="color: #000"> <b> Clave de Asignatura:</b></label>
                                         <select id="select_clave_asignatura" class="form-control"
                                             class="form-control"></select>
 
@@ -314,21 +322,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ClaveAsig">Asignatura</label>
+                                        <label style="color: #000"> <b>Asignatura:</b> </label>
                                         <select name="" id="select_nombre_asignatura" class="form-control">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Espacio</label>
+                                        <label style="color: #000"> <b>Espacio:</b> </label>
                                         <select name="" id="select_espacio" class="form-control select_espacio">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Fecha de Solicitud</label><br>
+                                        <label style="color: #000"> <b>Fecha de Solicitud:</b> </label><br>
                                         <input type="text" class="form-control" id="fecha_solicitud" disabled>
 
                                         {{-- <input type="text" class="form-control" id="fecha_solicitud" disabled> --}}
@@ -338,37 +346,40 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Fecha Solicitada</label><br>
+                                        <label style="color: #000"> <b>Fecha Solicitada:</b> </label><br>
                                         <input type="date" class="form-control requested_date" id="requested_date"
-                                            class="requested_date">
+                                            class="requested_date" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Horarios</label>
+                                        <label style="color: #000"> <b>Horarios disponibles:</b> </label>
                                         <select name="" id="select_horario" class="form-control start_time">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Titulo de la actividad</label><br>
+                                        <label style="color: #000"> <b>Titulo de la actividad:</b> </label><br>
                                         <input type="text" class="form-control" id="titulo_actividad">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Detalle de la actividad</label><br>
-                                        <input type="text" class="form-control" id="detalle_actividad">
+                                        <label style="color: #000"> <b>Cantidad de participantes:</b> </label><br>
+                                        <input type="text" pattern="/^-?\d+\.?\d*$/"
+                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                            class="form-control" id="cantidad_participantes" maxlength="2">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label style="color: #000"> <b> Detalles de la actividad:</b></label><br>
+                                        <textarea type="text" class="form-control" id="detalle_actividad"></textarea>
 
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Cantidad de participantes</label><br>
-                                        <input type="number" class="form-control" id="cantidad_participantes" min="0">
-                                    </div>
-                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -391,6 +402,7 @@
     <script src="js/docente/solicitudes.js"></script>
     <script src="js/docente/solicitudes_dt.js"></script>
     <script src="js/docente/validaciones_fechas.js"></script>
+
 @endpush
 <input type="hidden" name="route" value="{{ url('/') }}">
 <input type="hidden" id="horarios" value="{{ url('/getHorarios') }}">
@@ -401,3 +413,4 @@
 <input type="hidden" id="url_get_espacios" value="{{ url('/apiEspacioSolicitud') }}">
 <input type="hidden" id="url_finish_espacio" value="{{ url('apiAceptarSolicitudDocente') }}">
 <input type="hidden" id="url_update_solicitud" value="{{ url('apiUpdateSolicitudDocente') }}">
+<input type="hidden" id="url_created_pdf" value="{{ url('reporte') }}">

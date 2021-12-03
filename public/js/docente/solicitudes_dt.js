@@ -6,7 +6,8 @@ $(function () {
         //   serverSide: true,
         //ajax: "{{ url('apiSolicitudes') }}",
         ajax: $("#url_ver_solicitud").val(),
-        columns: [{
+        columns: [
+            {
                 data: "DT_RowIndex",
                 name: "DT_RowIndex",
             },
@@ -45,7 +46,7 @@ $(function () {
                     text = "";
                     switch (data) {
                         case 0:
-                            text = "Rechazado";
+                            text = "Rechazado ";
                             break;
                         case 1:
                             text = "Pendiente";
@@ -54,7 +55,9 @@ $(function () {
                             text = "Aceptado";
                             break;
                         case 3:
-                            text = "Finalizado";
+                            text =
+                                'Finalizado <span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>';
+                            // return btn =
                             break;
                     }
                     return text;
@@ -78,6 +81,20 @@ $(function () {
                 var id_espacio = $(this).data("id_espacio");
                 finalizar_espacio(id_solicitud, id_espacio);
             });
+            $(".btn-pdf").on("click", function () {
+                var id_solicitud = $(this).data("idsolicitud");
+                var cedula = $(this).data("cedula");
+                var id_espacio = $(this).data("idespacio");
+                var id_horario = $(this).data("idhorario");
+                var ClaveAsig = $(this).data("claveasignatura");
+                generar_pdf(
+                    id_solicitud,
+                    cedula,
+                    id_espacio,
+                    id_horario,
+                    ClaveAsig
+                );
+            });
         },
     });
 
@@ -92,6 +109,36 @@ $(function () {
         );
     });
 });
+function generar_pdf(id_solicitud, cedula, id_espacio, id_horario, ClaveAsig) {
+    var urlPdf = $("#url_created_pdf").val();
+    // var info = {
+    //     id_solicitud : id_solicitud,
+    //     cedula : cedula,
+    //     id_espacio :id_espacio,
+    //     id_horario:id_horario,
+    //     ClaveAsig : ClaveAsig
+    // };
+    // $.ajax({
+    //     url : urlPdf,
+    //     type : "get",
+    //     dataType: "json",
+    //     data: info,
+    // })
+    var news =
+        urlPdf +
+        "?id_solicitud=" +
+        id_solicitud +
+        "&" +
+        "id_espacio=" +
+        id_espacio +
+        "&" +
+        "id_horario=" +
+        id_horario +
+        "&" +
+        "ClaveAsig=" +
+        ClaveAsig;
+    window.open(news, "_blank");
+}
 
 function ver_datos_solicitud(id_solicitud, status, asignatura) {
     var url = $("#url_ver_solicitud").val() + "/" + id_solicitud;
@@ -141,23 +188,52 @@ function ver_datos_solicitud(id_solicitud, status, asignatura) {
             $("#cantidad_participantes").val(data.participantes);
 
             $(".btn-update").on("click", function () {
-                var solici = {
-                    id_solicitud: id_solicitud,
-                    id_espacio: $("#select_espacio").val(),
-                    status: status,
-                    ClaveAsig: $("#select_clave_asignatura").val(),
-                    ClaveGrupo: $("#select_clave_grupo").val(),
-                    asignatura: asignatura,
-                    cedula: $("#select_docente").val(),
-                    detalle_actividad: $("#detalle_actividad").val(),
-                    fecha_solicitada: $("#requested_date").val(),
-                    fecha_solicitud: $("#fecha_solicitud").val(),
-                    id_horario: $("#select_horario").val(),
-                    participantes: $("#cantidad_participantes").val(),
-                    titulo_actividad: $("#titulo_actividad").val(),
-                };
-                update_solicitud(solici);
-
+                if (
+                    $("#select_espacio").val().length < 1||
+                    $("#select_clave_asignatura").val().length < 1||
+                    $("#select_clave_grupo").val().length < 1 ||
+                    $("#select_docente").val().length < 1||
+                    $("#detalle_actividad").val().length < 1 ||
+                    $("#requested_date").val().length < 1 ||
+                    $("#fecha_solicitud").val().length < 1 ||
+                    $("#select_horario").val().length < 1 ||
+                    $("#cantidad_participantes").length < 1 ||
+                    $("#titulo_actividad").val().length < 1
+                ) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "¡Ha ocurrido un error!",
+                        text: "¡No deje campos vacios!",
+                    });
+                } else if(
+                    $("#select_espacio").val() &&
+                    $("#select_clave_asignatura").val() &&
+                    $("#select_clave_grupo").val() &&
+                    $("#select_docente").val() &&
+                    $("#detalle_actividad").val() &&
+                    $("#requested_date").val() &&
+                    $("#fecha_solicitud").val() &&
+                    $("#select_horario").val() &&
+                    $("#cantidad_participantes").val() &&
+                    $("#titulo_actividad").val() != null
+                ){
+                    var solici = {
+                        id_solicitud: id_solicitud,
+                        id_espacio: $("#select_espacio").val(),
+                        status: status,
+                        ClaveAsig: $("#select_clave_asignatura").val(),
+                        ClaveGrupo: $("#select_clave_grupo").val(),
+                        asignatura: asignatura,
+                        cedula: $("#select_docente").val(),
+                        detalle_actividad: $("#detalle_actividad").val(),
+                        fecha_solicitada: $("#requested_date").val(),
+                        fecha_solicitud: $("#fecha_solicitud").val(),
+                        id_horario: $("#select_horario").val(),
+                        participantes: $("#cantidad_participantes").val(),
+                        titulo_actividad: $("#titulo_actividad").val(),
+                    };
+                    update_solicitud(solici);
+                }
             });
         },
         error: function (data) {},
@@ -328,19 +404,14 @@ function update_solicitud(solici) {
         type: "GET",
         dataType: "json",
         data: solici,
-        success : function(data){
-            alert(data);
-        }
-    }).done(function(data){
-        $("#modal_edit").modal("hide");
-            $('#datatable_teacher_requests').DataTable().ajax.reload();
-            return Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "¡Guardado exitosamente!",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-    })
-
+    });
+    $("#modal_edit").modal("hide");
+    $("#datatable_teacher_requests").DataTable().ajax.reload();
+    return Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "¡Guardado exitosamente!",
+        showConfirmButton: false,
+        timer: 1500,
+    });
 }

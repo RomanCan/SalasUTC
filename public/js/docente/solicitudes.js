@@ -158,9 +158,10 @@ new Vue({
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    this.limpiar();
+
                     $("#Agregar").modal("hide");
                     $('#datatable_teacher_requests').DataTable().ajax.reload();
+                    this.limpiar();
                 })
                 .catch(function (error) {
                     if(error.status === 422){
