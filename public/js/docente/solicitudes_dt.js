@@ -351,67 +351,81 @@ function get_espacios(id_espacio, id_horario) {
 }
 
 function finalizar_espacio(id_solicitud, id_espacio) {
-    var urlUpdate = $("#url_finish_espacio").val();
-    Swal.fire({
+
+    Swal
+    .fire({
         title: "No podrás revertir este cambio!,¿Estás seguro de aceptar?",
-        icon: "warning",
+        icon: 'warning',
         showCancelButton: true,
+        confirmButtonText: "Sí, aceptar",
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        buttons: {
-            confirm: {
-                text: "Aceptar",
-                value: true,
-                visible: true,
-                className: "",
-                closeModal: true,
-            },
-            cancel: {
-                text: "Cancelar",
-                value: false,
-                visible: true,
-                className: "",
-                closeModal: true,
-            },
-        },
-    }).then((isConfirm) => {
-        if (isConfirm) {
-            var solicitud = {
-                status: 3,
-                id_solicitud: id_solicitud,
-                id_espacio: id_espacio,
-            };
-            $.ajax({
-                url: urlUpdate,
-                type: "GET",
-                dataType: "json",
-                data: solicitud,
-                success: function (data) {
-                    console.log(data);
-                    // $('#dt_admin_solicitudes').dataTable.ajax.reload(null, false)
-                },
+                cancelButtonColor: "#d33",
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "¡La solicitud ha sido finalizada!",
+                showConfirmButton: false,
+                timer: 1500,
             });
+            aceptar_finalizado(id_solicitud, id_espacio);
+        } else {
+
         }
     });
+}
+function aceptar_finalizado(id_solicitud,id_espacio){
+    var urlUpdate = $("#url_finish_espacio").val();
+    var solicitud = {
+        status: 3,
+        id_solicitud: id_solicitud,
+        id_espacio: id_espacio,
+    };
+    //  $("#datatable_teacher_requests").DataTable().ajax.reload();
+    $.ajax({
+        url: urlUpdate,
+        type: "GET",
+        dataType: "json",
+        data: solicitud,
+    });
+    $("#datatable_teacher_requests").DataTable().ajax.reload();
 }
 
 function update_solicitud(solici) {
     // console.log(solici);
-    var urlUpdateSolicitud = $("#url_update_solicitud").val();
+    Swal
+    .fire({
+        title: "¿Estás seguro de aceptar?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Sí, aceptar",
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            var urlUpdateSolicitud = $("#url_update_solicitud").val();
+            $.ajax({
+                url: urlUpdateSolicitud,
+                type: "GET",
+                dataType: "json",
+                data: solici,
+            });
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "¡La solicitud ha sido finalizada!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            $("#datatable_teacher_requests").DataTable().ajax.reload();
+            $("#modal_edit").modal("hide");
+        } else {
 
-    $.ajax({
-        url: urlUpdateSolicitud,
-        type: "GET",
-        dataType: "json",
-        data: solici,
-    });
-    $("#modal_edit").modal("hide");
-    $("#datatable_teacher_requests").DataTable().ajax.reload();
-    return Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "¡Guardado exitosamente!",
-        showConfirmButton: false,
-        timer: 1500,
+        }
     });
 }

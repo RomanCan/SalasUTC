@@ -75,8 +75,6 @@ class SolicitudesController extends Controller
                     } elseif ($status === 3) {
                         return $mensaje =
                             '
-
-
                             <button type="button"class="edit btn btn-danger btn-sm btn-pdf"
                                 data-idsolicitud="' .
                             $id_solicitud .
@@ -94,8 +92,12 @@ class SolicitudesController extends Controller
                             $ClaveAsig .
                             '"
                             >
-                            <i class="material-icons">file_download</i></button>
-
+                            <i class="material-icons">
+                                <span class="material-icons-outlined">
+description
+</span>
+</i>
+                            </button>
                         ';
                     }
                 })
