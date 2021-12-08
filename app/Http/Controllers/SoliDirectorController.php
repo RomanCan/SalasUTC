@@ -39,8 +39,8 @@ class SoliDirectorController extends Controller
                     if ($status === 0) {
                         return $mensaje = '<span style=" color: rgb(233, 32, 18)"> <i class="material-icons">warning</i></span>';
                     } elseif ($status === 1 && $cupo_espacio === 0) {
-                        return $mensaje ='<span style=" color: rgb(201, 201, 0)">Sala en uso <i class="material-icons">hourglass_top</i></span>';
-                    }elseif ($status === 1 && $cupo_espacio === 1) {
+                        return $mensaje = '<span style=" color: rgb(201, 201, 0)">Sala en uso <i class="material-icons">hourglass_top</i></span>';
+                    } elseif ($status === 1 && $cupo_espacio === 1) {
                         return $btns =
                             '<button class="btn btn-success btn-sm btn_aceptar" data-espacio="' .
                             $id_espacio .
@@ -55,8 +55,7 @@ class SoliDirectorController extends Controller
                             '">
                                                 <i class="material-icons">highlight_off</i>
                                             </button>';
-                    }
-                     elseif ($status === 2) {
+                    } elseif ($status === 2) {
                         return $mensaje = '<span style=" color: rgb(0, 187, 0)"> <i class="material-icons">check</i></span>';
                     } elseif ($status === 3) {
                         return $mensaje = '<span style=" color: rgb(0, 102, 255)"> <i class="material-icons">verified</i></span>';

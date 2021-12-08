@@ -162,6 +162,7 @@ new Vue({
                     $("#Agregar").modal("hide");
                     $('#datatable_teacher_requests').DataTable().ajax.reload();
                     this.limpiar();
+                    this.errors = "";
                 })
                 .catch(function (error) {
                     if(error.status === 422){
